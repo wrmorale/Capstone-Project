@@ -1938,7 +1938,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30236
+  m_Name: pb_Mesh28598
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2486,8 +2486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03708d928965a0841872a9759fccccec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  health: 1
+  maxHealth: 10
+  health: 10
+  playerPos: {fileID: 1773308543}
+  enemyPos: {fileID: 1718325060}
 --- !u!65 &1718325057
 BoxCollider:
   m_ObjectHideFlags: 0
