@@ -34,10 +34,11 @@ public class playerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         cam = Camera.main.transform;
+        // add actions from playerControls here
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
-        // add actions from playerControls here
+
     }
 
     void Update()
@@ -68,14 +69,20 @@ public class playerController : MonoBehaviour
         if (jumpAction.triggered && groundedPlayer){
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
-
-        if (attackAction.triggered){
-            Debug.Log("attacking");
-            isAttacking = true;
-        }
-
         // add gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+        
+        // attacking
+        if (attackAction.triggered){
+            if(isAttacking == true){
+                isAttacking = false;
+            }else{
+                Debug.Log("attacking");
+                isAttacking = true;
+            }
+            
+        }
+
     }
 }
