@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         float dist = Vector3.Distance(playerPos.position, enemyPos.position);
-        Debug.Log("Distance to obj: "  + dist);
+        //Debug.Log("Distance to obj: "  + dist);
         if(Input.GetKeyDown("space"))
         {
             
@@ -30,8 +30,14 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
                 }
             }
+        }
+    }
 
-            
+    public void isHit(){
+        health--;
+        if(health <= 0){
+            // Destroy the cube when it has no health left
+            Destroy(gameObject);
         }
     }
 }

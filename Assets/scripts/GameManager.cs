@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
-        Debug.Log("Time: " + timer.ToString("F2")); //timer displays in console for now
+        //Debug.Log("Time: " + timer.ToString("F2")); //timer displays in console for now
 
         //Checks to see if enemies are still in arena
         Enemy[] enemies = FindObjectsOfType<Enemy>();

@@ -23,13 +23,20 @@ public class playerController : MonoBehaviour
     private Transform cam;
 
     private InputAction moveAction;
+    private InputAction jumpAction;
+    private InputAction attackAction;
+
+    public bool isAttacking = false;
+
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
         cam = Camera.main.transform;
-        moveAction = playerInput.actions["Move"]; 
+        moveAction = playerInput.actions["Move"];
+        jumpAction = playerInput.actions["Jump"];
+        attackAction = playerInput.actions["Attack"];
         // add actions from playerControls here
     }
 
@@ -58,9 +65,13 @@ public class playerController : MonoBehaviour
         }
 
         // Changes the height position of the player.. 
-        // TODO: change jump to action input
-        if (Input.GetButtonDown("Jump") && groundedPlayer){
+        if (jumpAction.triggered && groundedPlayer){
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+        }
+
+        if (attackAction.triggered){
+            Debug.Log("attacking");
+            isAttacking = true;
         }
 
         // add gravity
