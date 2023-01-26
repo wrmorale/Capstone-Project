@@ -15,6 +15,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Camera",
+                    "type": "Value",
+                    "id": "395ef7d5-34fa-40f2-9558-9deb83c77292",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Run",
                     "type": "Button",
                     "id": "80a8ac26-0a40-4e9f-a1b7-40086d1a1c19",
@@ -24,13 +33,13 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Camera",
-                    "type": "Value",
-                    "id": "395ef7d5-34fa-40f2-9558-9deb83c77292",
-                    "expectedControlType": "Vector2",
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "cdeaae6b-327c-4b0a-a836-06ebefbf3226",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": true
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Attack",
@@ -42,9 +51,45 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "Speacial ",
                     "type": "Button",
-                    "id": "cdeaae6b-327c-4b0a-a836-06ebefbf3226",
+                    "id": "03f8e1f9-f4f4-432f-8975-1305a2415f8a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability_1",
+                    "type": "Button",
+                    "id": "f449bdb5-2674-440d-8f10-2a029f282691",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability_2",
+                    "type": "Button",
+                    "id": "9f0404f2-9e56-4262-bdac-e691c08f210d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability_3",
+                    "type": "Button",
+                    "id": "1e91343c-a291-4655-9c2b-fda24710678d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability_4",
+                    "type": "Button",
+                    "id": "b401822d-28c9-441a-9c7b-f3e68d91f8c1",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -142,17 +187,6 @@
                 },
                 {
                     "name": "",
-                    "id": "88db94c6-e812-44e5-a69f-d6d2b044ac16",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Camera",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "a5a97ac6-2b26-480a-b6f6-ec9c198241f0",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -175,12 +209,78 @@
                 },
                 {
                     "name": "",
+                    "id": "0c16732b-3587-4b9a-936b-3d7790570dbc",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Speacial ",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "aecf576e-62e7-4c4b-a9a4-e401566d1608",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88db94c6-e812-44e5-a69f-d6d2b044ac16",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "439f72f1-0ad9-44b7-a5e8-07cd24eda68f",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability_1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a58d654-6856-4dcd-93cf-ed9b31783129",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability_2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c89f8e5-5ac2-4c9b-9ebe-d2f2237cabaf",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability_3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a951e00-dd83-43fe-a45e-7bbf8d07af8d",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability_4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
