@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class playerController : MonoBehaviour
 {
     [SerializeField]
-    private float playerSpeed = 2.0f;
+    private float playerSpeed = 2.0f; 
     [SerializeField]
     private float jumpHeight = 1.0f;
     [SerializeField]
@@ -23,21 +23,28 @@ public class playerController : MonoBehaviour
     private Transform cam;
 
     private InputAction moveAction;
+    private InputAction walkAction;
     private InputAction jumpAction;
     private InputAction attackAction;
 
     public bool isAttacking = false;
 
 
+    //Animation stuff
+    Animator animator;
+
+
     private void Awake()
     {
-        controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
+        controller  = gameObject.GetComponent<CharacterController>();
+        playerInput = gameObject.GetComponent<PlayerInput>();
+        animator    = gameObject.GetComponent<Animator>();
         cam = Camera.main.transform;
         // add actions from playerControls here
-        moveAction = playerInput.actions["Move"];
-        jumpAction = playerInput.actions["Jump"];
+        moveAction   = playerInput.actions["Run"];
+        jumpAction   = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
+        walkAction   = playerInput.actions["Walk"];
 
     }
 
@@ -45,11 +52,16 @@ public class playerController : MonoBehaviour
     {
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0){
-            playerVelocity.y = 0f;
+            playerVelocity.y = 0f;    
         }
+
+
+        
 
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
+
+
 
         // if there is movement input 
         if (input.x != 0 || input.y != 0){
@@ -63,12 +75,29 @@ public class playerController : MonoBehaviour
             // move according to calculated target angle
             move = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             controller.Move(move * Time.deltaTime * playerSpeed);
+            
+
+            //Trying to get this to work
+            if(walkAction.triggered){
+                controller.Move(move * Time.deltaTime * playerSpeed * 0.5f);
+                Debug.Log("Walk is toggled");
+            }
+
+            
+
+            //enable animation
+            animator.SetBool("Running", true);
+        }else{
+            animator.SetBool("Running", false);
         }
 
         // Changes the height position of the player.. 
         if (jumpAction.triggered && groundedPlayer){
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            //animator.SetBool("Jumping", true); 
         }
+
+
         // add gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
