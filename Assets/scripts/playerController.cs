@@ -132,7 +132,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         playerVelocity.y += gravityValue * Time.deltaTime;
         // animate falling player
         controller.Move(playerVelocity * Time.deltaTime);
-        if (controller.transform.position.y < lastY && !groundedPlayer && !inJumpsquat)
+        if (controller.transform.position.y <= lastY && !groundedPlayer && !inJumpsquat)
         {
             Debug.Log(transform.position.y);
             Debug.Log(lastY);
