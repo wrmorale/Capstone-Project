@@ -1,25 +1,36 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Extensions;
 // This code is based on sample unity movement API code.
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
-public class playerController : MonoBehaviour
+public class playerController : MonoBehaviour, IFrameCheckHandler
 {
     [SerializeField]
-    private float playerSpeed = 2.0f; 
+    private float playerSpeed = 2.5f;
+    [SerializeField]
+    private float walkSpeed = 1.5f;
+    [SerializeField]
+    private float walkThreshold = 0.5f;
     [SerializeField]
     private float jumpHeight = 1.0f;
     [SerializeField]
     private float gravityValue = -9.81f;
     [SerializeField]
     public float turnSmoothTime = 0.1f;
+    [SerializeField]
+    private FrameParser jumpClip;
+    [SerializeField]
+    private FrameChecker jumpFrameChecker;
+
     float turnSmoothVelocity;
 
     private CharacterController controller;
     private PlayerInput playerInput;
     private Vector3 playerVelocity;
+    private float lastY;
     private bool groundedPlayer;
+    private bool inJumpsquat = false;
     private Transform cam;
 
     private InputAction moveAction;
@@ -33,6 +44,18 @@ public class playerController : MonoBehaviour
     //Animation stuff
     Animator animator;
 
+    // jump framedata management
+    public void onActiveFrameStart() 
+    {
+        playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+    }
+    public void onActiveFrameEnd() 
+    {
+        inJumpsquat = false;
+    }
+    public void onLastFrameStart(){}
+    public void onLastFrameEnd(){}
+
 
     private void Awake()
     {
@@ -45,28 +68,33 @@ public class playerController : MonoBehaviour
         jumpAction   = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
         walkAction   = playerInput.actions["Walk"];
-
+        jumpClip.initialize();
+        jumpFrameChecker.initialize(this, jumpClip);
     }
 
     void Update()
     {
+        lastY = controller.transform.position.y;
+        jumpFrameChecker.checkFrames();
         groundedPlayer = controller.isGrounded;
+
+        // handle edge case where player lands without ever gaining downward velocity
+        if (groundedPlayer && !inJumpsquat) { animator.SetBool("Jumping", false); }
+        // stop falling animation on land
         if (groundedPlayer && playerVelocity.y < 0){
-            playerVelocity.y = 0f;    
+            playerVelocity.y = 0f;
+            animator.SetBool("Falling", false);
         }
-
-
-        
 
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
 
-
-
         // if there is movement input 
         if (input.x != 0 || input.y != 0){
+            bool walking = false;
             Vector3 move = new Vector3(input.x, 0, input.y);
-            
+            if (move.magnitude < walkThreshold || walkAction.triggered) { walking = true; }
+
             // calculate model rotation
             float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -74,34 +102,43 @@ public class playerController : MonoBehaviour
 
             // move according to calculated target angle
             move = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            controller.Move(move * Time.deltaTime * playerSpeed);
-            
-
-            //Trying to get this to work
-            if(walkAction.triggered){
-                controller.Move(move * Time.deltaTime * playerSpeed * 0.5f);
-                Debug.Log("Walk is toggled");
+            if (walking) {
+                controller.Move(move * Time.deltaTime * walkSpeed);
+                animator.SetBool("Walking", true);
+                animator.SetBool("Running", false);
             }
-
-            
-
-            //enable animation
-            animator.SetBool("Running", true);
-        }else{
+            else {
+                controller.Move(move * Time.deltaTime * playerSpeed);
+                animator.SetBool("Running", true);
+                animator.SetBool("Walking", false);
+            }
+        }
+        else
+        {
             animator.SetBool("Running", false);
+            animator.SetBool("Walking", false);
         }
 
         // Changes the height position of the player.. 
         if (jumpAction.triggered && groundedPlayer){
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            //animator.SetBool("Jumping", true); 
+            // playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            animator.SetBool("Jumping", true);
+            inJumpsquat = true;
+            jumpFrameChecker.initCheck();
         }
 
 
         // add gravity
         playerVelocity.y += gravityValue * Time.deltaTime;
+        // animate falling player
         controller.Move(playerVelocity * Time.deltaTime);
-        
+        if (controller.transform.position.y < lastY && !groundedPlayer && !inJumpsquat)
+        {
+            Debug.Log(transform.position.y);
+            Debug.Log(lastY);
+            animator.SetBool("Jumping", false);
+            animator.SetBool("Falling", true);
+        }
         // attacking
         if (attackAction.triggered){
             if(isAttacking == true){
