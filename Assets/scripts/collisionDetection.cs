@@ -9,6 +9,8 @@ public class collisionDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other){
         if(other.tag == "Enemy" && pc.isAttacking){
+            //applies to all with the enemy tag
+            Enemy enemy = other.GetComponent<Enemy>();
             enemy.isHit();
         }
     }

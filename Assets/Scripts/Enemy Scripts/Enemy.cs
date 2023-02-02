@@ -19,6 +19,10 @@ public class Enemy : MonoBehaviour
     }
 
     public void isHit(){
+        //checks to make sure enemy hasn't already been deleted
+        if(this == null){
+            return;
+        }
         health-=1.0f;
         if(health <= 0){
             // Destroy the cube when it has no health left

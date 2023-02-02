@@ -35,7 +35,12 @@ public class GameManager : MonoBehaviour{
     public bool roomCleared;
     public int currentGold; 
     public List<String> availableAbilities = new List<String>(); //not sure how we will keep track of abilities yet but a list of strings to hold ablities that can be learned
-    
+    //
+    public int numberOfEnemmies = 10;
+    public GameObject enemyPrefab;
+    public GameObject player;
+    public int spawnSpread = 10;//how far apart the enemies spawn from each other
+
     //setup singleton
     private void Awake() {
         instance = this;
@@ -46,6 +51,11 @@ public class GameManager : MonoBehaviour{
         timer = 0;
         roomCleared = false;
         currentGold = 0;
+        //create enemy copies at a location near the player
+        Vector3 playerPos = player.transform.position;
+        for(int i = 0; i < numberOfEnemmies; i++){
+            GameObject enemy = Instantiate(enemyPrefab, playerPos + new Vector3(UnityEngine.Random.Range(-spawnSpread, spawnSpread), 0, UnityEngine.Random.Range(-5, 5)), Quaternion.identity);
+        }
     }
 
     void Update(){
@@ -54,9 +64,21 @@ public class GameManager : MonoBehaviour{
 
         //Checks to see if enemies are still in arena
         Enemy[] enemies = FindObjectsOfType<Enemy>();
+        //deletes the enemy from the array if it has been destroyed
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] == null)
+            {
+                Array.Clear(enemies, i, 1);
+            }
+        }
+
         if(enemies.Length == 0){
             roomCleared = true; 
+            //Room clear condition successfully logged
+            Debug.Log("Room clear");
             //Add some code to advance to next scene
         }
+        numberOfEnemmies = enemies.Length;
     }
 }
