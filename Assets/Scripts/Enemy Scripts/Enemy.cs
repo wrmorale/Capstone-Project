@@ -4,24 +4,23 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int maxHealth = 2;
-    public int health;
-    
+    [Header("stats")]
+    [SerializeField] private float maxHealth;
+    public float health;
+    [SerializeField] private float movementSpeed;
+    [SerializeField] private float maxHealth;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    
+    void Start(){
        health = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update(){
 
     }
 
     public void isHit(){
-        health--;
+        health-=1.0;
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);

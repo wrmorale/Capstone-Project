@@ -7,17 +7,27 @@ using UnityEngine.SceneManagement;
 
 //this will keep track of stats for player across scenes. Also helpful for testing since stats can be changed with sliders
 [System.Serializable]
-public class playerStats
-{
+public class playerStats{
     public float maxHealth;
     public float movementSpeed;
     public float basicDamage;
     public float attackSpeed;
     public float cooldownReduction;
 }
+//this class can be used by both the player and enemies
+[System.Serializable]
+public class Ability{
+    public string abilityName = "";
+    public string abilityType = ""; //this would be like aoe, single target, heal, etc
+    public float abilityDamage = 1.0; //negative # should work for healing
+    public float abilityRange = 1.0;
+    public float abilityCooldown = 1.0;
+    public float castTime = 1.0;
+    public float damageMultiplier = 1.0;
+    //public Transform abilityAnimation; //not tested but should work to play correct animation
+}
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour{
     public static GameManager instance;
 
     public float timer;
@@ -32,17 +42,13 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         timer = 0;
         roomCleared = false;
         currentGold = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update(){
         timer += Time.deltaTime;
         //Debug.Log("Time: " + timer.ToString("F2")); //timer displays in console for now
 
