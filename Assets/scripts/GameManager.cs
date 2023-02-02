@@ -19,11 +19,11 @@ public class playerStats{
 public class Ability{
     public string abilityName = "";
     public string abilityType = ""; //this would be like aoe, single target, heal, etc
-    public float abilityDamage = 1.0; //negative # should work for healing
-    public float abilityRange = 1.0;
-    public float abilityCooldown = 1.0;
-    public float castTime = 1.0;
-    public float damageMultiplier = 1.0;
+    public float abilityDamage = 1; //negative # should work for healing
+    public float abilityRange = 1;
+    public float abilityCooldown = 1;
+    public float castTime = 1;
+    public float damageMultiplier = 1;
     //public Transform abilityAnimation; //not tested but should work to play correct animation
 }
 

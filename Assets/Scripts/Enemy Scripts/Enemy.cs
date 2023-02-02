@@ -5,10 +5,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("stats")]
-    [SerializeField] private float maxHealth;
-    public float health;
+    [SerializeField] private double maxHealth;
+    public double health;
     [SerializeField] private float movementSpeed;
-    [SerializeField] private float maxHealth;
 
     
     void Start(){
@@ -20,7 +19,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void isHit(){
-        health-=1.0;
+        health-=1.0f;
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);
