@@ -82,7 +82,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         if (groundedPlayer && !inJumpsquat) { animator.SetBool("Jumping", false); }
         // stop falling animation on land
         if (groundedPlayer && playerVelocity.y < 0){
-            playerVelocity.y = 0f;
+            playerVelocity.y = -2.0f;
             animator.SetBool("Falling", false);
         }
 
@@ -119,7 +119,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             animator.SetBool("Walking", false);
         }
 
-        // Changes the height position of the player.. 
+        // Changes the height position of the player
         if (jumpAction.triggered && groundedPlayer){
             // playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
             animator.SetBool("Jumping", true);
@@ -127,18 +127,18 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             jumpFrameChecker.initCheck();
         }
 
-
-        // add gravity
-        playerVelocity.y += gravityValue * Time.deltaTime;
         // animate falling player
-        controller.Move(playerVelocity * Time.deltaTime);
         if (controller.transform.position.y <= lastY && !groundedPlayer && !inJumpsquat)
         {
-            Debug.Log(transform.position.y);
-            Debug.Log(lastY);
+            //Debug.Log(transform.position.y);
+            //Debug.Log(lastY);
             animator.SetBool("Jumping", false);
             animator.SetBool("Falling", true);
         }
+
+        // add gravity
+        ApplyGravity();
+
         // attacking
         if (attackAction.triggered){
             if(isAttacking == true){
@@ -147,8 +147,29 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 Debug.Log("attacking");
                 isAttacking = true;
             }
-            
         }
+    }
 
+    private void ApplyGravity(){
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    /* checks if the player is on a slope */
+    /* potentially usefull to fix weird behavior on slopes */
+    private bool OnSlope(){
+        if (!groundedPlayer)
+            return false;
+
+        RaycastHit hit;
+        // calculate the normal of surface directly below player.
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, controller.height/2 * slopeForceRayLength)){
+            // if it is not straight up, we are on a slope.
+            if (hit.normal != Vector3.up){
+                Debug.Log("is on Slope");
+                return true;
+            }
+        }
+        return false;
     }
 }
