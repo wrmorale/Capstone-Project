@@ -31,6 +31,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private float lastY;
     private bool groundedPlayer;
     private bool inJumpsquat = false;
+
     private Transform cam;
 
     private InputAction moveAction;
@@ -153,23 +154,5 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private void ApplyGravity(){
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
-    }
-
-    /* checks if the player is on a slope */
-    /* potentially usefull to fix weird behavior on slopes */
-    private bool OnSlope(){
-        if (!groundedPlayer)
-            return false;
-
-        RaycastHit hit;
-        // calculate the normal of surface directly below player.
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, controller.height/2 * slopeForceRayLength)){
-            // if it is not straight up, we are on a slope.
-            if (hit.normal != Vector3.up){
-                Debug.Log("is on Slope");
-                return true;
-            }
-        }
-        return false;
     }
 }
