@@ -7285,6 +7285,8 @@ MonoBehaviour:
   availableAbilities: []
   numberOfEnemmies: 10
   enemyPrefab: {fileID: 1718325055}
+  player: {fileID: 1605249635}
+  spawnSpread: 10
 --- !u!4 &1928179609
 Transform:
   m_ObjectHideFlags: 0
