@@ -5,12 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("stats")]
-    [SerializeField]private string enemyName;
-    [SerializeField]private double maxHealth;
+    [SerializeField]public string enemyName;
+    [SerializeField]public double maxHealth;
     [SerializeField]public double health;
     [SerializeField]public float basicAttackDamage;
-    [SerializeField]private float movementSpeed;
+    [SerializeField]public float movementSpeed;
     public List<Ability> abilities; 
+    public Transform platform;
+    public float fallLimit = -10; 
 
     
     void Start(){
@@ -18,7 +20,9 @@ public class Enemy : MonoBehaviour
     }
 
     void Update(){
-
+        if (transform.position.y < platform.position.y + fallLimit){
+            Destroy(gameObject);
+        }
     }
 
     public void isHit(){

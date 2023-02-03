@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class enemyAttacks : MonoBehaviour
 {
+    [SerializeField] private Transform player;
+    public Enemy enemyInstance;
+
     void Start(){
-        
+        print(enemyInstance.basicAttackDamage);
     }
 
     void Update(){

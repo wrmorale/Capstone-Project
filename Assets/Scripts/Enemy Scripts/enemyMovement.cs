@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class enemyMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
     [SerializeField] private float range;
     [SerializeField] private float idleMovementRange;
     [SerializeField] private Transform player;
+    public Enemy enemyInstance;
     private Rigidbody body;
     private Rigidbody playerBody;
     private Vector3 movement;
@@ -24,7 +24,7 @@ public class enemyMovement : MonoBehaviour
         // if player is in range
         if(Vector2.Distance(body.position, playerBody.position) < range) {
             // move enemy towards player
-            movement = (playerBody.position - body.position) * speed;
+            movement = (playerBody.position - body.position) * enemyInstance.movementSpeed;
             body.MovePosition(body.position + (movement * Time.fixedDeltaTime));
         }
         else {
@@ -35,7 +35,7 @@ public class enemyMovement : MonoBehaviour
                 isIdle = !isIdle;
                 if (isIdle) {
                     idleMovement = body.position + new Vector3(Random.Range(-idleMovementRange, idleMovementRange), 0, Random.Range(-idleMovementRange, idleMovementRange));
-                    movement = (idleMovement - body.position).normalized * speed;
+                    movement = (idleMovement - body.position).normalized * enemyInstance.movementSpeed;
                 } 
                 else {
                     movement = Vector3.zero;
