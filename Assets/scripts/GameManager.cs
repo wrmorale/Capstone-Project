@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour{
                 Array.Clear(enemies, i, 1);
             }
         }
-        if(!playerStats.alive){
+        if(!playerStats.alive && playerStats.lives ==1){
+            playerStats.lives--;
             Debug.Log("You're Dead, Loser");
             //here we could insert a scene jump to a losing scene
         }

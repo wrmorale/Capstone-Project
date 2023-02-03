@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -393,7 +393,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.32102954, y: 0.31284878, z: -0.11326688, w: 0.8866997}
+  m_LocalRotation: {x: 0.32102957, y: 0.31284875, z: -0.11326688, w: 0.8866997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1307,7 +1307,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.25131634, y: 0.27872637, z: -0.07582667, w: 0.9237976}
+  m_LocalRotation: {x: 0.25131637, y: 0.27872634, z: -0.07582666, w: 0.9237976}
   m_LocalPosition: {x: 2.5279617, y: 5.058, z: -1.2457775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3730,7 +3730,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201922360}
-  m_LocalRotation: {x: 0.25131634, y: 0.27872637, z: -0.075826675, w: 0.9237976}
+  m_LocalRotation: {x: 0.25131637, y: 0.27872634, z: -0.07582667, w: 0.9237976}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4294,7 +4294,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.27989358, y: 0.29168594, z: -0.08969189, w: 0.9102386}
+  m_LocalRotation: {x: 0.27989358, y: 0.29168594, z: -0.08969188, w: 0.9102386}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5136,6 +5136,7 @@ MonoBehaviour:
   attackSpeed: 0
   cooldownReduction: 0
   alive: 0
+  lives: 1
   health: 0
   abilities: []
   platform: {fileID: 1891471869}
