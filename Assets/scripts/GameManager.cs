@@ -5,15 +5,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 
-//this will keep track of stats for player across scenes. Also helpful for testing since stats can be changed with sliders
-[System.Serializable]
-public class playerStats{
-    public float maxHealth;
-    public float movementSpeed;
-    public float basicDamage;
-    public float attackSpeed;
-    public float cooldownReduction;
-}
+
 //this class can be used by both the player and enemies
 [System.Serializable]
 public class Ability{
@@ -39,6 +31,7 @@ public class GameManager : MonoBehaviour{
     public int numberOfEnemmies = 10;
     public GameObject enemyPrefab;
     public GameObject player;
+    public Player playerStats;
     public int spawnSpread = 10;//how far apart the enemies spawn from each other
 
     //setup singleton
@@ -51,6 +44,7 @@ public class GameManager : MonoBehaviour{
         timer = 0;
         roomCleared = false;
         currentGold = 0;
+
         //create enemy copies at a location near the player
         Vector3 playerPos = player.transform.position;
         for(int i = 0; i < numberOfEnemmies; i++){
@@ -72,7 +66,10 @@ public class GameManager : MonoBehaviour{
                 Array.Clear(enemies, i, 1);
             }
         }
-
+        if(!playerStats.alive){
+            Debug.Log("You're Dead, Loser");
+            //here we could insert a scene jump to a losing scene
+        }
         if(enemies.Length == 0){
             roomCleared = true; 
             //Room clear condition successfully logged
