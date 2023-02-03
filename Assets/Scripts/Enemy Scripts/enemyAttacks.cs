@@ -8,7 +8,7 @@ public class enemyAttacks : MonoBehaviour
     public Enemy enemyInstance;
 
     void Start(){
-        print(enemyInstance.basicAttackDamage);
+        
     }
 
     void Update(){

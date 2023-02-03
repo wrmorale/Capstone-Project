@@ -14,6 +14,7 @@ public class Ability{
     public float abilityDamage = 1; //negative # should work for healing
     public float abilityRange = 1;
     public float abilityCooldown = 1;
+    public float abilityChance = 1; 
     public float castTime = 1;
     public float damageMultiplier = 1;
     //public Transform abilityAnimation; //not tested but should work to play correct animation
