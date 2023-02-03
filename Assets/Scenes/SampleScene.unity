@@ -393,7 +393,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.32102954, y: 0.31284875, z: -0.11326686, w: 0.8866997}
+  m_LocalRotation: {x: 0.32102957, y: 0.31284875, z: -0.113266855, w: 0.8866997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5130,13 +5130,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934100d95ea2bc940ab103c688380ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
+  maxHealth: 20
   movementSpeed: 0
-  basicDamage: 0
-  attackSpeed: 0
-  cooldownReduction: 0
-  alive: 0
-  health: 0
+  basicDamage: 4
+  attackSpeed: 0.5
+  cooldownReduction: 1
+  alive: 1
+  health: 20
   abilities: []
   platform: {fileID: 1891471869}
   fallLimit: -10
@@ -5451,15 +5451,21 @@ MonoBehaviour:
   enemyName: Sample Enemy
   maxHealth: 10
   health: 10
-  basicAttackDamage: 3
+  basicAttackDamage: 2
+  basicAttackSpeed: 0.3
+  attackRange: 1.8
   movementSpeed: 0.5
+  movementRange: 3
+  player: {fileID: 23324959}
+  body: {fileID: 1718325061}
+  playerBody: {fileID: 1605249637}
   abilities:
   - abilityName: Sample Ability
     abilityType: SingleTarget
     abilityDamage: 5
-    abilityRange: 4
+    abilityRange: 3
     abilityCooldown: 8
-    abilityChance: 1
+    abilityChance: 0.5
     castTime: 0.5
     damageMultiplier: 1
   platform: {fileID: 1891471869}
@@ -5570,9 +5576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbbbd7cf0337d1e43baa02a33100e247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 4
-  idleMovementRange: 5
-  player: {fileID: 23324959}
+  idleMovementRange: 3
   enemyInstance: {fileID: 1718325056}
 --- !u!114 &1718325063
 MonoBehaviour:
@@ -5586,8 +5590,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f4e05bbf7ab93642a6bda59b581791a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 23324959}
   enemyInstance: {fileID: 1718325056}
+  basicAttackCooldownTimer: 0
+  abilityCooldownTimer: 0
+  actionCooldownTimer: 0
+  counter: 0
 --- !u!1 &1764477828
 GameObject:
   m_ObjectHideFlags: 0

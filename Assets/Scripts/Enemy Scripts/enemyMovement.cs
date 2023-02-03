@@ -4,28 +4,24 @@ using UnityEngine;
 
 public class enemyMovement : MonoBehaviour
 {
-    [SerializeField] private float range;
     [SerializeField] private float idleMovementRange;
-    [SerializeField] private Transform player;
     public Enemy enemyInstance;
-    private Rigidbody body;
-    private Rigidbody playerBody;
     private Vector3 movement;
     private Vector3 idleMovement;
     private float elapsedTime = 0;
     private bool isIdle = false;
 
     private void Awake() {
-        body = GetComponent<Rigidbody>();
-        playerBody = player.GetComponent<Rigidbody>();
+        enemyInstance.body = GetComponent<Rigidbody>();
+        enemyInstance.playerBody = enemyInstance.player.GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate() {
         // if player is in range
-        if(Vector2.Distance(body.position, playerBody.position) < range) {
+        if(Vector3.Distance(enemyInstance.body.position, enemyInstance.playerBody.position) < enemyInstance.movementRange) {
             // move enemy towards player
-            movement = (playerBody.position - body.position) * enemyInstance.movementSpeed;
-            body.MovePosition(body.position + (movement * Time.fixedDeltaTime));
+            movement = (enemyInstance.playerBody.position - enemyInstance.body.position) * enemyInstance.movementSpeed;
+            enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
         }
         else {
             //enemy idle movement
@@ -34,14 +30,14 @@ public class enemyMovement : MonoBehaviour
                 elapsedTime = 0;
                 isIdle = !isIdle;
                 if (isIdle) {
-                    idleMovement = body.position + new Vector3(Random.Range(-idleMovementRange, idleMovementRange), 0, Random.Range(-idleMovementRange, idleMovementRange));
-                    movement = (idleMovement - body.position).normalized * enemyInstance.movementSpeed;
+                    idleMovement = enemyInstance.body.position + new Vector3(Random.Range(-idleMovementRange, idleMovementRange), 0, Random.Range(-idleMovementRange, idleMovementRange));
+                    movement = (idleMovement - enemyInstance.body.position).normalized * enemyInstance.movementSpeed;
                 } 
                 else {
                     movement = Vector3.zero;
                 }
             }
-            body.MovePosition(body.position + (movement * Time.fixedDeltaTime));
+            enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
         }
     }
 }

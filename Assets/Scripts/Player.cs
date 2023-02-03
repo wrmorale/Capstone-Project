@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     }
 
     public void isHit(float damage){
+        print("Player took damage");
         health -= damage;
         if(health <= 0){
             alive = false;

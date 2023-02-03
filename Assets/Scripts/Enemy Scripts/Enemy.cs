@@ -9,7 +9,13 @@ public class Enemy : MonoBehaviour
     [SerializeField]public double maxHealth;
     [SerializeField]public double health;
     [SerializeField]public float basicAttackDamage;
+    [SerializeField]public float basicAttackSpeed;
+    [SerializeField]public float attackRange;
     [SerializeField]public float movementSpeed;
+    [SerializeField]public float movementRange;
+    [SerializeField]public Transform player;
+    public Rigidbody body;
+    public Rigidbody playerBody;
     public List<Ability> abilities; 
     public Transform platform;
     public float fallLimit = -10; 
