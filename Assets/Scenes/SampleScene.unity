@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5452,13 +5452,13 @@ MonoBehaviour:
   maxHealth: 10
   health: 10
   basicAttackDamage: 3
-  basicAttackSpeed: 0
-  attackRange: 0
+  basicAttackSpeed: 0.4
+  attackRange: 1.4
   movementSpeed: 0.5
-  movementRange: 0
-  player: {fileID: 0}
-  body: {fileID: 0}
-  playerBody: {fileID: 0}
+  movementRange: 3
+  player: {fileID: 23324959}
+  body: {fileID: 1718325061}
+  playerBody: {fileID: 1605249637}
   abilities:
   - abilityName: Sample Ability
     abilityType: SingleTarget
@@ -7341,7 +7341,7 @@ MonoBehaviour:
   roomCleared: 0
   currentGold: 0
   availableAbilities: []
-  numberOfEnemmies: 2
+  numberOfEnemmies: 10
   enemyPrefab: {fileID: 1718325055}
   player: {fileID: 1605249635}
   playerStats: {fileID: 1605249641}
