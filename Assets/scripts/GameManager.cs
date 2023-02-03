@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour{
             Debug.Log("You're Dead, Loser");
             //here we could insert a scene jump to a losing scene
         }
-        if(enemies.Length == 0){
+        if(enemies.Length == 0 && !roomCleared){
             roomCleared = true; 
             //Room clear condition successfully logged
             Debug.Log("Room clear");
