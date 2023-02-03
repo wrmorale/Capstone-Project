@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour{
         timer = 0;
         roomCleared = false;
         currentGold = 0;
-
         //create enemy copies at a location near the player
         Vector3 playerPos = player.transform.position;
         for(int i = 0; i < numberOfEnemmies; i++){
