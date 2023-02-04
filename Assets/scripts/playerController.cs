@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Extensions;
+using States;
 // This code is based on sample unity movement API code.
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
@@ -27,6 +28,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     private CharacterController controller;
     private PlayerInput playerInput;
+    private BroomAttackManager attackManager;
     private Vector3 playerVelocity;
     private float lastY;
     private bool groundedPlayer;
@@ -54,6 +56,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     {
         inJumpsquat = false;
     }
+    public void onAttackCancelFrameStart() { }
+    public void onAttackCancelFrameEnd() { }
+    public void onAllCancelFrameStart() { }
+    public void onAllCancelFrameEnd() { }
     public void onLastFrameStart(){}
     public void onLastFrameEnd(){}
 
@@ -63,6 +69,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         controller  = gameObject.GetComponent<CharacterController>();
         playerInput = gameObject.GetComponent<PlayerInput>();
         animator    = gameObject.GetComponent<Animator>();
+        attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
         // add actions from playerControls here
         moveAction   = playerInput.actions["Run"];
