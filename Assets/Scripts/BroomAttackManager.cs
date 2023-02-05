@@ -24,7 +24,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 
     private playerController player;
     private int combo = 0;
-    enum Actions {Inactionable, AttackCancelable, AllCancelable}
+    enum ActionState {Inactionable, AttackCancelable, AllCancelable}
 
     //atack frame data management
     public void onActiveFrameStart() {
@@ -45,13 +45,14 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onAllCancelFrameEnd() { }
     public void onLastFrameStart(){
         Debug.Log("onLastFrameStart");
+        
+    }
+    public void onLastFrameEnd(){
+        Debug.Log("onLastFrameEnd");
         light1Clip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
         player.justEnded = true;
         combo = 0;
-    }
-    public void onLastFrameEnd(){
-        Debug.Log("onLastFrameEnd");
     }
 
     void Awake()

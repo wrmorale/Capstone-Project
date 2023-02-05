@@ -108,9 +108,8 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         
         // if there is movement input 
         if(state != States.PlayerStates.Attacking){
-            coroutine = attackManager.handleAttacks();
             StopCoroutine(coroutine);
-
+            coroutine = attackManager.handleAttacks();
             if (input.x != 0 || input.y != 0){
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
@@ -160,10 +159,11 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         //TO DO: check if the player is in a valid attack state
         if(attackAction.triggered){
+            // launch animations and attacks
+            if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
             //set state to attacking 
             SetState(States.PlayerStates.Attacking);
-            // launch animations and attacks
-            StartCoroutine(coroutine);
+            
         }
         
         // add gravity
