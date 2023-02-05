@@ -72,15 +72,16 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         light2Checker.initialize(this, light2Clip);
         light3Clip.initialize();
         light3Checker.initialize(this, light3Clip);
+        activeChecker = light1Checker;
+        activeClip = light1Clip;
     }
     
 
     // This custom update function can be called every frame from the Update() in playerController.cs to reduce overhead.
     // Only call if the player's state is Attacking.
 
-    private void updateMe() // do we need this?
+    public void updateMe() // do we need this?
     {
-        Debug.Log("Combo " + combo);
         activeChecker.checkFrames();
         if (player.attackAction.triggered)
         {
@@ -89,22 +90,20 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
             }
             else if (actionState == ActionState.AttackCancelable)
             {
-                StopAllCoroutines();
                 actionState = ActionState.Inactionable;
-                StartCoroutine(handleAttacks());
+                handleAttacks();
             }
             else if (actionState == ActionState.AllCancelable)
             {
-                StopAllCoroutines();
                 combo = 0;
                 actionState = ActionState.Inactionable;
-                StartCoroutine(handleAttacks());
+                handleAttacks();
             }
         }
         
     }
 
-    public IEnumerator handleAttacks(){
+    public void handleAttacks(){
         int frames = 0;                   // amount of frames in anim 
         actionState = ActionState.Inactionable;
         // first attack
@@ -130,10 +129,12 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         activeClip.animator.SetBool("Attacking", true);
         activeChecker.initCheck();
         activeChecker.checkFrames();
+        /*
         for (int i = 0; i < frames; i++)
         {
             updateMe();
             yield return new WaitForSeconds(0.033f); // return at the right frame interval
         }
+        */
     }
 }

@@ -85,7 +85,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
         SetState(States.PlayerStates.Idle);
-        coroutine = attackManager.handleAttacks();
+        // coroutine = attackManager.handleAttacks();
     }
 
     void Update()
@@ -105,11 +105,15 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
-        
+
         // if there is movement input 
+
+        if (state == States.PlayerStates.Attacking) {
+            attackManager.updateMe();
+        }
         if(state != States.PlayerStates.Attacking){
-            StopCoroutine(coroutine);
-            coroutine = attackManager.handleAttacks();
+            //StopCoroutine(coroutine);
+            //coroutine = attackManager.handleAttacks();
             if (input.x != 0 || input.y != 0){
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
@@ -155,16 +159,19 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 animator.SetBool("Jumping", false);
                 animator.SetBool("Falling", true);
             }
+
+            if (attackAction.triggered)
+            {
+                // launch animations and attacks
+                // if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
+                //set state to attacking 
+                attackManager.handleAttacks();
+                SetState(States.PlayerStates.Attacking);
+            }
         }
 
         //TO DO: check if the player is in a valid attack state
-        if(attackAction.triggered){
-            // launch animations and attacks
-            if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
-            //set state to attacking 
-            SetState(States.PlayerStates.Attacking);
-            
-        }
+        
         
         // add gravity
         ApplyGravity();

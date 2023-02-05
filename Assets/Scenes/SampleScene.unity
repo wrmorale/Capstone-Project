@@ -393,7 +393,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.32102954, y: 0.31284878, z: -0.11326688, w: 0.8866997}
+  m_LocalRotation: {x: 0.32102957, y: 0.31284875, z: -0.113266855, w: 0.8866997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5281,8 +5281,8 @@ MonoBehaviour:
   light2Checker:
     activeFrameStart: 0
     activeFrameEnd: 0
-    attackCancelFrameStart: 0
-    attackCancelFrameEnd: 0
+    attackCancelFrameStart: 12
+    attackCancelFrameEnd: 18
     allCancelFrameStart: 0
     allCancelFrameEnd: 0
   light3Clip:
