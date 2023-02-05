@@ -40,10 +40,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     private Transform cam;
 
-    private InputAction moveAction;
-    private InputAction walkAction;
-    private InputAction jumpAction;
-    private InputAction attackAction;
+    public InputAction moveAction;
+    public InputAction walkAction;
+    public InputAction jumpAction;
+    public InputAction attackAction;
 
     public States.PlayerStates state;
 
