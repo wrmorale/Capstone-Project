@@ -80,27 +80,37 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     // This custom update function can be called every frame from the Update() in playerController.cs to reduce overhead.
     // Only call if the player's state is Attacking.
 
-    public void updateMe() // do we need this?
+    public void updateMe() // yes we need this
     {
         activeChecker.checkFrames();
-        if (player.attackAction.triggered)
+
+        if (actionState == ActionState.Inactionable)
+        { 
+        }
+        if (actionState == ActionState.AttackCancelable)
         {
-            if (actionState == ActionState.Inactionable)
+            if (player.attackAction.triggered)
             {
-            }
-            else if (actionState == ActionState.AttackCancelable)
-            {
-                actionState = ActionState.Inactionable;
-                handleAttacks();
-            }
-            else if (actionState == ActionState.AllCancelable)
-            {
-                combo = 0;
                 actionState = ActionState.Inactionable;
                 handleAttacks();
             }
         }
-        
+        if (actionState == ActionState.AllCancelable)
+        {
+            if (player.attackAction.triggered)
+            {
+                actionState = ActionState.Inactionable;
+                combo = 0;
+                handleAttacks();
+            }
+            else if (player.jumpAction.triggered)
+            {
+                actionState = ActionState.Inactionable;
+                combo = 0;
+                activeClip.animator.SetBool("Attacking", false);
+                player.Jump();
+            }
+        }
     }
 
     public void handleAttacks(){
