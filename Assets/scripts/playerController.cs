@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.InputSystem;
 using Extensions;
 using States;
@@ -33,6 +34,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private float lastY;
     private bool groundedPlayer;
     private bool inJumpsquat = false;
+    public bool justEnded = false;
+
+    public IEnumerator coroutine;
 
     private Transform cam;
 
@@ -81,11 +85,12 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
         SetState(States.PlayerStates.Idle);
+        coroutine = attackManager.handleAttacks();
     }
 
     void Update()
     {
-        Debug.Log(state);
+        //Debug.Log(state);
         lastY = controller.transform.position.y;
         jumpFrameChecker.checkFrames();
         groundedPlayer = controller.isGrounded;
@@ -100,14 +105,12 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
-
-        
-        if(state == States.PlayerStates.Attacking){
-            attackManager.updateMe();
-        }
         
         // if there is movement input 
         if(state != States.PlayerStates.Attacking){
+            coroutine = attackManager.handleAttacks();
+            StopCoroutine(coroutine);
+
             if (input.x != 0 || input.y != 0){
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
@@ -153,21 +156,19 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 animator.SetBool("Jumping", false);
                 animator.SetBool("Falling", true);
             }
-            //TO DO: check if the player is in a valid attack state
-            if(attackAction.triggered){
-                //set state to attacking 
-                SetState(States.PlayerStates.Attacking);
-                attackManager.updateMe();
-            }
         }
-        
-        
 
-        
-        
+        //TO DO: check if the player is in a valid attack state
+        if(attackAction.triggered){
+            //set state to attacking 
+            SetState(States.PlayerStates.Attacking);
+            // launch animations and attacks
+            StartCoroutine(coroutine);
+        }
         
         // add gravity
         ApplyGravity();
+        justEnded = false;
     }
 
     private void ApplyGravity(){

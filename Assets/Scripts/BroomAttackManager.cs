@@ -36,17 +36,24 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         Debug.Log("onActiveFrameEnd");
         weapon.SetActive(false);
     }
-    public void onAttackCancelFrameStart() { }
+    public void onAttackCancelFrameStart() {
+        // set state to start next attack to start new coroutine
+        // StopCoroutine(player.coroutine);
+    }
     public void onAttackCancelFrameEnd() { }
     public void onAllCancelFrameStart() { }
     public void onAllCancelFrameEnd() { }
-    public void onLastFrameStart(){}
-    public void onLastFrameEnd(){
-        Debug.Log("onLastFrameEnd");
+    public void onLastFrameStart(){
+        Debug.Log("onLastFrameStart");
         light1Clip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
+        player.justEnded = true;
         combo = 0;
     }
+    public void onLastFrameEnd(){
+        Debug.Log("onLastFrameEnd");
+    }
+
     void Awake()
     {
         player = gameObject.GetComponent<playerController>();
@@ -58,17 +65,32 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 
     // This custom update function can be called every frame from the Update() in playerController.cs to reduce overhead.
     // Only call if the player's state is Attacking.
-    public void updateMe()
-    {   
+
+    private void updateMe() // do we need this?
+    {
         Debug.Log("Combo " + combo);
         light1FrameChecker.checkFrames();
-        //Let the player rotate (Can make the rotate function from playerController into a proper function)
-        if(combo == 0){
+    }
+
+    public IEnumerator handleAttacks(){
+        int frames = 0;                   // amount of frames in anim 
+
+        // first attack
+        if(combo == 0){ 
+            light1FrameChecker.checkFrames();
+            frames = light1Clip.getTotalFrames();
             combo++;
-            light1Clip.animator.SetBool("Attacking", true);
+            // start animation
+            light1Clip.animator.SetBool("Attacking", true); 
+            Debug.Log("attacking set true");
             light1FrameChecker.initCheck();
+
+            // Take this out of if statement ?
+            for (int i = 0; i < frames; i++){
+                updateMe();
+                yield return new WaitForSeconds(0.033f); // return at the right frame interval
+            }
+
         }
-
-
     }
 }
