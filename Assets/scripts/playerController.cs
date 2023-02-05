@@ -41,7 +41,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private InputAction jumpAction;
     private InputAction attackAction;
 
-    public bool isAttacking = false;
+    public States.PlayerStates state;
+
+    
 
 
     //Animation stuff
@@ -78,10 +80,12 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         walkAction   = playerInput.actions["Walk"];
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
+        SetState(States.PlayerStates.Idle);
     }
 
     void Update()
     {
+        Debug.Log(state);
         lastY = controller.transform.position.y;
         jumpFrameChecker.checkFrames();
         groundedPlayer = controller.isGrounded;
@@ -97,69 +101,81 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
 
+        
+        if(state == States.PlayerStates.Attacking){
+            attackManager.updateMe();
+        }
+        
         // if there is movement input 
-        if (input.x != 0 || input.y != 0){
-            bool walking = false;
-            Vector3 move = new Vector3(input.x, 0, input.y);
-            if (move.magnitude < walkThreshold || walkAction.triggered) { walking = true; }
+        if(state != States.PlayerStates.Attacking){
+            if (input.x != 0 || input.y != 0){
+                bool walking = false;
+                Vector3 move = new Vector3(input.x, 0, input.y);
+                if (move.magnitude < walkThreshold || walkAction.triggered) { walking = true; }
 
-            // calculate model rotation
-            float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f); // apply rotation
+                // calculate model rotation
+                float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f); // apply rotation
 
-            // move according to calculated target angle
-            move = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            if (walking) {
-                controller.Move(move * Time.deltaTime * walkSpeed);
-                animator.SetBool("Walking", true);
-                animator.SetBool("Running", false);
+                // move according to calculated target angle
+                move = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                if (walking) {
+                    controller.Move(move * Time.deltaTime * walkSpeed);
+                    animator.SetBool("Walking", true);
+                    animator.SetBool("Running", false);
+                }
+                else {
+                    controller.Move(move * Time.deltaTime * playerSpeed);
+                    animator.SetBool("Running", true);
+                    animator.SetBool("Walking", false);
+                }
             }
-            else {
-                controller.Move(move * Time.deltaTime * playerSpeed);
-                animator.SetBool("Running", true);
+            else
+            {
+                animator.SetBool("Running", false);
                 animator.SetBool("Walking", false);
             }
-        }
-        else
-        {
-            animator.SetBool("Running", false);
-            animator.SetBool("Walking", false);
-        }
 
-        // Changes the height position of the player
-        if (jumpAction.triggered && groundedPlayer){
-            // playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-            animator.SetBool("Jumping", true);
-            inJumpsquat = true;
-            jumpFrameChecker.initCheck();
-        }
+            // Changes the height position of the player
+            if (jumpAction.triggered && groundedPlayer){
+                // playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+                animator.SetBool("Jumping", true);
+                inJumpsquat = true;
+                jumpFrameChecker.initCheck();
+            }
 
-        // animate falling player
-        if (controller.transform.position.y <= lastY && !groundedPlayer && !inJumpsquat)
-        {
-            //Debug.Log(transform.position.y);
-            //Debug.Log(lastY);
-            animator.SetBool("Jumping", false);
-            animator.SetBool("Falling", true);
-        }
-
-        // add gravity
-        ApplyGravity();
-
-        // attacking
-        if (attackAction.triggered){
-            if(isAttacking == true){
-                isAttacking = false;
-            }else{
-                Debug.Log("attacking");
-                isAttacking = true;
+            // animate falling player
+            if (controller.transform.position.y <= lastY && !groundedPlayer && !inJumpsquat)
+            {
+                //Debug.Log(transform.position.y);
+                //Debug.Log(lastY);
+                animator.SetBool("Jumping", false);
+                animator.SetBool("Falling", true);
+            }
+            //TO DO: check if the player is in a valid attack state
+            if(attackAction.triggered){
+                //set state to attacking 
+                SetState(States.PlayerStates.Attacking);
+                attackManager.updateMe();
             }
         }
+        
+        
+
+        
+        
+        
+        // add gravity
+        ApplyGravity();
     }
 
     private void ApplyGravity(){
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    public void SetState(States.PlayerStates newState){
+        state = newState;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -393,7 +393,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.32102957, y: 0.31284875, z: -0.11326688, w: 0.8866997}
+  m_LocalRotation: {x: 0.32102954, y: 0.31284878, z: -0.11326688, w: 0.8866997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -819,8 +819,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1.1796}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1579301690}
-  m_RootOrder: 0
+  m_Father: {fileID: 23324959}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &301251854
 BoxCollider:
@@ -1307,7 +1307,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.25131637, y: 0.27872634, z: -0.07582666, w: 0.9237976}
+  m_LocalRotation: {x: 0.25131634, y: 0.27872637, z: -0.07582667, w: 0.9237976}
   m_LocalPosition: {x: 2.5279617, y: 5.058, z: -1.2457775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3730,7 +3730,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201922360}
-  m_LocalRotation: {x: 0.25131637, y: 0.27872634, z: -0.07582667, w: 0.9237976}
+  m_LocalRotation: {x: 0.25131634, y: 0.27872637, z: -0.075826675, w: 0.9237976}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4406,7 +4406,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29110
+  m_Name: pb_Mesh29846
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4871,7 +4871,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1579301690
 Transform:
   m_ObjectHideFlags: 0
@@ -4883,10 +4883,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 301251853}
+  m_Children: []
   m_Father: {fileID: 23324959}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1579301691
 MonoBehaviour:
@@ -4895,7 +4894,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1579301689}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9b60f55b9ea741b49bd4fffe40f373e1, type: 3}
   m_Name: 
@@ -5067,8 +5066,11 @@ MonoBehaviour:
   jumpFrameChecker:
     activeFrameStart: 2
     activeFrameEnd: 5
-    totalFrames: 9
-  isAttacking: 0
+    attackCancelFrameStart: 0
+    attackCancelFrameEnd: 0
+    allCancelFrameStart: 0
+    allCancelFrameEnd: 0
+  state: 0
 --- !u!114 &1605249639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5141,6 +5143,31 @@ MonoBehaviour:
   abilities: []
   platform: {fileID: 1891471869}
   fallLimit: -10
+--- !u!114 &1605249642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605249635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9863ab575a2445439709f2d53951b76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 301251852}
+  light1Clip:
+    animator: {fileID: 1605249636}
+    clip: {fileID: 7400000, guid: bc50abf456d7b9b4ea684d42c576bebd, type: 2}
+    animatorStateName: Light_1
+    layerNumber: 0
+  light1FrameChecker:
+    activeFrameStart: 4
+    activeFrameEnd: 7
+    attackCancelFrameStart: 0
+    attackCancelFrameEnd: 0
+    allCancelFrameStart: 0
+    allCancelFrameEnd: 0
 --- !u!1 &1624033811
 GameObject:
   m_ObjectHideFlags: 3
@@ -5436,7 +5463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1718325056
 MonoBehaviour:
   m_ObjectHideFlags: 0
