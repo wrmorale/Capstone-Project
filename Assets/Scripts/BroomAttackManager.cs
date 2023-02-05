@@ -21,6 +21,9 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     [SerializeField]
     private FrameChecker light3Checker;
 
+    private FrameParser activeClip;
+    private FrameChecker activeChecker;
+
     private playerController player;
     private int combo = 0;
     enum ActionState {Inactionable, AttackCancelable, AllCancelable}
@@ -29,11 +32,11 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onActiveFrameStart() {
         //call hitbox detection
         Debug.Log("onActiveFrameStart");
-        weapon.SetActive(true);
+        //weapon.SetActive(true);
     }
     public void onActiveFrameEnd() {
         Debug.Log("onActiveFrameEnd");
-        weapon.SetActive(false);
+        //weapon.SetActive(false);
     }
     public void onAttackCancelFrameStart() {
         actionState = ActionState.AttackCancelable;
@@ -53,7 +56,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     }
     public void onLastFrameEnd(){
         Debug.Log("onLastFrameEnd");
-        light1Clip.animator.SetBool("Attacking", false);
+        activeClip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
         player.justEnded = true;
         combo = 0;
@@ -78,10 +81,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     private void updateMe() // do we need this?
     {
         Debug.Log("Combo " + combo);
-        if (combo == 1) light1Checker.checkFrames();
-        else if (combo == 2) light2Checker.checkFrames();
-        else if (combo == 3) light3Checker.checkFrames();
-        
+        activeChecker.checkFrames();
         if (player.attackAction.triggered)
         {
             if (actionState == ActionState.Inactionable)
@@ -110,30 +110,26 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         // first attack
         if (combo == 0)
         {
-            light1Checker.checkFrames();
-            frames = light1Clip.getTotalFrames();
-            combo++;
-            // start animation
-            light1Clip.animator.SetBool("Attacking", true);
-            Debug.Log("attacking set true");
-            light1Checker.initCheck();
+            activeChecker = light1Checker;
+            activeClip = light1Clip;
         }
         else if (combo == 1)
         {
-            light2Checker.checkFrames();
-            frames = light2Clip.getTotalFrames();
-            combo++;
-            light2Clip.animator.SetBool("Attacking", true);
-            light2Checker.initCheck();
+            activeChecker = light2Checker;
+            activeClip = light2Clip;
         }
         else if (combo == 2)
         {
-            light3Checker.checkFrames();
-            frames = light3Clip.getTotalFrames();
-            combo++;
-            light3Clip.animator.SetBool("Attacking", true);
-            light3Checker.initCheck();
+            activeChecker = light3Checker;
+            activeClip = light3Clip;
         }
+        activeClip.animator.SetInteger("Combo", combo);
+        combo++;
+        if (combo > 2) combo = 0;
+        frames = activeClip.getTotalFrames();
+        activeClip.animator.SetBool("Attacking", true);
+        activeChecker.initCheck();
+        activeChecker.checkFrames();
         for (int i = 0; i < frames; i++)
         {
             updateMe();
