@@ -32,11 +32,11 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onActiveFrameStart() {
         //call hitbox detection
         Debug.Log("onActiveFrameStart");
-        //weapon.SetActive(true);
+        weapon.SetActive(true);
     }
     public void onActiveFrameEnd() {
         Debug.Log("onActiveFrameEnd");
-        //weapon.SetActive(false);
+        weapon.SetActive(false);
     }
     public void onAttackCancelFrameStart() {
         actionState = ActionState.AttackCancelable;
