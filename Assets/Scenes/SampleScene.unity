@@ -393,7 +393,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.32102957, y: 0.31284875, z: -0.113266855, w: 0.8866997}
+  m_LocalRotation: {x: 0.32102954, y: 0.31284878, z: -0.11326688, w: 0.8866997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -401,6 +401,74 @@ Transform:
   - {fileID: 1624033812}
   m_Father: {fileID: 965643144}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &142198250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142198253}
+  - component: {fileID: 142198252}
+  - component: {fileID: 142198251}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &142198251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142198250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &142198252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142198250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &142198253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142198250}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &180128082
 GameObject:
@@ -4406,7 +4474,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29846
+  m_Name: pb_Mesh29200
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5064,13 +5132,49 @@ MonoBehaviour:
     animatorStateName: jump
     layerNumber: 0
   jumpFrameChecker:
-    activeFrameStart: 2
+    activeFrameStart: 1
     activeFrameEnd: 5
     attackCancelFrameStart: 0
     attackCancelFrameEnd: 0
     allCancelFrameStart: 0
     allCancelFrameEnd: 0
   justEnded: 0
+  moveAction:
+    m_Name: Move
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bf2b1af9-aa1c-4fe1-8093-35a29472f0b0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  walkAction:
+    m_Name: Walk
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 43595fa8-b901-427c-827d-61207f845025
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  jumpAction:
+    m_Name: Jump
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9fbbe9df-521f-4d01-856d-03249ab76c80
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  attackAction:
+    m_Name: Attack
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e11cf6bb-02c3-40b3-95d4-fc78b3e1f9a5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   state: 0
 --- !u!114 &1605249639
 MonoBehaviour:
@@ -5160,15 +5264,39 @@ MonoBehaviour:
   light1Clip:
     animator: {fileID: 1605249636}
     clip: {fileID: 7400000, guid: bc50abf456d7b9b4ea684d42c576bebd, type: 2}
-    animatorStateName: Light_1
+    animatorStateName: light_1
     layerNumber: 0
-  light1FrameChecker:
-    activeFrameStart: 5
-    activeFrameEnd: 7
+  light1Checker:
+    activeFrameStart: 1
+    activeFrameEnd: 2
     attackCancelFrameStart: 12
     attackCancelFrameEnd: 16
-    allCancelFrameStart: 0
-    allCancelFrameEnd: 0
+    allCancelFrameStart: 17
+    allCancelFrameEnd: 26
+  light2Clip:
+    animator: {fileID: 1605249636}
+    clip: {fileID: 7400000, guid: 67f8d02c6d12c024e8e7e93441dcec4e, type: 2}
+    animatorStateName: light_2
+    layerNumber: 0
+  light2Checker:
+    activeFrameStart: 0
+    activeFrameEnd: 0
+    attackCancelFrameStart: 12
+    attackCancelFrameEnd: 18
+    allCancelFrameStart: 19
+    allCancelFrameEnd: 25
+  light3Clip:
+    animator: {fileID: 1605249636}
+    clip: {fileID: 7400000, guid: 53a8140dacf536d49a1ff780b9903e71, type: 2}
+    animatorStateName: light_3
+    layerNumber: 0
+  light3Checker:
+    activeFrameStart: 0
+    activeFrameEnd: 0
+    attackCancelFrameStart: 0
+    attackCancelFrameEnd: 0
+    allCancelFrameStart: 1
+    allCancelFrameEnd: 25
 --- !u!1 &1624033811
 GameObject:
   m_ObjectHideFlags: 3

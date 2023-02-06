@@ -40,10 +40,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     private Transform cam;
 
-    private InputAction moveAction;
-    private InputAction walkAction;
-    private InputAction jumpAction;
-    private InputAction attackAction;
+    public InputAction moveAction;
+    public InputAction walkAction;
+    public InputAction jumpAction;
+    public InputAction attackAction;
 
     public States.PlayerStates state;
 
@@ -85,7 +85,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
         SetState(States.PlayerStates.Idle);
-        coroutine = attackManager.handleAttacks();
+        // coroutine = attackManager.handleAttacks();
     }
 
     void Update()
@@ -105,11 +105,16 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
-        
+
         // if there is movement input 
+
+        if (state == States.PlayerStates.Attacking) {
+            attackManager.updateMe();
+        }
         if(state != States.PlayerStates.Attacking){
-            StopCoroutine(coroutine);
-            coroutine = attackManager.handleAttacks();
+            //StopCoroutine(coroutine);
+            //coroutine = attackManager.handleAttacks();
+            SetState(States.PlayerStates.Idle);
             if (input.x != 0 || input.y != 0){
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
@@ -140,11 +145,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             }
 
             // Changes the height position of the player
-            if (jumpAction.triggered && groundedPlayer){
+            if (jumpAction.triggered && groundedPlayer && state != States.PlayerStates.Jumping){
                 // playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-                animator.SetBool("Jumping", true);
-                inJumpsquat = true;
-                jumpFrameChecker.initCheck();
+                Jump();
             }
 
             // animate falling player
@@ -155,16 +158,20 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 animator.SetBool("Jumping", false);
                 animator.SetBool("Falling", true);
             }
+
+            if (attackAction.triggered)
+            {
+                // launch animations and attacks
+                // if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
+                //set state to attacking 
+                SetState(States.PlayerStates.Attacking);
+                attackManager.handleAttacks();
+                
+            }
         }
 
         //TO DO: check if the player is in a valid attack state
-        if(attackAction.triggered){
-            // launch animations and attacks
-            if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
-            //set state to attacking 
-            SetState(States.PlayerStates.Attacking);
-            
-        }
+        
         
         // add gravity
         ApplyGravity();
@@ -178,5 +185,13 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     public void SetState(States.PlayerStates newState){
         state = newState;
+    }
+
+    public void Jump() {
+        SetState(States.PlayerStates.Jumping);
+        animator.SetBool("Jumping", true);
+        inJumpsquat = true;
+        jumpFrameChecker.initCheck();
+        animator.Play("jump", 0);
     }
 }
