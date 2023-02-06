@@ -7,7 +7,11 @@ using Extensions;
 public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 {
     [SerializeField]
-    public GameObject weapon;
+    public GameObject attack1_collider;
+    [SerializeField]
+    public GameObject attack2_collider;
+    [SerializeField]
+    public GameObject attack3_collider;
     [SerializeField]
     private FrameParser light1Clip;
     [SerializeField]
@@ -32,11 +36,27 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onActiveFrameStart() {
         //call hitbox detection
         Debug.Log("onActiveFrameStart");
-        weapon.SetActive(true);
+        if (combo == 1){
+            attack1_collider.SetActive(true);
+        }
+        else if (combo == 2){
+            attack2_collider.SetActive(true);
+        }
+        else if (combo == 0){
+            attack3_collider.SetActive(true);
+        }
     }
     public void onActiveFrameEnd() {
         Debug.Log("onActiveFrameEnd");
-        weapon.SetActive(false);
+        if (combo == 1){
+            attack1_collider.SetActive(false);
+        }
+        else if (combo == 2){
+            attack2_collider.SetActive(false);
+        }
+        else if (combo == 0){
+            attack3_collider.SetActive(false);
+        }
     }
     public void onAttackCancelFrameStart() {
         actionState = ActionState.AttackCancelable;
