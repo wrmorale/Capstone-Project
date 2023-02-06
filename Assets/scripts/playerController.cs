@@ -164,8 +164,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 // launch animations and attacks
                 // if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
                 //set state to attacking 
-                attackManager.handleAttacks();
                 SetState(States.PlayerStates.Attacking);
+                attackManager.handleAttacks();
+                
             }
         }
 

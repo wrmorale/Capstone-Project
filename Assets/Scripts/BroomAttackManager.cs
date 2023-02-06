@@ -137,6 +137,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         if (combo > 2) combo = 0;
         frames = activeClip.getTotalFrames();
         activeClip.animator.SetBool("Attacking", true);
+        activeClip.animator.Play(activeClip.animatorStateName, 0);
         activeChecker.initCheck();
         activeChecker.checkFrames();
         /*
