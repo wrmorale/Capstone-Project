@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -505,7 +505,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.34042525, y: -0.00000002287612, z: 0.0000000082822975, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.0000000082837355, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4586,7 +4586,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.28978413, y: -0.000000023289521, z: 0.0000000070514994, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: -0.0000000232894, z: 0.0000000070514625, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4698,7 +4698,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29616
+  m_Name: pb_Mesh35456
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5471,11 +5471,11 @@ MonoBehaviour:
     animatorStateName: light_3
     layerNumber: 0
   light3Checker:
-    activeFrameStart: 1
-    activeFrameEnd: 15
-    attackCancelFrameStart: 16
-    attackCancelFrameEnd: 18
-    allCancelFrameStart: 19
+    activeFrameStart: 12
+    activeFrameEnd: 20
+    attackCancelFrameStart: 21
+    attackCancelFrameEnd: 23
+    allCancelFrameStart: 24
     allCancelFrameEnd: 25
 --- !u!1 &1624033811
 GameObject:
