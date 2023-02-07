@@ -30,6 +30,12 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 
     private playerController player;
     private int combo = 0;
+
+    AudioSource aud;
+    public AudioClip attacksfx12;
+    public AudioClip attacksfx3;
+
+    
     enum ActionState {Inactionable, AttackCancelable, AllCancelable}
     private ActionState actionState;
     //atack frame data management
@@ -38,13 +44,17 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         Debug.Log("onActiveFrameStart");
         if (combo == 1){
             attack1_collider.SetActive(true);
+            //aud.PlayOneShot(attacksfx12);
         }
         else if (combo == 2){
             attack2_collider.SetActive(true);
+            //aud.PlayOneShot(attacksfx12);
         }
         else if (combo == 0){
             attack3_collider.SetActive(true);
+            //aud.PlayOneShot(attacksfx3);
         }
+        aud.PlayOneShot(attacksfx12);
     }
     public void onActiveFrameEnd() {
         Debug.Log("onActiveFrameEnd");
@@ -85,6 +95,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     void Awake()
     {
         player = gameObject.GetComponent<playerController>();
+        aud    = gameObject.GetComponent<AudioSource>();
 
         light1Clip.initialize();
         light1Checker.initialize(this, light1Clip);
@@ -158,6 +169,16 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         frames = activeClip.getTotalFrames();
         activeClip.animator.SetBool("Attacking", true);
         activeClip.animator.Play(activeClip.animatorStateName, 0);
+        if (combo == 1){
+            aud.PlayOneShot(attacksfx12);
+        }
+        else if (combo == 2){
+            aud.PlayOneShot(attacksfx12);
+        }
+        else if (combo == 0){
+            aud.PlayOneShot(attacksfx3);
+        }
+        aud.PlayOneShot(attacksfx12);
         activeChecker.initCheck();
         activeChecker.checkFrames();
         /*
