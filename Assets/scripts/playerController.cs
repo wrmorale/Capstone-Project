@@ -74,7 +74,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     {
         controller  = gameObject.GetComponent<CharacterController>();
         playerInput = gameObject.GetComponent<PlayerInput>();
-        animator    = gameObject.GetComponent<Animator>();
+        animator    = gameObject.GetComponentInChildren<Animator>();
         attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
         // add actions from playerControls here
