@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sphere
   - Enemy
+  - Room
   layers:
   - Default
   - TransparentFX
