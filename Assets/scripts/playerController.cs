@@ -34,7 +34,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private float lastY;
     private bool groundedPlayer;
     private bool inJumpsquat = false;
-    public bool justEnded = false;
 
     public IEnumerator coroutine;
 
@@ -74,7 +73,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     {
         controller  = gameObject.GetComponent<CharacterController>();
         playerInput = gameObject.GetComponent<PlayerInput>();
-        animator    = gameObject.GetComponent<Animator>();
+        animator    = gameObject.GetComponentInChildren<Animator>();
         attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
         // add actions from playerControls here
@@ -175,7 +174,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         
         // add gravity
         ApplyGravity();
-        justEnded = false;
     }
 
     private void ApplyGravity(){

@@ -78,7 +78,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         Debug.Log("onLastFrameEnd");
         activeClip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
-        player.justEnded = true;
         combo = 0;
     }
 
