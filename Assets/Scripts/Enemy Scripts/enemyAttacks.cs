@@ -16,15 +16,17 @@ public class enemyAttacks : MonoBehaviour
             enemyAction();
         }
         actionCooldownTimer -= Time.deltaTime;
-        while(abilityCooldownTimer >= 0 ){
-            abilityCooldownTimer -= Time.deltaTime;
-        }
+        abilityCooldownTimer -= Time.deltaTime;
+        if(abilityCooldownTimer < 0) {
+            abilityCooldownTimer = 0;
+        } 
     }
 
     // function to control enemy actions 
     private void enemyAction(){
+        
         //if off ability cooldown can use ability depending on chance to use that ability
-        if(abilityCooldownTimer <=0) {abilityCooldownTimer = 0;} 
+        
         if(abilityCooldownTimer == 0){
             counter = 0;
             foreach (Ability ability in enemyInstance.abilities) {
@@ -44,21 +46,29 @@ public class enemyAttacks : MonoBehaviour
 
     private void attack(){
         //play attack animation - for now something generic for our cube enemy (makes enemy jump)
-        enemyInstance.body.AddForce(Vector3.up * 1, ForceMode.Impulse);
+        enemyInstance.body.AddForce(Vector3.up * 2, ForceMode.Impulse);
+
+        checkCollision(enemyInstance.basicAttackDamage);
+    }
+
+    private void useAbility(int abilityNum){
+        Debug.Log("Ability " + enemyInstance.abilities[abilityNum].abilityName + " has been cast.");
+        //play ability animation - for now something generic for our cube enemy (makes enemy jump)
+        enemyInstance.body.AddForce(Vector3.up * 4, ForceMode.Impulse);
+
+        checkCollision(enemyInstance.abilities[abilityNum].abilityDamage);
+        abilityCooldownTimer = enemyInstance.abilities[abilityNum].abilityCooldown;
+    }
+
+    private void checkCollision(float damage){
         //checks to see if "attack" collides with player
         Collider[] colliders = Physics.OverlapSphere(enemyInstance.body.position, enemyInstance.attackRange);
         foreach (Collider collider in colliders) {
             if (collider.tag == "Player") {
                 // apply damage to player
                 Player player = collider.GetComponent<Player>();
-                player.isHit(enemyInstance.basicAttackDamage);
+                player.isHit(damage);
             }
         }
-    }
-
-    private void useAbility(int abilityNum){
-        Debug.Log("Ability " + enemyInstance.abilities[abilityNum].abilityName + " has been cast.");
-        abilityCooldownTimer = enemyInstance.abilities[abilityNum].abilityCooldown;
-        actionCooldownTimer = (1 / enemyInstance.basicAttackSpeed);
     }
 }
