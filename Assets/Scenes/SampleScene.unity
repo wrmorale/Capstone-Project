@@ -505,7 +505,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.34042525, y: -0.00000002288009, z: 0.0000000082837355, w: 0.9402717}
+  m_LocalRotation: {x: 0.34042525, y: 0.000000022880096, z: -0.000000008283737, w: 0.9402717}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1487,7 +1487,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.256668, y: -0.00000003624416, z: 0.000000009625161, w: 0.9664997}
+  m_LocalRotation: {x: 0.256668, y: 0.00000003624416, z: -0.000000009625161, w: 0.9664997}
   m_LocalPosition: {x: 4.410551, y: 5.058, z: -1.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3910,7 +3910,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201922360}
-  m_LocalRotation: {x: 0.25666797, y: -0.00000001662996, z: 0.0000000044163255, w: 0.9664997}
+  m_LocalRotation: {x: 0.25666797, y: 0.000000016629963, z: -0.0000000044163264, w: 0.9664997}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4586,7 +4586,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.28978413, y: -0.0000000232894, z: 0.0000000070514625, w: 0.95709205}
+  m_LocalRotation: {x: 0.28978413, y: 0.00000002328939, z: -0.00000000705146, w: 0.95709205}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5450,7 +5450,7 @@ MonoBehaviour:
     activeFrameStart: 1
     activeFrameEnd: 11
     attackCancelFrameStart: 12
-    attackCancelFrameEnd: 16
+    attackCancelFrameEnd: 23
     allCancelFrameStart: 17
     allCancelFrameEnd: 25
   light2Clip:
@@ -5462,7 +5462,7 @@ MonoBehaviour:
     activeFrameStart: 1
     activeFrameEnd: 11
     attackCancelFrameStart: 12
-    attackCancelFrameEnd: 18
+    attackCancelFrameEnd: 23
     allCancelFrameStart: 19
     allCancelFrameEnd: 25
   light3Clip:
@@ -5772,7 +5772,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1718325056
 MonoBehaviour:
   m_ObjectHideFlags: 0
