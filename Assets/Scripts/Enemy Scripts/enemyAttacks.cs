@@ -16,12 +16,15 @@ public class enemyAttacks : MonoBehaviour
             enemyAction();
         }
         actionCooldownTimer -= Time.deltaTime;
-        abilityCooldownTimer -= Time.deltaTime;
+        while(abilityCooldownTimer >= 0 ){
+            abilityCooldownTimer -= Time.deltaTime;
+        }
     }
 
     // function to control enemy actions 
     private void enemyAction(){
         //if off ability cooldown can use ability depending on chance to use that ability
+        if(abilityCooldownTimer <=0) {abilityCooldownTimer = 0;} 
         if(abilityCooldownTimer == 0){
             counter = 0;
             foreach (Ability ability in enemyInstance.abilities) {
@@ -33,9 +36,8 @@ public class enemyAttacks : MonoBehaviour
                 counter++;
             }
         }
-        //if not will just basic attack
         else{
-            attack();
+            attack(); //basic attack
         }
         actionCooldownTimer = (1 / enemyInstance.basicAttackSpeed);
     }

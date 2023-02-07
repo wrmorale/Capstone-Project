@@ -22,6 +22,7 @@ public class enemyMovement : MonoBehaviour
             // move enemy towards player
             movement = (enemyInstance.playerBody.position - enemyInstance.body.position) * enemyInstance.movementSpeed;
             enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
+            
         }
         else {
             //enemy idle movement
@@ -32,12 +33,17 @@ public class enemyMovement : MonoBehaviour
                 if (isIdle) {
                     idleMovement = enemyInstance.body.position + new Vector3(Random.Range(-idleMovementRange, idleMovementRange), 0, Random.Range(-idleMovementRange, idleMovementRange));
                     movement = (idleMovement - enemyInstance.body.position).normalized * enemyInstance.movementSpeed;
+                    
                 } 
                 else {
                     movement = Vector3.zero;
                 }
             }
             enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
+        }
+        
+        if (movement != Vector3.zero) {
+            enemyInstance.body.rotation = Quaternion.LookRotation(-movement);
         }
     }
 }
