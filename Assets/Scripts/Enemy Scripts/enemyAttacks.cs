@@ -24,9 +24,7 @@ public class enemyAttacks : MonoBehaviour
 
     // function to control enemy actions 
     private void enemyAction(){
-        
         //if off ability cooldown can use ability depending on chance to use that ability
-        
         if(abilityCooldownTimer == 0){
             counter = 0;
             foreach (Ability ability in enemyInstance.abilities) {
@@ -47,20 +45,17 @@ public class enemyAttacks : MonoBehaviour
     private void attack(){
         //play attack animation - for now something generic for our cube enemy (makes enemy jump)
         enemyInstance.body.AddForce(Vector3.up * 2, ForceMode.Impulse);
-
         checkCollision(enemyInstance.basicAttackDamage);
     }
 
     private void useAbility(int abilityNum){
-        Debug.Log("Ability " + enemyInstance.abilities[abilityNum].abilityName + " has been cast.");
         //play ability animation - for now something generic for our cube enemy (makes enemy jump)
         enemyInstance.body.AddForce(Vector3.up * 4, ForceMode.Impulse);
-
         checkCollision(enemyInstance.abilities[abilityNum].abilityDamage);
         abilityCooldownTimer = enemyInstance.abilities[abilityNum].abilityCooldown;
     }
 
-    private void checkCollision(float damage){
+    private void checkCollision(float damage){ //for now just checks for collisions to deal damage. Will probably change once hitboxes and animations are in for enemies
         //checks to see if "attack" collides with player
         Collider[] colliders = Physics.OverlapSphere(enemyInstance.body.position, enemyInstance.attackRange);
         foreach (Collider collider in colliders) {

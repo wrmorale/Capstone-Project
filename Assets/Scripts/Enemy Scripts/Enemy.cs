@@ -31,8 +31,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void isHit(){
-        health-=1.0f;
+    public void isHit(float damage){
+        print("EnemyTookDamage");
+        health -= damage;
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);
