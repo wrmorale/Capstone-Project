@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: bookcase_3
     second: {fileID: 2100000, guid: b7983e14092e641209004266755df85f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bookcase_glass
+    second: {fileID: 2100000, guid: 4bbf650b692a54357ba4881d148fb927, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

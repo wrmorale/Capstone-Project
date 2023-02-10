@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 114ee7159296e46ffbadc785cac3b692
+guid: 491d2545799a642ca8eded6445f64a1b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,13 +7,68 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bookcase_1
-    second: {fileID: 2100000, guid: 96872f00872f4443dbd8704f51b273da, type: 2}
+      name: ceiling.001
+    second: {fileID: 2100000, guid: 793a6e83a1e8e4bcf95fce45b8f1850e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: bookcase_glass
-    second: {fileID: 2100000, guid: 4bbf650b692a54357ba4881d148fb927, type: 2}
+      name: chandelier
+    second: {fileID: 2100000, guid: 4118966045e104787b50287630b462cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chandelier.001
+    second: {fileID: 2100000, guid: 4118966045e104787b50287630b462cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door
+    second: {fileID: 2100000, guid: 86046e196777a42159b15c1027092135, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: door.001
+    second: {fileID: 2100000, guid: 86046e196777a42159b15c1027092135, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floor
+    second: {fileID: 2100000, guid: 3400aeed935bc46bc81cee9b4f650b62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floor.001
+    second: {fileID: 2100000, guid: 3400aeed935bc46bc81cee9b4f650b62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pillars
+    second: {fileID: 2100000, guid: d2518284cc06242bb93c7088b43fdbc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pillars.001
+    second: {fileID: 2100000, guid: d2518284cc06242bb93c7088b43fdbc3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sconce
+    second: {fileID: 2100000, guid: 05db36049a1134f2fb48bd34021f0de8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: sconce.001
+    second: {fileID: 2100000, guid: 05db36049a1134f2fb48bd34021f0de8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: walls
+    second: {fileID: 2100000, guid: 5a17b5f3de5144695b0ad489a7151413, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: walls.001
+    second: {fileID: 2100000, guid: 5a17b5f3de5144695b0ad489a7151413, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
