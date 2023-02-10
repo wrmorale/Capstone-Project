@@ -166,7 +166,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 animator.SetBool("Falling", true);
             }
 
-            if (attackAction.triggered)
+            if (attackAction.triggered && !inJumpsquat)
             {
                 // log current root bone position
                 lastRootY = hip.transform.localPosition.y;
