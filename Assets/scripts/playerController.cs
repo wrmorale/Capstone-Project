@@ -30,8 +30,12 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private CharacterController controller;
     private PlayerInput playerInput;
     private BroomAttackManager attackManager;
+    private GameObject model;
+    private GameObject metarig;
+    private GameObject hip;
     private Vector3 playerVelocity;
     private float lastY;
+    private float lastRootY;
     private bool groundedPlayer;
     private bool inJumpsquat = false;
     public bool justEnded = false;
@@ -75,8 +79,12 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         controller  = gameObject.GetComponent<CharacterController>();
         playerInput = gameObject.GetComponent<PlayerInput>();
         animator    = gameObject.GetComponentInChildren<Animator>();
+        model       = transform.Find("maid64").gameObject;
+        metarig     = transform.Find("maid64/metarig").gameObject;
+        hip         = transform.Find("maid64/metarig/hip").gameObject;
         attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
+        lastRootY = hip.transform.localPosition.y;
         // add actions from playerControls here
         moveAction   = playerInput.actions["Run"];
         jumpAction   = playerInput.actions["Jump"];
@@ -112,9 +120,8 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             attackManager.updateMe();
         }
         if(state != States.PlayerStates.Attacking){
-            //StopCoroutine(coroutine);
-            //coroutine = attackManager.handleAttacks();
             SetState(States.PlayerStates.Idle);
+            model.transform.localPosition = Vector3.zero;
             if (input.x != 0 || input.y != 0){
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
@@ -161,10 +168,11 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
             if (attackAction.triggered)
             {
-                // launch animations and attacks
-                // if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
+                // log current root bone position
+                lastRootY = hip.transform.localPosition.y;
                 //set state to attacking 
                 SetState(States.PlayerStates.Attacking);
+                // launch animations and attacks
                 attackManager.handleAttacks();
                 
             }
@@ -193,5 +201,16 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         inJumpsquat = true;
         jumpFrameChecker.initCheck();
         animator.Play("jump", 0);
+    }
+
+    // Simulates root motion when called during an animation.
+    public void MoveRoot() {
+        if (lastRootY != hip.transform.localPosition.y) {
+            float diff = lastRootY - hip.transform.localPosition.y;
+            Debug.Log(diff);
+            controller.Move(transform.forward * diff * metarig.transform.localScale.y * transform.localScale.z);
+            model.transform.localPosition = model.transform.localPosition + (Vector3.forward * -diff * metarig.transform.localScale.y);
+        }
+        lastRootY = hip.transform.localPosition.y;
     }
 }
