@@ -117,13 +117,15 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         }
         if (actionState == ActionState.AllCancelable)
         {
+            /*
             if (player.attackAction.triggered)
             {
                 actionState = ActionState.Inactionable;
                 combo = 0;
                 // handleAttacks();
             }
-            else if (player.jumpAction.triggered)
+            */
+            if (player.jumpAction.triggered)
             {
                 actionState = ActionState.Inactionable;
                 combo = 0;
