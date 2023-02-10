@@ -103,7 +103,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void updateMe() // yes we need this
     {
         activeChecker.checkFrames();
-
+        player.MoveRoot();
         if (actionState == ActionState.Inactionable)
         { 
         }
@@ -117,13 +117,15 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         }
         if (actionState == ActionState.AllCancelable)
         {
+            /*
             if (player.attackAction.triggered)
             {
                 actionState = ActionState.Inactionable;
                 combo = 0;
-                handleAttacks();
+                // handleAttacks();
             }
-            else if (player.jumpAction.triggered)
+            */
+            if (player.jumpAction.triggered)
             {
                 actionState = ActionState.Inactionable;
                 combo = 0;
@@ -160,12 +162,5 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         activeClip.animator.Play(activeClip.animatorStateName, 0);
         activeChecker.initCheck();
         activeChecker.checkFrames();
-        /*
-        for (int i = 0; i < frames; i++)
-        {
-            updateMe();
-            yield return new WaitForSeconds(0.033f); // return at the right frame interval
-        }
-        */
     }
 }
