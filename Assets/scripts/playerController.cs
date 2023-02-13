@@ -27,7 +27,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     float turnSmoothVelocity;
 
-    private CharacterController controller;
+    public CharacterController controller;
     private PlayerInput playerInput;
     private BroomAttackManager attackManager;
     private GameObject model;
@@ -114,8 +114,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
 
-        // if there is movement input 
-
+        // if there is movement input
         if (state == States.PlayerStates.Attacking) {
             attackManager.updateMe();
         }
@@ -127,13 +126,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 Vector3 move = new Vector3(input.x, 0, input.y);
                 if (move.magnitude < walkThreshold || walkAction.triggered) { walking = true; }
 
-                // calculate model rotation
-                float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, angle, 0f); // apply rotation
+                // store calculated model rotation
+                move = RotatePlayer(input);
 
-                // move according to calculated target angle
-                move = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 if (walking) {
                     controller.Move(move * Time.deltaTime * walkSpeed);
                     animator.SetBool("Walking", true);
@@ -201,6 +196,16 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         inJumpsquat = true;
         jumpFrameChecker.initCheck();
         animator.Play("jump", 0);
+    }
+
+    public Vector3 RotatePlayer(Vector2 input){
+        // calculate model rotation
+        float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f); // apply rotation
+
+        // move according to calculated target angle
+        return Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
     }
 
     // Simulates root motion when called during an animation.

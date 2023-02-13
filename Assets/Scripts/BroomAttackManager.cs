@@ -29,12 +29,15 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     private FrameChecker activeChecker;
 
     private playerController player;
+    private Vector2 input = Vector2.zero;
+
     private int combo = 0;
     enum ActionState {Inactionable, AttackCancelable, AllCancelable}
     private ActionState actionState;
-    //atack frame data management
+
+    /* Attack frame data management */
     public void onActiveFrameStart() {
-        //call hitbox detection
+        // call hitbox detection
         Debug.Log("onActiveFrameStart");
         if (combo == 1){
             attack1_collider.SetActive(true);
@@ -60,6 +63,15 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     }
     public void onAttackCancelFrameStart() {
         actionState = ActionState.AttackCancelable;
+        // let the player move between attacks
+        if (combo != 0){
+            Vector2 input = player.moveAction.ReadValue<Vector2>();
+            if (input.x != 0 || input.y != 0){
+                Vector3 move = new Vector3(input.x, 0, input.y);
+                move = player.RotatePlayer(input);
+                player.controller.Move(move * Time.deltaTime * 0.01f);
+            }
+        }
     }
     public void onAttackCancelFrameEnd() {
         if (actionState == ActionState.AttackCancelable) actionState = ActionState.Inactionable;
@@ -71,8 +83,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         if (actionState == ActionState.AllCancelable) actionState = ActionState.Inactionable;
     }
     public void onLastFrameStart(){
-        Debug.Log("onLastFrameStart");
-        
+        Debug.Log("onLastFrameStart");        
     }
     public void onLastFrameEnd(){
         Debug.Log("onLastFrameEnd");
@@ -92,6 +103,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         light2Checker.initialize(this, light2Clip);
         light3Clip.initialize();
         light3Checker.initialize(this, light3Clip);
+
         activeChecker = light1Checker;
         activeClip = light1Clip;
     }
@@ -105,7 +117,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         activeChecker.checkFrames();
         player.MoveRoot();
         if (actionState == ActionState.Inactionable)
-        { 
+        {  
         }
         if (actionState == ActionState.AttackCancelable)
         {
@@ -136,8 +148,9 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     }
 
     public void handleAttacks(){
-        int frames = 0;                   // amount of frames in anim 
+        int frames = 0; // amount of frames in anim 
         actionState = ActionState.Inactionable;
+
         // first attack
         if (combo == 0)
         {
@@ -154,9 +167,11 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
             activeChecker = light3Checker;
             activeClip = light3Clip;
         }
+
         activeClip.animator.SetInteger("Combo", combo);
         combo++;
         if (combo > 2) combo = 0;
+
         frames = activeClip.getTotalFrames();
         activeClip.animator.SetBool("Attacking", true);
         activeClip.animator.Play(activeClip.animatorStateName, 0);
