@@ -22,7 +22,6 @@ public class enemyMovement : MonoBehaviour
             // move enemy towards player
             movement = (enemyInstance.playerBody.position - enemyInstance.body.position) * enemyInstance.movementSpeed;
             enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
-            
         }
         else {
             //enemy idle movement
@@ -41,9 +40,14 @@ public class enemyMovement : MonoBehaviour
             }
             enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
         }
-        
         if (movement != Vector3.zero) {
-            enemyInstance.body.rotation = Quaternion.LookRotation(-movement);
+            enemyInstance.body.rotation = Quaternion.LookRotation(-movement); //not sure why but bunny looks at opposite direction w/o -movement
         }
+    }
+
+    public void abilityMovement(){
+        movement = (enemyInstance.playerBody.position - enemyInstance.body.position) * enemyInstance.movementSpeed * 3; //*3 so it will move faster like if it was a dash
+        enemyInstance.body.rotation = Quaternion.LookRotation(-movement);
+        enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
     }
 }

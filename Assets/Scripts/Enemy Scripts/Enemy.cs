@@ -19,6 +19,9 @@ public class Enemy : MonoBehaviour
     public List<Ability> abilities; 
     public Transform platform;
     public float fallLimit = -10; 
+    public enemyAttacks attacks;
+    public enemyMovement movement;
+
 
     
     void Start(){
