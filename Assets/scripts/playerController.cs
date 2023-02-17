@@ -27,11 +27,15 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     float turnSmoothVelocity;
 
-    private CharacterController controller;
+    public CharacterController controller;
     private PlayerInput playerInput;
     private BroomAttackManager attackManager;
+    private GameObject model;
+    private GameObject metarig;
+    private GameObject hip;
     private Vector3 playerVelocity;
     private float lastY;
+    private float lastRootY;
     private bool groundedPlayer;
     private bool inJumpsquat = false;
     public bool justEnded = false;
@@ -40,10 +44,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     private Transform cam;
 
-    private InputAction moveAction;
-    private InputAction walkAction;
-    private InputAction jumpAction;
-    private InputAction attackAction;
+    public InputAction moveAction;
+    public InputAction walkAction;
+    public InputAction jumpAction;
+    public InputAction attackAction;
 
     public States.PlayerStates state;
 
@@ -74,9 +78,13 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     {
         controller  = gameObject.GetComponent<CharacterController>();
         playerInput = gameObject.GetComponent<PlayerInput>();
-        animator    = gameObject.GetComponent<Animator>();
+        animator    = gameObject.GetComponentInChildren<Animator>();
+        model       = transform.Find("maid64").gameObject;
+        metarig     = transform.Find("maid64/metarig").gameObject;
+        hip         = transform.Find("maid64/metarig/hip").gameObject;
         attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
+        lastRootY = hip.transform.localPosition.y;
         // add actions from playerControls here
         moveAction   = playerInput.actions["Run"];
         jumpAction   = playerInput.actions["Jump"];
@@ -85,7 +93,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
         SetState(States.PlayerStates.Idle);
-        coroutine = attackManager.handleAttacks();
+        // coroutine = attackManager.handleAttacks();
     }
 
     void Update()
@@ -105,23 +113,22 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
-        
-        // if there is movement input 
+
+        // if there is movement input
+        if (state == States.PlayerStates.Attacking) {
+            attackManager.updateMe();
+        }
         if(state != States.PlayerStates.Attacking){
-            StopCoroutine(coroutine);
-            coroutine = attackManager.handleAttacks();
+            SetState(States.PlayerStates.Idle);
+            model.transform.localPosition = Vector3.zero;
             if (input.x != 0 || input.y != 0){
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
                 if (move.magnitude < walkThreshold || walkAction.triggered) { walking = true; }
 
-                // calculate model rotation
-                float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-                transform.rotation = Quaternion.Euler(0f, angle, 0f); // apply rotation
+                // store calculated model rotation
+                move = RotatePlayer(input);
 
-                // move according to calculated target angle
-                move = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
                 if (walking) {
                     controller.Move(move * Time.deltaTime * walkSpeed);
                     animator.SetBool("Walking", true);
@@ -140,11 +147,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             }
 
             // Changes the height position of the player
-            if (jumpAction.triggered && groundedPlayer){
+            if (jumpAction.triggered && groundedPlayer && state != States.PlayerStates.Jumping){
                 // playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
-                animator.SetBool("Jumping", true);
-                inJumpsquat = true;
-                jumpFrameChecker.initCheck();
+                Jump();
             }
 
             // animate falling player
@@ -155,16 +160,21 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 animator.SetBool("Jumping", false);
                 animator.SetBool("Falling", true);
             }
+
+            if (attackAction.triggered && !inJumpsquat)
+            {
+                // log current root bone position
+                lastRootY = hip.transform.localPosition.y;
+                //set state to attacking 
+                SetState(States.PlayerStates.Attacking);
+                // launch animations and attacks
+                attackManager.handleAttacks();
+                
+            }
         }
 
         //TO DO: check if the player is in a valid attack state
-        if(attackAction.triggered){
-            // launch animations and attacks
-            if (state != States.PlayerStates.Attacking) StartCoroutine(coroutine);
-            //set state to attacking 
-            SetState(States.PlayerStates.Attacking);
-            
-        }
+        
         
         // add gravity
         ApplyGravity();
@@ -178,5 +188,34 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     public void SetState(States.PlayerStates newState){
         state = newState;
+    }
+
+    public void Jump() {
+        SetState(States.PlayerStates.Jumping);
+        animator.SetBool("Jumping", true);
+        inJumpsquat = true;
+        jumpFrameChecker.initCheck();
+        animator.Play("jump", 0);
+    }
+
+    public Vector3 RotatePlayer(Vector2 input){
+        // calculate model rotation
+        float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+        transform.rotation = Quaternion.Euler(0f, angle, 0f); // apply rotation
+
+        // move according to calculated target angle
+        return Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+    }
+
+    // Simulates root motion when called during an animation.
+    public void MoveRoot() {
+        if (lastRootY != hip.transform.localPosition.y) {
+            float diff = lastRootY - hip.transform.localPosition.y;
+            Debug.Log(diff);
+            controller.Move(transform.forward * diff * metarig.transform.localScale.y * transform.localScale.z);
+            model.transform.localPosition = model.transform.localPosition + (Vector3.forward * -diff * metarig.transform.localScale.y);
+        }
+        lastRootY = hip.transform.localPosition.y;
     }
 }

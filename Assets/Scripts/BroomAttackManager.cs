@@ -7,49 +7,87 @@ using Extensions;
 public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 {
     [SerializeField]
-    public GameObject weapon;
+    public GameObject attack1_collider;
+    [SerializeField]
+    public GameObject attack2_collider;
+    [SerializeField]
+    public GameObject attack3_collider;
     [SerializeField]
     private FrameParser light1Clip;
     [SerializeField]
-    private FrameChecker light1FrameChecker;
-    /*[SerializeField]
+    private FrameChecker light1Checker;
+    [SerializeField]
     private FrameParser light2Clip;
     [SerializeField]
     private FrameChecker light2Checker;
     [SerializeField]
     private FrameParser light3Clip;
     [SerializeField]
-    private FrameChecker light3checker;
-    */
+    private FrameChecker light3Checker;
+
+    private FrameParser activeClip;
+    private FrameChecker activeChecker;
 
     private playerController player;
+    private Vector2 input = Vector2.zero;
+
     private int combo = 0;
     enum ActionState {Inactionable, AttackCancelable, AllCancelable}
+    private ActionState actionState;
 
-    //atack frame data management
+    /* Attack frame data management */
     public void onActiveFrameStart() {
-        //call hitbox detection
+        // call hitbox detection
         Debug.Log("onActiveFrameStart");
-        weapon.SetActive(true);
+        if (combo == 1){
+            attack1_collider.SetActive(true);
+        }
+        else if (combo == 2){
+            attack2_collider.SetActive(true);
+        }
+        else if (combo == 0){
+            attack3_collider.SetActive(true);
+        }
     }
     public void onActiveFrameEnd() {
         Debug.Log("onActiveFrameEnd");
-        weapon.SetActive(false);
+        if (combo == 1){
+            attack1_collider.SetActive(false);
+        }
+        else if (combo == 2){
+            attack2_collider.SetActive(false);
+        }
+        else if (combo == 0){
+            attack3_collider.SetActive(false);
+        }
     }
     public void onAttackCancelFrameStart() {
-        // set state to start next attack to start new coroutine
-        // StopCoroutine(player.coroutine);
+        actionState = ActionState.AttackCancelable;
+        // let the player move between attacks
+        if (combo != 0){
+            Vector2 input = player.moveAction.ReadValue<Vector2>();
+            if (input.x != 0 || input.y != 0){
+                Vector3 move = new Vector3(input.x, 0, input.y);
+                move = player.RotatePlayer(input);
+                player.controller.Move(move * Time.deltaTime * 0.01f);
+            }
+        }
     }
-    public void onAttackCancelFrameEnd() { }
-    public void onAllCancelFrameStart() { }
-    public void onAllCancelFrameEnd() { }
+    public void onAttackCancelFrameEnd() {
+        if (actionState == ActionState.AttackCancelable) actionState = ActionState.Inactionable;
+    }
+    public void onAllCancelFrameStart() {
+        actionState = ActionState.AllCancelable;
+    }
+    public void onAllCancelFrameEnd() {
+        if (actionState == ActionState.AllCancelable) actionState = ActionState.Inactionable;
+    }
     public void onLastFrameStart(){
-        Debug.Log("onLastFrameStart");
-        
+        Debug.Log("onLastFrameStart");        
     }
     public void onLastFrameEnd(){
         Debug.Log("onLastFrameEnd");
-        light1Clip.animator.SetBool("Attacking", false);
+        activeClip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
         player.justEnded = true;
         combo = 0;
@@ -60,38 +98,84 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         player = gameObject.GetComponent<playerController>();
 
         light1Clip.initialize();
-        light1FrameChecker.initialize(this, light1Clip);
+        light1Checker.initialize(this, light1Clip);
+        light2Clip.initialize();
+        light2Checker.initialize(this, light2Clip);
+        light3Clip.initialize();
+        light3Checker.initialize(this, light3Clip);
+
+        activeChecker = light1Checker;
+        activeClip = light1Clip;
     }
     
 
     // This custom update function can be called every frame from the Update() in playerController.cs to reduce overhead.
     // Only call if the player's state is Attacking.
 
-    private void updateMe() // do we need this?
+    public void updateMe() // yes we need this
     {
-        Debug.Log("Combo " + combo);
-        light1FrameChecker.checkFrames();
+        activeChecker.checkFrames();
+        player.MoveRoot();
+        if (actionState == ActionState.Inactionable)
+        {  
+        }
+        if (actionState == ActionState.AttackCancelable)
+        {
+            if (player.attackAction.triggered)
+            {
+                actionState = ActionState.Inactionable;
+                handleAttacks();
+            }
+        }
+        if (actionState == ActionState.AllCancelable)
+        {
+            /*
+            if (player.attackAction.triggered)
+            {
+                actionState = ActionState.Inactionable;
+                combo = 0;
+                // handleAttacks();
+            }
+            */
+            if (player.jumpAction.triggered)
+            {
+                actionState = ActionState.Inactionable;
+                combo = 0;
+                activeClip.animator.SetBool("Attacking", false);
+                player.Jump();
+            }
+        }
     }
 
-    public IEnumerator handleAttacks(){
-        int frames = 0;                   // amount of frames in anim 
+    public void handleAttacks(){
+        int frames = 0; // amount of frames in anim 
+        actionState = ActionState.Inactionable;
 
         // first attack
-        if(combo == 0){ 
-            light1FrameChecker.checkFrames();
-            frames = light1Clip.getTotalFrames();
-            combo++;
-            // start animation
-            light1Clip.animator.SetBool("Attacking", true); 
-            Debug.Log("attacking set true");
-            light1FrameChecker.initCheck();
-
-            // Take this out of if statement ?
-            for (int i = 0; i < frames; i++){
-                updateMe();
-                yield return new WaitForSeconds(0.033f); // return at the right frame interval
-            }
-
+        if (combo == 0)
+        {
+            activeChecker = light1Checker;
+            activeClip = light1Clip;
         }
+        else if (combo == 1)
+        {
+            activeChecker = light2Checker;
+            activeClip = light2Clip;
+        }
+        else if (combo == 2)
+        {
+            activeChecker = light3Checker;
+            activeClip = light3Clip;
+        }
+
+        activeClip.animator.SetInteger("Combo", combo);
+        combo++;
+        if (combo > 2) combo = 0;
+
+        frames = activeClip.getTotalFrames();
+        activeClip.animator.SetBool("Attacking", true);
+        activeClip.animator.Play(activeClip.animatorStateName, 0);
+        activeChecker.initCheck();
+        activeChecker.checkFrames();
     }
 }
