@@ -41,7 +41,7 @@ public class enemyMovement : MonoBehaviour
             enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
         }
         if (movement != Vector3.zero) {
-            enemyInstance.body.rotation = Quaternion.LookRotation(-movement); //not sure why but bunny looks at opposite direction w/o -movement
+            enemyInstance.body.rotation = Quaternion.LookRotation(movement); //not sure why but bunny looks at opposite direction w/o -movement
         }
     }
 
