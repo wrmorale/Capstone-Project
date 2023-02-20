@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Room
   - DustPile
+  - Furniture
   layers:
   - Default
   - TransparentFX
