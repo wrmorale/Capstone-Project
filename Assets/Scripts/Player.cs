@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     [SerializeField]public float cooldownReduction;
     public bool alive;
     public int lives;
+    public bool isInvulnerable;
     [SerializeField]public float health;
     public List<Ability> abilities; 
     public Transform platform;
@@ -23,6 +24,7 @@ public class Player : MonoBehaviour
     {
         health = maxHealth;
         alive = true;
+        isInvulnerable = false;
     }
 
     // Update is called once per frame
@@ -35,10 +37,14 @@ public class Player : MonoBehaviour
     }
 
     public void isHit(float damage){
-        print("Player took " + damage + " damage");
-        health -= damage;
-        if(health <= 0){
-            alive = false;
+        if (!isInvulnerable){
+            print("Player took " + damage + " damage");
+            health -= damage;
+            if(health <= 0){
+                alive = false;
+            }
         }
+        else 
+            Debug.Log("isInvulnerable");
     }
 }
