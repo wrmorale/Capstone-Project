@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571336, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1496,6 +1496,55 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &328862107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328862109}
+  - component: {fileID: 328862108}
+  m_Layer: 5
+  m_Name: Hud
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &328862108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328862107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 52f3faccbffd14dc0b5d5a3b2f411ebb, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 43643cd1defe08848967708b07049bd9,
+    type: 3}
+  m_SortingOrder: 0
+--- !u!4 &328862109
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328862107}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1574,7 +1623,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.20317271, y: -0.000000018836081, z: 0.000000003908497, w: 0.97914296}
+  m_LocalRotation: {x: 0.20317271, y: -0.000000018836085, z: 0.000000003908498, w: 0.97914296}
   m_LocalPosition: {x: 6.390681, y: 4.757502, z: -0.57700753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4937,7 +4986,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201922360}
-  m_LocalRotation: {x: 0.20317268, y: -0.00000001883608, z: 0.0000000039084966, w: 0.97914296}
+  m_LocalRotation: {x: 0.20317268, y: -0.000000018836083, z: 0.0000000039084975, w: 0.97914296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6029,7 +6078,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh32598
+  m_Name: pb_Mesh29706
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -10388,9 +10437,24 @@ PrefabInstance:
       objectReference: {fileID: 1810345600}
     - target: {fileID: 7428022771512999012, guid: 780a7481df1a48d4792aed7fd543ee02,
         type: 3}
+      propertyPath: hud
+      value: 
+      objectReference: {fileID: 328862108}
+    - target: {fileID: 7428022771512999012, guid: 780a7481df1a48d4792aed7fd543ee02,
+        type: 3}
       propertyPath: platform
       value: 
       objectReference: {fileID: 1891471869}
+    - target: {fileID: 7428022771512999012, guid: 780a7481df1a48d4792aed7fd543ee02,
+        type: 3}
+      propertyPath: maxHealth
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7428022771512999012, guid: 780a7481df1a48d4792aed7fd543ee02,
+        type: 3}
+      propertyPath: healthPercent
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
         type: 3}
       propertyPath: light1Clip.animator
