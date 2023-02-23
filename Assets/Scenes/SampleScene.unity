@@ -4964,7 +4964,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201922360}
-  m_LocalRotation: {x: 0.20317268, y: 0.000000018836083, z: -0.000000003908497, w: 0.97914296}
+  m_LocalRotation: {x: 0.20317268, y: 0.000000018836083, z: -0.0000000039084975, w: 0.97914296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5726,7 +5726,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.25981757, y: 0.000000023497828, z: -0.00000000632227, w: 0.9656578}
+  m_LocalRotation: {x: 0.25981757, y: -0.000000023497828, z: 0.00000000632227, w: 0.9656578}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7883,8 +7883,10 @@ MonoBehaviour:
     damageMultiplier: 1
   platform: {fileID: 1891471869}
   fallLimit: -10
-  attacks: {fileID: 0}
+  usingAbility: 0
   movement: {fileID: 0}
+  attacks: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!65 &1718325057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10266,7 +10268,7 @@ MonoBehaviour:
   roomCleared: 0
   currentGold: 0
   availableAbilities: []
-  numberOfEnemmies: 5
+  numberOfEnemmies: 0
   enemyPrefab: {fileID: 906402153}
   player: {fileID: 795224103}
   playerStats: {fileID: 795224107}
@@ -10565,7 +10567,7 @@ PrefabInstance:
     - target: {fileID: 8327740662560138378, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.887
+      value: 10.927
       objectReference: {fileID: 0}
     - target: {fileID: 8327740662560138378, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
@@ -10632,5 +10634,10 @@ PrefabInstance:
       propertyPath: playerBody
       value: 
       objectReference: {fileID: 795224104}
+    - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: abilities.Array.data[0].abilityChance
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fec4a32b1661b648bdcb0b9faccc35d, type: 3}

@@ -12,6 +12,7 @@ public class enemyAttacks : MonoBehaviour
     float longestAttackRange = 0;
 
     void Start(){
+        enemyInstance.movement = GetComponent<enemyMovement>();
         //this just gets longest range to see when the enemy can start to cast abilities or attacking the player
         foreach (Ability ability in enemyInstance.abilities) {
             if(longestAttackRange < ability.abilityRange){
@@ -54,6 +55,7 @@ public class enemyAttacks : MonoBehaviour
                 }
             }
         }
+        enemyInstance.usingAbility = false;
         //if ability not used will attack if in range
         if(Vector2.Distance(enemyInstance.body.position, enemyInstance.playerBody.position) < enemyInstance.attackRange){
             attack(); //basic attack
@@ -65,13 +67,13 @@ public class enemyAttacks : MonoBehaviour
     private void attack(){
         //play basic attack animation of this enemy - for now something generic for our enemy (makes enemy jump)
         //the attack animation should be checking for collisions so it should do damage that way. 
-        enemyInstance.body.AddForce(Vector3.up * 2, ForceMode.Impulse);
         checkCollision(enemyInstance.basicAttackDamage); //temp damage dealing
     }
 
     private void useAbility(int abilityNum){
+        enemyInstance.usingAbility = true;
         //play ability animation for ability used - for now something generic for our enemy (makes enemy jump)
-        enemyInstance.body.AddForce(Vector3.up * 4, ForceMode.Impulse);
+        //enemyInstance.body.AddForce(Vector3.up * 4, ForceMode.Impulse);
         checkCollision(enemyInstance.abilities[abilityNum].abilityDamage);
         abilityCooldownTimer = enemyInstance.abilities[abilityNum].abilityCooldown;
 
@@ -81,6 +83,7 @@ public class enemyAttacks : MonoBehaviour
             //should play animation here
             //since this ability is for movement here is some generic code that will make it move 
             enemyInstance.movement.abilityMovement();
+            
         }
         else if(enemyInstance.abilities[abilityNum].abilityType == "AoE"){
             //again play animation here

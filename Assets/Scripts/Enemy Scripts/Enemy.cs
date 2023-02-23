@@ -19,13 +19,17 @@ public class Enemy : MonoBehaviour
     public List<Ability> abilities; 
     public Transform platform;
     public float fallLimit = -10; 
-    public enemyAttacks attacks;
+    public bool usingAbility = false;
     public enemyMovement movement;
+    public enemyAttacks attacks;
 
+    public Animator animator;
+    public AnimatorStateInfo stateInfo;
+    public bool animationFinished = true;
 
     
     void Start(){
-       health = maxHealth;
+        health = maxHealth;
     }
 
     void Update(){
