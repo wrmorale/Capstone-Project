@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
     }
 
     public void isHit(float damage){
-        print("Player took " + damage + " damage");
+        //print("Player took " + damage + " damage");
         health -= damage;
         health = Mathf.Clamp(health, 0 , maxHealth);
         healthPercent = health / maxHealth;

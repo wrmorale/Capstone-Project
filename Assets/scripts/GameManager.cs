@@ -30,10 +30,14 @@ public class GameManager : MonoBehaviour{
     public List<String> availableAbilities = new List<String>(); //not sure how we will keep track of abilities yet but a list of strings to hold ablities that can be learned
     //
     public int numberOfEnemmies = 10;
+    public int numberOfDustPiles = 5;
     public GameObject enemyPrefab;
     public GameObject player;
+    public GameObject spawnArea;
+    public GameObject dustPilePrefab;
     public Player playerStats;
-    public int spawnSpread = 10;//how far apart the enemies spawn from each other
+
+    private bool objectsInstantiated = false;
 
     //setup singleton
     private void Awake() {
@@ -45,10 +49,38 @@ public class GameManager : MonoBehaviour{
         timer = 0;
         roomCleared = false;
         currentGold = 0;
-        //create enemy copies at a location near the player
-        Vector3 playerPos = player.transform.position;
-        for(int i = 0; i < numberOfEnemmies; i++){
-            GameObject enemy = Instantiate(enemyPrefab, playerPos + new Vector3(UnityEngine.Random.Range(-spawnSpread, spawnSpread), 0, UnityEngine.Random.Range(-5, 5)), Quaternion.identity);
+        //Dust Pile Spawn
+        if(!objectsInstantiated){
+            Bounds spawnBounds = spawnArea.GetComponent<MeshCollider>().bounds;
+            for (int i = 0; i < numberOfDustPiles; i++)
+            {
+                Vector3 position = new Vector3(
+                    UnityEngine.Random.Range(spawnBounds.min.x, spawnBounds.max.x),
+                    2.125f,
+                    UnityEngine.Random.Range(spawnBounds.min.z, spawnBounds.max.z)
+                );
+                Instantiate(dustPilePrefab, position, Quaternion.identity);
+            }
+            //
+            //create enemy copies at a location near the player
+            Vector3 playerPos = player.transform.position;
+            for(int i = 0; i < numberOfEnemmies; i++){
+                Vector3 position;
+                do {
+                    position = new Vector3(
+                        UnityEngine.Random.Range(spawnBounds.min.x, spawnBounds.max.x),
+                        playerPos.y,
+                        UnityEngine.Random.Range(spawnBounds.min.z, spawnBounds.max.z)
+                    );
+                } while (Vector3.Distance(playerPos, position) < 3);
+                GameObject enemy = Instantiate(enemyPrefab, position, Quaternion.identity);
+            }
+
+            // Disable original objects
+            enemyPrefab.SetActive(false);
+            dustPilePrefab.SetActive(false);
+
+            objectsInstantiated = true;
         }
     }
 
@@ -58,6 +90,7 @@ public class GameManager : MonoBehaviour{
 
         //Checks to see if enemies are still in arena
         Enemy[] enemies = FindObjectsOfType<Enemy>();
+        DustPile[] dustPiles = FindObjectsOfType<DustPile>();
         //deletes the enemy from the array if it has been destroyed
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -71,7 +104,7 @@ public class GameManager : MonoBehaviour{
             //Debug.Log("You're Dead, Loser");
             //here we could insert a scene jump to a losing scene
         }
-        if(enemies.Length == 0 && !roomCleared){
+        if(enemies.Length == 0 && dustPiles.Length == 0 && !roomCleared){
             roomCleared = true; 
             //Room clear condition successfully logged
             Debug.Log("Room clear");

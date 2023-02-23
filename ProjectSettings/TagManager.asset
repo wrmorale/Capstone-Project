@@ -7,6 +7,8 @@ TagManager:
   - Sphere
   - Enemy
   - Room
+  - DustPile
+  - Furniture
   layers:
   - Default
   - TransparentFX
