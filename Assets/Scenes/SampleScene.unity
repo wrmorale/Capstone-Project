@@ -7939,6 +7939,10 @@ MonoBehaviour:
     damageMultiplier: 1
   platform: {fileID: 1891471869}
   fallLimit: -10
+  detectionRange: 5
+  healingSpeed: 0.1
+  dustPilePrefab: {fileID: 0}
+  maxDustPiles: 5
 --- !u!65 &1718325057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8882,6 +8886,8 @@ MonoBehaviour:
   enemyName: DustPile
   maxHealth: 10
   health: 0
+  range: 0.4
+  healingSpeed: 0.4
 --- !u!1 &1891471864
 GameObject:
   m_ObjectHideFlags: 0
@@ -10911,5 +10917,10 @@ PrefabInstance:
       propertyPath: playerBody
       value: 
       objectReference: {fileID: 795224104}
+    - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: dustPilePrefab
+      value: 
+      objectReference: {fileID: 1867231458}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fec4a32b1661b648bdcb0b9faccc35d, type: 3}

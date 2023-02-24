@@ -111,5 +111,6 @@ public class GameManager : MonoBehaviour{
             //Add some code to advance to next scene
         }
         numberOfEnemmies = enemies.Length;
+        
     }
 }
