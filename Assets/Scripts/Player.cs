@@ -61,10 +61,4 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnValidate(){
-        if(healthbar != null){
-            healthbar.value = healthPercent;
-            health = (healthPercent * maxHealth);
-        }
-    }
 }

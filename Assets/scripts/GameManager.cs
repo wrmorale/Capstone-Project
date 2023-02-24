@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using HudElements;
 
 
 //this class can be used by both the player and enemies
@@ -29,8 +31,9 @@ public class GameManager : MonoBehaviour{
     public int currentGold; 
     public List<String> availableAbilities = new List<String>(); //not sure how we will keep track of abilities yet but a list of strings to hold ablities that can be learned
     //
-    public int numberOfEnemmies = 10;
-    public int numberOfDustPiles = 5;
+    public int numberOfEnemies = 10;
+    public float maxDustPiles = 5;
+    private float numberOfDustPiles;
     public GameObject enemyPrefab;
     public GameObject player;
     public GameObject spawnArea;
@@ -38,6 +41,15 @@ public class GameManager : MonoBehaviour{
     public Player playerStats;
 
     private bool objectsInstantiated = false;
+
+    //UI stuff
+    public UIDocument hud;
+    private CleaningBar cleaningbar;
+
+    [Range(0,1)]
+    public float cleaningPercent = 0;
+
+    private float dustPilesCleaned;
 
     //setup singleton
     private void Awake() {
@@ -49,6 +61,7 @@ public class GameManager : MonoBehaviour{
         timer = 0;
         roomCleared = false;
         currentGold = 0;
+        numberOfDustPiles = maxDustPiles;
         //Dust Pile Spawn
         if(!objectsInstantiated){
             Bounds spawnBounds = spawnArea.GetComponent<MeshCollider>().bounds;
@@ -64,7 +77,7 @@ public class GameManager : MonoBehaviour{
             //
             //create enemy copies at a location near the player
             Vector3 playerPos = player.transform.position;
-            for(int i = 0; i < numberOfEnemmies; i++){
+            for(int i = 0; i < numberOfEnemies; i++){
                 Vector3 position;
                 do {
                     position = new Vector3(
@@ -81,7 +94,14 @@ public class GameManager : MonoBehaviour{
             dustPilePrefab.SetActive(false);
 
             objectsInstantiated = true;
+            
         }
+
+        // UI set up
+        var root = hud.rootVisualElement;
+        cleaningbar = root.Q<CleaningBar>();
+        cleaningbar.value = 0;
+
     }
 
     void Update(){
@@ -110,6 +130,16 @@ public class GameManager : MonoBehaviour{
             Debug.Log("Room clear");
             //Add some code to advance to next scene
         }
-        numberOfEnemmies = enemies.Length;
+        numberOfEnemies = enemies.Length;
+        numberOfDustPiles = dustPiles.Length;
+        dustPilesCleaned = maxDustPiles - numberOfDustPiles;
+
+        numberOfDustPiles = Mathf.Clamp(numberOfDustPiles, 0, maxDustPiles);
+        cleaningPercent = dustPilesCleaned/maxDustPiles;
+        cleaningbar.value = cleaningPercent;
+
+
     }
+    
+
 }

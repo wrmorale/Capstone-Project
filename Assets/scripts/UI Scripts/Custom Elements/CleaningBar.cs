@@ -58,7 +58,7 @@ namespace HudElements
         {
             UxmlIntAttributeDescription m_width = new UxmlIntAttributeDescription(){name = "width", defaultValue = 300};
             UxmlIntAttributeDescription m_height = new UxmlIntAttributeDescription(){name = "height", defaultValue = 50};
-            UxmlFloatAttributeDescription m_value = new UxmlFloatAttributeDescription(){name = "value", defaultValue = 1};
+            UxmlFloatAttributeDescription m_value = new UxmlFloatAttributeDescription(){name = "value", defaultValue = 0};
             UxmlEnumAttributeDescription<CleaningBar.FillType> m_fillType = new UxmlEnumAttributeDescription<FillType>(){name = "fill-type", defaultValue = 0};
 
             public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
@@ -87,9 +87,13 @@ namespace HudElements
                 ate.cbParent.style.height = ate.height;
                 ate.style.width  = ate.width;
                 ate.style.height = ate.height;
+                ate.RegisterValueChangedCallback(ate.UpdateCleaning);
                 ate.FillCleaning();
 
             }
+        }
+        public void UpdateCleaning(ChangeEvent<float> evt){
+            FillCleaning();
         }
         private void FillCleaning(){
 

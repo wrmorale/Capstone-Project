@@ -1,6 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="screen" style="flex-grow: 1;">
         <HudElements.HealthBar width="300" style="position: absolute; left: 5%; top: 5%;" />
-        <HudElements.CleaningBar width="300" style="position: absolute; top: 10%; left: 5%;" />
+        <HudElements.CleaningBar width="300" style="position: absolute; top: 20%; left: 5%;" />
     </ui:VisualElement>
 </ui:UXML>

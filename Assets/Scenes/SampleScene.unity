@@ -530,8 +530,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.21332426, y: 0.0000000084051575, z: -0.0000000018352693,
-    w: 0.97698146}
+  m_LocalRotation: {x: 0.21332426, y: -0.000000008405158, z: 0.0000000018352695, w: 0.97698146}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1588,7 +1587,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.20317271, y: 0.000000018836085, z: -0.000000003908498, w: 0.97914296}
+  m_LocalRotation: {x: 0.20317271, y: -0.000000018836085, z: 0.000000003908498, w: 0.97914296}
   m_LocalPosition: {x: 6.390681, y: 4.757502, z: -0.57700753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4988,7 +4987,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201922360}
-  m_LocalRotation: {x: 0.20317268, y: 0.000000018836083, z: -0.0000000039084975, w: 0.97914296}
+  m_LocalRotation: {x: 0.20317268, y: -0.000000018836083, z: 0.000000003908497, w: 0.97914296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5106,6 +5105,55 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 444954648325390464, guid: c803e077be25f40a6ad03d7a6c66247d, type: 3}
+--- !u!1 &1226842386
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226842388}
+  - component: {fileID: 1226842387}
+  m_Layer: 5
+  m_Name: Hud
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1226842387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226842386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: 52f3faccbffd14dc0b5d5a3b2f411ebb, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 43643cd1defe08848967708b07049bd9,
+    type: 3}
+  m_SortingOrder: 0
+--- !u!4 &1226842388
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226842386}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1228885379
 GameObject:
   m_ObjectHideFlags: 0
@@ -5765,7 +5813,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.25981757, y: -0.000000023497828, z: 0.00000000632227, w: 0.9656578}
+  m_LocalRotation: {x: 0.25981757, y: 0.000000023497828, z: -0.00000000632227, w: 0.9656578}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6100,7 +6148,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh33452
+  m_Name: pb_Mesh29754
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7939,6 +7987,8 @@ MonoBehaviour:
     damageMultiplier: 1
   platform: {fileID: 1891471869}
   fallLimit: -10
+  attacks: {fileID: 0}
+  movement: {fileID: 0}
 --- !u!65 &1718325057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10543,13 +10593,15 @@ MonoBehaviour:
   roomCleared: 0
   currentGold: 0
   availableAbilities: []
-  numberOfEnemmies: 5
-  numberOfDustPiles: 5
+  numberOfEnemies: 0
+  maxDustPiles: 5
   enemyPrefab: {fileID: 906402153}
   player: {fileID: 795224103}
   spawnArea: {fileID: 1828240060}
   dustPilePrefab: {fileID: 1867231458}
   playerStats: {fileID: 795224107}
+  hud: {fileID: 1226842387}
+  cleaningPercent: 1
 --- !u!4 &1928179609
 Transform:
   m_ObjectHideFlags: 0
@@ -10692,6 +10744,11 @@ PrefabInstance:
       propertyPath: jumpClip.animator
       value: 
       objectReference: {fileID: 1810345600}
+    - target: {fileID: 7428022771512999012, guid: 780a7481df1a48d4792aed7fd543ee02,
+        type: 3}
+      propertyPath: hud
+      value: 
+      objectReference: {fileID: 1226842387}
     - target: {fileID: 7428022771512999012, guid: 780a7481df1a48d4792aed7fd543ee02,
         type: 3}
       propertyPath: platform
