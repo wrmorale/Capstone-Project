@@ -9,6 +9,31 @@ public class FeatherDusterTriggerable : MonoBehaviour, IFrameCheckHandler
     [HideInInspector] public float projectileForce = 250f;
     [HideInInspector] public float lifetime = 1f;
 
+    public void onActiveFrameStart()
+    {
+    }
+    public void onActiveFrameEnd()
+    {
+    }
+    public void onAttackCancelFrameStart()
+    {
+    }
+    public void onAttackCancelFrameEnd()
+    {
+    }
+    public void onAllCancelFrameStart()
+    {
+    }
+    public void onAllCancelFrameEnd()
+    {
+    }
+    public void onLastFrameStart()
+    {
+    }
+    public void onLastFrameEnd()
+    {
+    }
+
     public void Launch()
     {
         Rigidbody clonedBullet = Instantiate(projectile, bulletSpawn.position, transform.rotation) as Rigidbody;
