@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     [Range(0,1)]
     public float healthPercent = 1;
 
+    public bool isInvulnerable = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,13 +54,16 @@ public class Player : MonoBehaviour
 
     public void isHit(float damage){
         //print("Player took " + damage + " damage");
-        health -= damage;
-        health = Mathf.Clamp(health, 0 , maxHealth);
-        healthPercent = health / maxHealth;
-        healthbar.value = healthPercent;  
-        if(health <= 0){
-            alive = false;
+        if(!isInvulnerable){
+            health -= damage;
+            health = Mathf.Clamp(health, 0 , maxHealth);
+            healthPercent = health / maxHealth;
+            healthbar.value = healthPercent;  
+            if(health <= 0){
+                alive = false;
+            }
         }
+        
     }
 
 }
