@@ -125,7 +125,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: roll
-  m_Speed: 1
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3170360796299756491}
@@ -594,7 +594,7 @@ AnimatorStateMachine:
     m_Position: {x: 140, y: 540, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5283747457555527069}
-    m_Position: {x: 620, y: 770, z: 0}
+    m_Position: {x: 610, y: 650, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571336, b: 0.3069219, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -529,7 +529,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128607680}
-  m_LocalRotation: {x: 0.21332426, y: -0.000000008405158, z: 0.0000000018352695, w: 0.97698146}
+  m_LocalRotation: {x: 0.21332426, y: 0.0000000071900046, z: -0.0000000015699401,
+    w: 0.97698146}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1574,7 +1575,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.20317271, y: 0.000000018836085, z: -0.000000003908498, w: 0.97914296}
+  m_LocalRotation: {x: 0.20317271, y: 0.000000018311237, z: -0.000000003799592, w: 0.97914296}
   m_LocalPosition: {x: 6.390681, y: 4.757502, z: -0.57700753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3371,7 +3372,7 @@ MonoBehaviour:
   rollClip:
     animator: {fileID: 1810345600}
     clip: {fileID: 7400000, guid: 80dfaf9b80e5c6d47a66784f9b888085, type: 2}
-    animatorStateName: Rolling
+    animatorStateName: roll
     layerNumber: 0
   rollFrameChecker:
     activeFrameStart: 1
@@ -4961,7 +4962,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201922360}
-  m_LocalRotation: {x: 0.20317268, y: 0.000000018836083, z: -0.0000000039084975, w: 0.97914296}
+  m_LocalRotation: {x: 0.20317268, y: 0.000000018311237, z: -0.0000000037995918, w: 0.97914296}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5723,7 +5724,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.25981757, y: 0.000000023497828, z: -0.00000000632227, w: 0.9656578}
+  m_LocalRotation: {x: 0.25981757, y: -0.000000023055945, z: 0.000000006203377, w: 0.9656578}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
