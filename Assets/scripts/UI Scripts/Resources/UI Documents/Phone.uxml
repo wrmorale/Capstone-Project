@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Phone" style="flex-grow: 1;">
+        <ui:VisualElement name="Background" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/phonebar.png?fileID=2800000&amp;guid=72453ba99acb1fc48b42a9b8e84bb955&amp;type=3#phonebar&apos;); height: 130px; flex-grow: 1;">
+            <ui:VisualElement name="Foreground" style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
