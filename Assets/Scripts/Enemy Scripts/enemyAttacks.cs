@@ -39,6 +39,8 @@ public class enemyAttacks : MonoBehaviour
 
     // function to control enemy actions 
     private void enemyAction(){
+        //face player when performing action
+        
         //if off ability cooldown can use ability depending on chance to use that ability
         if(abilityCooldownTimer == 0){
             counter = 0;
@@ -55,7 +57,6 @@ public class enemyAttacks : MonoBehaviour
                 }
             }
         }
-        enemyInstance.usingAbility = false;
         //if ability not used will attack if in range
         if(Vector2.Distance(enemyInstance.body.position, enemyInstance.playerBody.position) < enemyInstance.attackRange){
             attack(); //basic attack
@@ -71,24 +72,26 @@ public class enemyAttacks : MonoBehaviour
     }
 
     private void useAbility(int abilityNum){
-        enemyInstance.usingAbility = true;
-        //play ability animation for ability used - for now something generic for our enemy (makes enemy jump)
-        //enemyInstance.body.AddForce(Vector3.up * 4, ForceMode.Impulse);
         checkCollision(enemyInstance.abilities[abilityNum].abilityDamage);
         abilityCooldownTimer = enemyInstance.abilities[abilityNum].abilityCooldown;
-
-        //this is what the abilities should really do=
         //first check what type of ability it is and will do stuff depending on type of ability
         if(enemyInstance.abilities[abilityNum].abilityType == "Movement"){
-            //should play animation here
-            //since this ability is for movement here is some generic code that will make it move 
-            enemyInstance.movement.abilityMovement();
-            
+            enemyInstance.animator.SetBool("MovementAttack", true);
+            StartCoroutine(enemyInstance.waitForAnimation("MovementAttack"));
         }
         else if(enemyInstance.abilities[abilityNum].abilityType == "AoE"){
             //again play animation here
             //pretty generic code but will deal damage to player if around certain radius during animation frames
             
+        }
+        else if(enemyInstance.abilities[abilityNum].abilityType == "Ranged Projectile"){
+            //again play animation here
+            //pretty generic code but will deal damage to player if around certain radius during animation frames
+            Vector3 direction = enemyInstance.playerBody.position - enemyInstance.body.position;
+            direction.y = 0; // set y direction to 0 to keep enemy upright
+            enemyInstance.body.rotation = Quaternion.LookRotation(direction);
+            enemyInstance.animator.SetBool("RangedAbility", true);
+            StartCoroutine(enemyInstance.waitForAnimation("RangedAbility"));
         }
         //have other ability types as else if statments and we can add simple code to deal damage correctly. 
     }

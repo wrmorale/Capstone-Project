@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour
     public List<Ability> abilities; 
     public Transform platform;
     public float fallLimit = -10; 
-    public bool usingAbility = false;
+
     public enemyMovement movement;
     public enemyAttacks attacks;
 
@@ -45,5 +45,11 @@ public class Enemy : MonoBehaviour
             // Destroy the cube when it has no health left
             Destroy(gameObject);
         }
+    }
+
+    public IEnumerator waitForAnimation(string animationName) {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        animator.SetBool(animationName, false);
+        animationFinished = true;
     }
 }

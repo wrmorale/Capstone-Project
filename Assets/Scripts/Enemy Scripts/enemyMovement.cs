@@ -22,7 +22,7 @@ public class enemyMovement : MonoBehaviour
         // if player is in range
         if(Vector3.Distance(enemyInstance.body.position, enemyInstance.playerBody.position) < enemyInstance.movementRange) {
             // move enemy towards player
-            if (!enemyInstance.usingAbility && enemyInstance.stateInfo.normalizedTime >= 1f){
+            if (enemyInstance.stateInfo.normalizedTime >= 1f){
                 enemyInstance.animator.SetBool("Moving", true);
                 movement = (enemyInstance.playerBody.position - enemyInstance.body.position) * enemyInstance.movementSpeed;
                 enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
@@ -49,18 +49,5 @@ public class enemyMovement : MonoBehaviour
         if (movement != Vector3.zero) {
             enemyInstance.body.rotation = Quaternion.LookRotation(movement); //not sure why but bunny looks at opposite direction w/o -movement
         }
-    }
-
-    public void abilityMovement(){
-        enemyInstance.animator.SetBool("Moving", false);
-        enemyInstance.animator.SetBool("MovementAttack", true);
-        enemyInstance.body.rotation = Quaternion.LookRotation(-movement);
-        enemyInstance.body.MovePosition(enemyInstance.body.position + (movement * Time.fixedDeltaTime));
-        StartCoroutine(ResetMovementAttack());
-    }
-
-    IEnumerator ResetMovementAttack() {
-        yield return new WaitForSeconds(enemyInstance.animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        enemyInstance.animator.SetBool("MovementAttack", false);
     }
 }
