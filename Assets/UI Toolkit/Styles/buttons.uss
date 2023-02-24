@@ -1,0 +1,22 @@
+.button-main-title {
+    -unity-font-style: bold;
+    font-size: 44px;
+    background-color: rgb(255, 255, 255);
+    background-image: url('project://database/Assets/UI%20Toolkit/UI-Assets/startbutton.png?fileID=2800000&guid=9561671bbe390fa4dbd48c6fb6cea1b9&type=3#startbutton');
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+    color: rgba(27, 27, 27, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+}
+
+.button-main-title:hover {
+    background-color: rgb(255, 255, 255);
+    -unity-background-image-tint-color: rgba(255, 249, 158, 255);
+}
+
+.button-main-title:active {
+    background-color: rgb(255, 216, 0);
+    -unity-background-image-tint-color: rgba(96, 96, 96, 255);
+}
