@@ -29,13 +29,14 @@ public class Player : MonoBehaviour
     [Range(0,1)]
     public float healthPercent = 1;
 
-    public bool isInvulnerable = false;
+    public bool isInvulnerable;
 
     // Start is called before the first frame update
     void Start()
     {
         health = maxHealth;
         alive = true;
+        isInvulnerable = false;
 
 
         var root = hud.rootVisualElement;
