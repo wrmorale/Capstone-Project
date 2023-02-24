@@ -1,0 +1,11 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/buttons.uss?fileID=7433441132597879392&amp;guid=4e2e404407519964eb2fdda9e170cc4f&amp;type=3#buttons" />
+    <ui:VisualElement name="Background" style="background-color: rgb(137, 47, 112); align-items: center; justify-content: space-between;">
+        <ui:VisualElement name="PauseMenuImg" style="height: 1084px; width: 1296px; align-items: auto; justify-content: center; background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/pausescreen.png?fileID=2800000&amp;guid=1f69a953cf82d4df6a1f2375675e7e91&amp;type=3#pausescreen&apos;); margin-left: 16%; margin-right: 16%; background-color: rgb(137, 47, 112); flex-direction: row;">
+            <ui:VisualElement name="ButtonHolder" style="height: 100%; width: 33%; align-items: stretch; justify-content: center; margin-bottom: 0; padding-bottom: 28%;">
+                <ui:Button text="Continue" display-tooltip-when-elided="true" name="Continue" class="button-main-pause" />
+                <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="button-main-pause" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -226,7 +226,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     public void MoveRoot() {
         if (lastRootY != hip.transform.localPosition.y) {
             float diff = lastRootY - hip.transform.localPosition.y;
-            Debug.Log(diff);
+            //Debug.Log(diff);
             controller.Move(transform.forward * diff * metarig.transform.localScale.y * transform.localScale.z);
             model.transform.localPosition = model.transform.localPosition + (Vector3.forward * -diff * metarig.transform.localScale.y);
         }
