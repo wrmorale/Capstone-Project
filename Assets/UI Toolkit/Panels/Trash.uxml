@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/labels.uss?fileID=7433441132597879392&amp;guid=426b66d2a79e1894496a0135f8d6f580&amp;type=3#labels" />
+    <Style src="project://database/Assets/UI%20Toolkit/Styles/buttons.uss?fileID=7433441132597879392&amp;guid=4e2e404407519964eb2fdda9e170cc4f&amp;type=3#buttons" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/mainmenu.png?fileID=2800000&amp;guid=4a9dc963d2b8e44c8a1ab6311faba814&amp;type=3#mainmenu&apos;); flex-direction: column-reverse; background-color: rgb(56, 56, 56); -unity-background-image-tint-color: rgb(255, 255, 255);">
+        <ui:VisualElement name="BottomBar" style="flex-direction: column; height: 529px; justify-content: center; margin-left: 40%; margin-right: 40%; margin-top: 28px; margin-bottom: 28px; width: 379px;">
+            <ui:Button text="Button" display-tooltip-when-elided="true" name="Start" class="button-main-title" style="background-color: rgb(56, 56, 56); background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/cleaningsignstart.png?fileID=2800000&amp;guid=574941a33395148ac93f8451e32d6d0e&amp;type=3#cleaningsignstart&apos;); position: absolute; top: auto; left: auto;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
