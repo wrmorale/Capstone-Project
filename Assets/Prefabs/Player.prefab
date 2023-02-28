@@ -113,6 +113,8 @@ MonoBehaviour:
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
   enemy: {fileID: 0}
+  dustPile: {fileID: 0}
+  furniture: {fileID: 0}
 --- !u!1 &7428022770733803843
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +228,8 @@ MonoBehaviour:
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
   enemy: {fileID: 0}
+  dustPile: {fileID: 0}
+  furniture: {fileID: 0}
 --- !u!1 &7428022771009043263
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +343,8 @@ MonoBehaviour:
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
   enemy: {fileID: 0}
+  dustPile: {fileID: 0}
+  furniture: {fileID: 0}
 --- !u!1 &7428022771512999016
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +360,7 @@ GameObject:
   - component: {fileID: 7428022771512999011}
   - component: {fileID: 7428022771512999012}
   - component: {fileID: 7428022771512999013}
+  - component: {fileID: 2330392013427656052}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -463,6 +470,7 @@ MonoBehaviour:
   jumpHeight: 1.14
   gravityValue: -18.17
   turnSmoothTime: 0.1
+  rollCooldown: 3
   jumpClip:
     animator: {fileID: 0}
     clip: {fileID: 7400000, guid: 84d3e014aa1e37241a26ce746e1762a3, type: 2}
@@ -475,10 +483,7 @@ MonoBehaviour:
     attackCancelFrameEnd: 0
     allCancelFrameStart: 0
     allCancelFrameEnd: 0
-  model: {fileID: 0}
-  metarig: {fileID: 0}
-  hip: {fileID: 0}
-  justEnded: 0
+  controller: {fileID: 0}
   moveAction:
     m_Name: Move
     m_Type: 0
@@ -502,6 +507,15 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 9fbbe9df-521f-4d01-856d-03249ab76c80
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  rollAction:
+    m_Name: Roll
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f8d7906e-427a-48d4-ba4b-e1f94320b240
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -539,6 +553,9 @@ MonoBehaviour:
   abilities: []
   platform: {fileID: 0}
   fallLimit: -10
+  hud: {fileID: 0}
+  healthPercent: 1
+  isInvulnerable: 0
 --- !u!114 &7428022771512999013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -590,6 +607,30 @@ MonoBehaviour:
     attackCancelFrameEnd: 23
     allCancelFrameStart: 24
     allCancelFrameEnd: 25
+--- !u!114 &2330392013427656052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7428022771512999016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9605d23135542fb44839f85be3e648f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollClip:
+    animator: {fileID: 6870679871651066729}
+    clip: {fileID: 7400000, guid: 80dfaf9b80e5c6d47a66784f9b888085, type: 2}
+    animatorStateName: roll
+    layerNumber: 0
+  rollFrameChecker:
+    activeFrameStart: 0
+    activeFrameEnd: 0
+    attackCancelFrameStart: 0
+    attackCancelFrameEnd: 0
+    allCancelFrameStart: 0
+    allCancelFrameEnd: 0
 --- !u!1001 &6609636105879550251
 PrefabInstance:
   m_ObjectHideFlags: 0

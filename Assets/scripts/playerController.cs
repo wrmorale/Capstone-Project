@@ -9,7 +9,7 @@ using States;
 public class playerController : MonoBehaviour, IFrameCheckHandler
 {
     [SerializeField]
-    private float playerSpeed = 2.5f;
+    public float playerSpeed = 2.5f;
     [SerializeField]
     private float walkSpeed = 1.5f;
     [SerializeField]
@@ -19,7 +19,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     [SerializeField]
     private float gravityValue = -9.81f;
     [SerializeField]
-    public float turnSmoothTime = 0.1f;
+    public float turnSmoothTime = 0.0f;
+    [SerializeField]
+    public float rollCooldown = 3.0f;
+    private float rollCooldownTimer = 0.0f;
     [SerializeField]
     private FrameParser jumpClip;
     [SerializeField]
@@ -29,6 +32,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     public CharacterController controller;
     private PlayerInput playerInput;
+    private RollManager rollManager;
     private BroomAttackManager attackManager;
     private GameObject model;
     private GameObject metarig;
@@ -38,7 +42,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private float lastRootY;
     private bool groundedPlayer;
     private bool inJumpsquat = false;
-    public bool justEnded = false;
 
     public IEnumerator coroutine;
 
@@ -47,12 +50,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     public InputAction moveAction;
     public InputAction walkAction;
     public InputAction jumpAction;
+    public InputAction rollAction;
     public InputAction attackAction;
 
     public States.PlayerStates state;
-
-    
-
 
     //Animation stuff
     Animator animator;
@@ -82,6 +83,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         model       = transform.Find("maid64").gameObject;
         metarig     = transform.Find("maid64/metarig").gameObject;
         hip         = transform.Find("maid64/metarig/hip").gameObject;
+        rollManager = gameObject.GetComponent<RollManager>();
         attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
         lastRootY = hip.transform.localPosition.y;
@@ -90,6 +92,8 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         jumpAction   = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
         walkAction   = playerInput.actions["Walk"];
+        rollAction   = playerInput.actions["Roll"];
+
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
         SetState(States.PlayerStates.Idle);
@@ -114,14 +118,20 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
 
-        // if there is movement input
+        rollCooldownTimer = Mathf.Max(0f, rollCooldownTimer - Time.deltaTime);
+        if (state == States.PlayerStates.Rolling) {
+            rollManager.updateMe();
+        }
+
         if (state == States.PlayerStates.Attacking) {
             attackManager.updateMe();
         }
-        if(state != States.PlayerStates.Attacking){
+        if (state != States.PlayerStates.Attacking && state !=States.PlayerStates.Rolling) {
             SetState(States.PlayerStates.Idle);
             model.transform.localPosition = Vector3.zero;
-            if (input.x != 0 || input.y != 0){
+            
+            if (input.x != 0 || input.y != 0) { // if there is movement input
+                Debug.Log("moving");
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
                 if (move.magnitude < walkThreshold || walkAction.triggered) { walking = true; }
@@ -147,8 +157,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             }
 
             // Changes the height position of the player
-            if (jumpAction.triggered && groundedPlayer && state != States.PlayerStates.Jumping){
-                // playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            if (jumpAction.triggered && groundedPlayer && state != States.PlayerStates.Jumping) {
                 Jump();
             }
 
@@ -163,22 +172,27 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
             if (attackAction.triggered && !inJumpsquat)
             {
+                Debug.Log("attacking");
                 // log current root bone position
                 lastRootY = hip.transform.localPosition.y;
                 //set state to attacking 
                 SetState(States.PlayerStates.Attacking);
                 // launch animations and attacks
                 attackManager.handleAttacks();
-                
+            }
+
+            if (rollAction.triggered && rollCooldownTimer == 0 && groundedPlayer)
+            {
+                SetState(States.PlayerStates.Rolling);
+                rollCooldownTimer = rollCooldown;
+                rollManager.Roll();
             }
         }
 
         //TO DO: check if the player is in a valid attack state
         
-        
         // add gravity
         ApplyGravity();
-        justEnded = false;
     }
 
     private void ApplyGravity(){

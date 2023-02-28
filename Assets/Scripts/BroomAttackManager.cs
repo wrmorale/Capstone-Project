@@ -89,7 +89,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         //Debug.Log("onLastFrameEnd");
         activeClip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
-        player.justEnded = true;
         combo = 0;
     }
 
@@ -147,7 +146,8 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         }
     }
 
-    public void handleAttacks(){
+    public void handleAttacks()
+    {
         int frames = 0; // amount of frames in anim 
         actionState = ActionState.Inactionable;
 
