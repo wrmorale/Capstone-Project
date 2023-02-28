@@ -131,7 +131,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             model.transform.localPosition = Vector3.zero;
             
             if (input.x != 0 || input.y != 0) { // if there is movement input
-                Debug.Log("moving");
                 bool walking = false;
                 Vector3 move = new Vector3(input.x, 0, input.y);
                 if (move.magnitude < walkThreshold || walkAction.triggered) { walking = true; }
