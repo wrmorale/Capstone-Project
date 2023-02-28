@@ -25,6 +25,7 @@ public class RollManager : MonoBehaviour, IFrameCheckHandler
     public void onLastFrameStart(){
         rollClip.animator.SetBool("Rolling", false);
         player.SetState(States.PlayerStates.Idle);
+        playerManager.isInvulnerable = false;
     }
     public void onLastFrameEnd()
     {
