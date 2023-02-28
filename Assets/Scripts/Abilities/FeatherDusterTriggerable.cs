@@ -6,8 +6,12 @@ public class FeatherDusterTriggerable : MonoBehaviour, IFrameCheckHandler
 {
     [HideInInspector] public Rigidbody projectile;
     public Transform bulletSpawn;
-    [HideInInspector] public float projectileForce = 250f;
+    [HideInInspector] public float speed = 250f;
     [HideInInspector] public float lifetime = 1f;
+    [HideInInspector] public FrameParser throwClip;
+    [HideInInspector] public FrameChecker throwFrameChecker;
+    [HideInInspector] public float damage = 1f;
+    private playerController player;
 
     public void onActiveFrameStart()
     {
@@ -34,10 +38,14 @@ public class FeatherDusterTriggerable : MonoBehaviour, IFrameCheckHandler
     {
     }
 
+    void Awake()
+    {
+        
+    }
     public void Launch()
     {
         Rigidbody clonedBullet = Instantiate(projectile, bulletSpawn.position, transform.rotation) as Rigidbody;
 
-        clonedBullet.AddForce(bulletSpawn.transform.forward * projectileForce);
+        clonedBullet.AddForce(bulletSpawn.transform.forward * speed);
     }
 }

@@ -80,9 +80,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         controller  = gameObject.GetComponent<CharacterController>();
         playerInput = gameObject.GetComponent<PlayerInput>();
         animator    = gameObject.GetComponentInChildren<Animator>();
-        model       = transform.Find("maid64").gameObject;
-        metarig     = transform.Find("maid64/metarig").gameObject;
-        hip         = transform.Find("maid64/metarig/hip").gameObject;
+        model       = transform.Find("maid68").gameObject;
+        metarig     = transform.Find("maid68/metarig").gameObject;
+        hip         = transform.Find("maid68/metarig/hip").gameObject;
         rollManager = gameObject.GetComponent<RollManager>();
         attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
