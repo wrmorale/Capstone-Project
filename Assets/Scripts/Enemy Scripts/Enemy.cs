@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("stats")]
+    [Header("Stats")]
     [SerializeField]public string enemyName;
     [SerializeField]public double maxHealth;
     [SerializeField]public double health;
@@ -17,8 +17,21 @@ public class Enemy : MonoBehaviour
     [SerializeField]public float staggerLimit;
     public List<Ability> abilities; 
 
+    [Header("Attacks info")]
+    public float basicAttackCooldownTimer = 0;
+    public float abilityCooldownTimer = 0;
+    public float actionCooldownTimer = 0;
+    public int abilityCounter = 0;
+    public float longestAttackRange = 0;
+
+    [Header("Movement info")]
+    public Vector3 movement;
+    public Vector3 idleMovement;
+    public float elapsedTime = 0;
+    public bool isIdle = false;
+
     [Header("Collider + Physics info")]
-    public MeshCollider enemyCollider;
+    //public MeshCollider enemyCollider; //having issues with meshcollider
     public Rigidbody enemyBody;
     public Rigidbody playerBody;
     public Transform player;
@@ -43,6 +56,15 @@ public class Enemy : MonoBehaviour
         playerBody = player.GetComponent<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
         health = maxHealth;
+        //this just gets longest range to see when the enemy can start to cast abilities or attacking the player
+        foreach (Ability ability in abilities) {
+            if(longestAttackRange < ability.abilityRange){
+                longestAttackRange = ability.abilityRange;
+            }
+        }
+        if(longestAttackRange < attackRange){
+            longestAttackRange = attackRange;
+        }
     }
 
     void Update(){
@@ -73,14 +95,23 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    
-    public Vector3 movement;
-    public Vector3 idleMovement;
-    public float elapsedTime = 0;
-    public bool isIdle = false;
 
-    public void enemyMovement(){
-        
+    public void attack(){
+        //play basic attack animation of this enemy - for now something generic for our enemy (makes enemy jump)
+        //the attack animation should be checking for collisions so it should do damage that way. 
+        checkCollision(basicAttackDamage); //temp damage dealing
+    }
+
+    public void checkCollision(float damage){ //for now just checks for collisions to deal damage. Will probably change once hitboxes and animations are in for enemies
+        //checks to see if "attack" collides with player
+        Collider[] colliders = Physics.OverlapSphere(enemyBody.position, attackRange);
+        foreach (Collider collider in colliders) {
+            if (collider.tag == "Player") {
+                // apply damage to player
+                Player player = collider.GetComponent<Player>();
+                player.isHit(damage);
+            }
+        }
     }
 
     public IEnumerator waitForAnimation(string animationName) {

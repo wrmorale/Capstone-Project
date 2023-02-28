@@ -1842,6 +1842,31 @@ PrefabInstance:
       propertyPath: dustPilePrefab
       value: 
       objectReference: {fileID: 1475709386}
+    - target: {fileID: 4479651422631388256, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: abilities.Array.data[0].castTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479651422631388256, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: abilities.Array.data[0].abilityRange
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479651422631388256, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: abilities.Array.data[0].abilityChance
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479651422631388256, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: abilities.Array.data[0].abilityCooldown
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4479651422631388256, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: abilities.Array.data[0].damageMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8327740662560138378, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
       propertyPath: m_RootOrder
@@ -1900,7 +1925,7 @@ PrefabInstance:
     - target: {fileID: 8327740662560138380, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
       propertyPath: m_Name
-      value: DustBunnyEnemy (1)
+      value: DustBunnyEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 8327740662560138380, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
