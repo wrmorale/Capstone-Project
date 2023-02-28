@@ -64,6 +64,7 @@ public class GameManager : MonoBehaviour{
         roomCleared = false;
         currentGold = 0;
         numberOfDustPiles = maxDustPiles;
+        float spawnAreaY = spawnArea.transform.position.y;
         //Dust Pile Spawn
         if(!objectsInstantiated){
             Bounds spawnBounds = spawnArea.GetComponent<MeshCollider>().bounds;
@@ -71,7 +72,7 @@ public class GameManager : MonoBehaviour{
             {
                 Vector3 position = new Vector3(
                     UnityEngine.Random.Range(spawnBounds.min.x, spawnBounds.max.x),
-                    2.125f,
+                    spawnAreaY,
                     UnityEngine.Random.Range(spawnBounds.min.z, spawnBounds.max.z)
                 );
                 Instantiate(dustPilePrefab, position, Quaternion.identity);
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour{
                 do {
                     position = new Vector3(
                         UnityEngine.Random.Range(spawnBounds.min.x, spawnBounds.max.x),
-                        playerPos.y,
+                        spawnAreaY,
                         UnityEngine.Random.Range(spawnBounds.min.z, spawnBounds.max.z)
                     );
                 } while (Vector3.Distance(playerPos, position) < 3);
