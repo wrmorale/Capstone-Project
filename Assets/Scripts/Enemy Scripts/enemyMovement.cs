@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class enemyMovement : MonoBehaviour
 {
     [SerializeField] private float idleMovementRange;
@@ -51,3 +51,4 @@ public class enemyMovement : MonoBehaviour
         }
     }
 }
+*/

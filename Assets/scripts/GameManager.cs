@@ -137,9 +137,5 @@ public class GameManager : MonoBehaviour{
         numberOfDustPiles = Mathf.Clamp(numberOfDustPiles, 0, maxDustPiles);
         cleaningPercent = dustPilesCleaned/maxDustPiles;
         cleaningbar.value = cleaningPercent;
-
-
     }
-    
-
 }

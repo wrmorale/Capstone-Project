@@ -10,10 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8327740662560138378}
   - component: {fileID: 8327740662560138379}
-  - component: {fileID: 8327740662560138376}
-  - component: {fileID: 8327740662560138377}
-  - component: {fileID: 8327740662560138382}
   - component: {fileID: 8327740662560138383}
+  - component: {fileID: 4479651422631388256}
   m_Layer: 0
   m_Name: DustBunnyEnemy
   m_TagString: Enemy
@@ -53,75 +51,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &8327740662560138376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8327740662560138380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbbbd7cf0337d1e43baa02a33100e247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleMovementRange: 3
-  enemyInstance: {fileID: 8327740662560138382}
---- !u!114 &8327740662560138377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8327740662560138380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4e05bbf7ab93642a6bda59b581791a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyInstance: {fileID: 8327740662560138382}
-  basicAttackCooldownTimer: 0
-  abilityCooldownTimer: 0
-  actionCooldownTimer: 0
-  counter: 0
---- !u!114 &8327740662560138382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8327740662560138380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03708d928965a0841872a9759fccccec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyName: Dust Bunny
-  maxHealth: 10
-  health: 10
-  basicAttackDamage: 2
-  basicAttackSpeed: 0.4
-  attackRange: 1
-  movementSpeed: 0.5
-  movementRange: 3
-  player: {fileID: 0}
-  body: {fileID: 8327740662560138379}
-  playerBody: {fileID: 0}
-  abilities:
-  - abilityName: Pounce
-    abilityType: Movement
-    abilityDamage: 3
-    abilityRange: 1.4
-    abilityCooldown: 6
-    abilityChance: 60
-    castTime: 1
-    damageMultiplier: 1
-  platform: {fileID: 0}
-  fallLimit: -10
-  movement: {fileID: 0}
-  attacks: {fileID: 0}
-  animator: {fileID: 0}
-  animationFinished: 1
 --- !u!65 &8327740662560138383
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -135,6 +64,48 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08431864, y: 0.124056816, z: 0.07837236}
   m_Center: {x: 0, y: 0.061112642, z: -0.0017233491}
+--- !u!114 &4479651422631388256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327740662560138380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b092570bbe4db9e448bceefc722b6263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Dust Bunny
+  maxHealth: 10
+  health: 2
+  basicAttackDamage: 2
+  basicAttackSpeed: 0.4
+  attackRange: 3
+  movementSpeed: 0.4
+  movementRange: 5
+  idleMovementRange: 2
+  staggerLimit: 0
+  abilities:
+  - abilityName: Pounce
+    abilityType: Movement
+    abilityDamage: 4
+    abilityRange: 4
+    abilityCooldown: 2
+    abilityChance: 80
+    castTime: 0
+    damageMultiplier: 0
+  enemyCollider: {fileID: 0}
+  enemyBody: {fileID: 8327740662560138379}
+  playerBody: {fileID: 0}
+  player: {fileID: 0}
+  animator: {fileID: 479845001633988736}
+  animationFinished: 1
+  detectionRange: 5
+  healingSpeed: 0.1
+  dustPilePrefab: {fileID: 0}
+  maxDustPiles: 5
+  enemyInstance: {fileID: 0}
 --- !u!1001 &809767176353720537
 PrefabInstance:
   m_ObjectHideFlags: 0

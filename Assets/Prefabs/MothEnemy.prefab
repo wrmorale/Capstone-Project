@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8327740662560138378}
   - component: {fileID: 8327740662560138379}
-  - component: {fileID: 8327740662560138376}
-  - component: {fileID: 8327740662560138377}
   - component: {fileID: 8327740662560138382}
   - component: {fileID: 8327740662560138383}
   m_Layer: 0
@@ -53,37 +51,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &8327740662560138376
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8327740662560138380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbbbd7cf0337d1e43baa02a33100e247, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idleMovementRange: 2
-  enemyInstance: {fileID: 8327740662560138382}
---- !u!114 &8327740662560138377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8327740662560138380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f4e05bbf7ab93642a6bda59b581791a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyInstance: {fileID: 8327740662560138382}
-  basicAttackCooldownTimer: 0
-  abilityCooldownTimer: 0
-  actionCooldownTimer: 0
-  counter: 0
 --- !u!114 &8327740662560138382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,9 +71,8 @@ MonoBehaviour:
   attackRange: 1
   movementSpeed: -0.4
   movementRange: 3
-  player: {fileID: 0}
-  body: {fileID: 8327740662560138379}
-  playerBody: {fileID: 0}
+  idleMovementRange: 0
+  staggerLimit: 0
   abilities:
   - abilityName: Big Spit Attack
     abilityType: Ranged Projectile
@@ -116,13 +82,17 @@ MonoBehaviour:
     abilityChance: 80
     castTime: 1
     damageMultiplier: 1
-  platform: {fileID: 0}
-  fallLimit: -10
-  usingAbility: 0
-  movement: {fileID: 0}
-  attacks: {fileID: 0}
+  enemyCollider: {fileID: 0}
+  enemyBody: {fileID: 0}
+  playerBody: {fileID: 0}
+  player: {fileID: 0}
   animator: {fileID: 0}
   animationFinished: 1
+  detectionRange: 5
+  healingSpeed: 0.1
+  dustPilePrefab: {fileID: 0}
+  maxDustPiles: 5
+  enemyInstance: {fileID: 0}
 --- !u!65 &8327740662560138383
 BoxCollider:
   m_ObjectHideFlags: 0

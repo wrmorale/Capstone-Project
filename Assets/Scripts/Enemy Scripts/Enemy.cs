@@ -13,37 +13,39 @@ public class Enemy : MonoBehaviour
     [SerializeField]public float attackRange;
     [SerializeField]public float movementSpeed;
     [SerializeField]public float movementRange;
-    [SerializeField]public Transform player;
-    public Rigidbody body;
-    public Rigidbody playerBody;
+    [SerializeField]public float idleMovementRange;
+    [SerializeField]public float staggerLimit;
     public List<Ability> abilities; 
-    public Transform platform;
-    public float fallLimit = -10; 
 
-    public enemyMovement movement;
-    public enemyAttacks attacks;
+    [Header("Collider + Physics info")]
+    public MeshCollider enemyCollider;
+    public Rigidbody enemyBody;
+    public Rigidbody playerBody;
+    public Transform player;
 
+    //public enemyMovement movement;
+    //public enemyAttacks attacks;
+
+    [Header("Animator info")]
     public Animator animator;
     public AnimatorStateInfo stateInfo;
     public bool animationFinished = true;
 
+    [Header("Dust Piles info")]
     public float detectionRange = 5.0f;
     public float healingSpeed = 0.1f;
     public GameObject dustPilePrefab;
     public int maxDustPiles = 5;
     private List<DustPile> dustPiles = new List<DustPile>();
 
-
-    
     void Start(){
+        enemyBody = GetComponent<Rigidbody>();
+        playerBody = player.GetComponent<Rigidbody>();
+        animator = gameObject.GetComponentInChildren<Animator>();
         health = maxHealth;
     }
 
     void Update(){
-        if (transform.position.y < platform.position.y + fallLimit){
-            Destroy(gameObject);
-        }
-
         // Check for nearby dust piles that need healing
         foreach (DustPile dustPile in dustPiles) {
             if (dustPile.health < dustPile.maxHealth) {
@@ -64,12 +66,21 @@ public class Enemy : MonoBehaviour
     }
 
     public void isHit(float damage){
-        print("EnemyTookDamage");
         health -= damage;
         if(health <= 0){
             // Destroy the cube when it has no health left
+            //Should also play death animation and then destroy once animation is finished
             Destroy(gameObject);
         }
+    }
+    
+    public Vector3 movement;
+    public Vector3 idleMovement;
+    public float elapsedTime = 0;
+    public bool isIdle = false;
+
+    public void enemyMovement(){
+        
     }
 
     public IEnumerator waitForAnimation(string animationName) {
