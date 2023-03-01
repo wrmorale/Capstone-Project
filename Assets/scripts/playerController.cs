@@ -27,6 +27,8 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private FrameParser jumpClip;
     [SerializeField]
     private FrameChecker jumpFrameChecker;
+    [SerializeField]
+    private PlayerAbility ability1, ability2, ability3, ability4;
 
     float turnSmoothVelocity;
 
@@ -52,6 +54,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     public InputAction jumpAction;
     public InputAction rollAction;
     public InputAction attackAction;
+    public InputAction abilityAction1;
+    public InputAction abilityAction2;
+    public InputAction abilityAction3;
+    public InputAction abilityAction4;
 
     public States.PlayerStates state;
 
@@ -73,7 +79,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     public void onAllCancelFrameEnd() { }
     public void onLastFrameStart(){}
     public void onLastFrameEnd(){}
-
+    public void updateMe(float time){}
 
     private void Awake()
     {
@@ -93,6 +99,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         attackAction = playerInput.actions["Attack"];
         walkAction   = playerInput.actions["Walk"];
         rollAction   = playerInput.actions["Roll"];
+        abilityAction1 = playerInput.actions["Ability_1"];
+        abilityAction2 = playerInput.actions["Ability_2"];
+        abilityAction3 = playerInput.actions["Ability_3"];
+        abilityAction4 = playerInput.actions["Ability_4"];
 
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
@@ -120,11 +130,11 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         rollCooldownTimer = Mathf.Max(0f, rollCooldownTimer - Time.deltaTime);
         if (state == States.PlayerStates.Rolling) {
-            rollManager.updateMe();
+            rollManager.updateMe(Time.deltaTime);
         }
 
         if (state == States.PlayerStates.Attacking) {
-            attackManager.updateMe();
+            attackManager.updateMe(Time.deltaTime);
         }
         if (state != States.PlayerStates.Attacking && state !=States.PlayerStates.Rolling) {
             SetState(States.PlayerStates.Idle);
