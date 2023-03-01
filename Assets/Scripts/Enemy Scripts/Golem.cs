@@ -41,23 +41,15 @@ public class Golem : Enemy
             foreach (Ability ability in abilities) {
                 //before checking if an ability can be cast check if the player is in ability range
                 if(Vector2.Distance(enemyBody.position, playerBody.position) < ability.abilityRange){
-                    print("ABILITY NUMBER CHECKING: ");
-                    print(abilityCounter);
-                    print(" ");
                     float randomNumber = Random.Range(0, 100);
                     if (randomNumber < ability.abilityChance) {
                         useAbility(abilityCounter);
-                        actionCooldownTimer = (1 / basicAttackSpeed);
+                        actionCooldownTimer = ability.abilityCooldown;
                         break;
                     }
                     abilityCounter++;
                 }
             }
-        }
-        //if ability not used will basic attack
-        if(Vector2.Distance(enemyBody.position, playerBody.position) < attackRange){
-            attack(); //basic attack
-            actionCooldownTimer = (1 / basicAttackSpeed);
         }
     }
 
@@ -68,8 +60,6 @@ public class Golem : Enemy
             animator.SetBool("Dash", true);
             checkCollision(abilities[abilityNum].abilityDamage);
             StartCoroutine(waitForAnimation("Dash"));
-            animator.SetBool("Dash", false);
-            animationFinished = true;
         }
         else if(abilities[abilityNum].abilityType == "Sweep"){
             animator.SetBool("SpinAttack", true);
