@@ -14,6 +14,10 @@ public class Moth : Enemy
         enemyMovement();
     }
 
+    void Update(){
+        enemyAttack();
+    }
+
     public void enemyMovement() {
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // if player is in range
@@ -57,11 +61,51 @@ public class Moth : Enemy
         }
         if (movement != Vector3.zero) {
             enemyBody.rotation = Quaternion.LookRotation(movement);
+        } else {
+            enemyBody.transform.LookAt(playerBody.transform);
         }
     }
 
-    void Attack(){
-
+    public void enemyAttack(){
+        //if able to attack, the enemy does so
+        //first checks to see if enemy is in range for an attack
+        if(Vector2.Distance(enemyBody.position, playerBody.position) < longestAttackRange && actionCooldownTimer <= 0) {
+            enemyAction();
+        }
+        actionCooldownTimer -= Time.deltaTime;
+        abilityCooldownTimer -= Time.deltaTime;
+        if(abilityCooldownTimer < 0) {
+            abilityCooldownTimer = 0;
+        }
     }
 
+    public void enemyAction(){
+        //if off ability cooldown can use ability depending on chance to use that ability
+        if(abilityCooldownTimer == 0){
+            abilityCounter = 0;
+            foreach (Ability ability in abilities) {
+                //before checking if an ability can be cast check if the player is in ability range
+                if(Vector2.Distance(enemyBody.position, playerBody.position) < ability.abilityRange){
+                    float randomNumber = Random.Range(0, 100);
+                    if (randomNumber < ability.abilityChance) {
+                        useAbility(abilityCounter);
+                        actionCooldownTimer = ability.abilityCooldown;
+                        break;
+                    }
+                    abilityCounter++;
+                }
+            }
+        }
+    }
+
+    private void useAbility(int abilityNum){
+        abilityCooldownTimer = abilities[abilityNum].abilityCooldown;
+        //first check what type of ability it is and will do stuff depending on type of ability
+        if(abilities[abilityNum].abilityType == "Ranged"){
+            animator.SetBool("RangedAbility", true);
+            checkCollision(abilities[abilityNum].abilityDamage);
+            StartCoroutine(waitForAnimation("RangedAbility"));
+        }
+        //have other ability types as else if statments and we can add simple code to deal damage correctly. 
+    }
 }

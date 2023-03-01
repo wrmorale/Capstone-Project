@@ -113,5 +113,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator waitForAnimation(string animationName) {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        animator.SetBool(animationName, false);
+        animationFinished = true;
     }
 }
