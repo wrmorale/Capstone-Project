@@ -6168,7 +6168,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.25981757, y: 0.000000023497828, z: -0.00000000632227, w: 0.9656578}
+  m_LocalRotation: {x: 0.25981757, y: -0.000000023497828, z: 0.00000000632227, w: 0.9656578}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6300,21 +6300,21 @@ MonoBehaviour:
   maxHealth: 8
   health: 8
   basicAttackDamage: 3
-  basicAttackSpeed: 0.1
+  basicAttackSpeed: 0.4
   attackRange: 1
-  movementSpeed: 3
+  movementSpeed: 1
   movementRange: 3
   idleMovementRange: 0
   staggerLimit: 0
   abilities:
-  - abilityName: 
-    abilityType: 
-    abilityDamage: 0
-    abilityRange: 0
-    abilityCooldown: 0
-    abilityChance: 0
-    castTime: 0
-    damageMultiplier: 0
+  - abilityName: Shoot
+    abilityType: Ranged
+    abilityDamage: 3
+    abilityRange: 2
+    abilityCooldown: 10
+    abilityChance: 99
+    castTime: 1
+    damageMultiplier: 1
   basicAttackCooldownTimer: 0
   abilityCooldownTimer: 0
   actionCooldownTimer: 0
