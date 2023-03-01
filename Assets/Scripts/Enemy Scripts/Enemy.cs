@@ -36,9 +36,6 @@ public class Enemy : MonoBehaviour
     public Rigidbody playerBody;
     public Transform player;
 
-    //public enemyMovement movement;
-    //public enemyAttacks attacks;
-
     [Header("Animator info")]
     public Animator animator;
     public AnimatorStateInfo stateInfo;
@@ -116,7 +113,5 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator waitForAnimation(string animationName) {
         yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
-        animator.SetBool(animationName, false);
-        animationFinished = true;
     }
 }

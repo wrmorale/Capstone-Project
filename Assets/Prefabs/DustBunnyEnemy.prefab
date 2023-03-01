@@ -91,11 +91,19 @@ MonoBehaviour:
     abilityType: Movement
     abilityDamage: 4
     abilityRange: 4
-    abilityCooldown: 2
+    abilityCooldown: 4
     abilityChance: 80
     castTime: 0
     damageMultiplier: 0
-  enemyCollider: {fileID: 0}
+  basicAttackCooldownTimer: 0
+  abilityCooldownTimer: 0
+  actionCooldownTimer: 0
+  abilityCounter: 0
+  longestAttackRange: 0
+  movement: {x: 0, y: 0, z: 0}
+  idleMovement: {x: 0, y: 0, z: 0}
+  elapsedTime: 0
+  isIdle: 0
   enemyBody: {fileID: 8327740662560138379}
   playerBody: {fileID: 0}
   player: {fileID: 0}
@@ -105,7 +113,6 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
-  enemyInstance: {fileID: 0}
 --- !u!1001 &809767176353720537
 PrefabInstance:
   m_ObjectHideFlags: 0
