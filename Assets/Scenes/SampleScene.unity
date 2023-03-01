@@ -3444,9 +3444,19 @@ PrefabInstance:
       objectReference: {fileID: 1891471869}
     - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
+        type: 3}
       propertyPath: playerBody
       value: 
       objectReference: {fileID: 795224104}
+    - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
+        type: 3}
+      propertyPath: movementSpeed
+      value: -5
+      objectReference: {fileID: 0}
     - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
         type: 3}
       propertyPath: dustPilePrefab
@@ -6232,7 +6242,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.25981757, y: -0.000000023497828, z: 0.00000000632227, w: 0.9656578}
+  m_LocalRotation: {x: 0.25981757, y: 0.000000023497828, z: -0.00000000632227, w: 0.9656578}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6336,6 +6346,71 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1353829288}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1388246808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8327740662560138380, guid: a3e774df6e3d732419c69b0540e06dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 658531958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1388246811 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8327740662560138379, guid: a3e774df6e3d732419c69b0540e06dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 658531958}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1388246813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388246808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f2cecec161384468db4388929a6877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Moth
+  maxHealth: 8
+  health: 8
+  basicAttackDamage: 3
+  basicAttackSpeed: 0.1
+  attackRange: 1
+  movementSpeed: 3
+  movementRange: 3
+  idleMovementRange: 0
+  staggerLimit: 0
+  abilities:
+  - abilityName: 
+    abilityType: 
+    abilityDamage: 0
+    abilityRange: 0
+    abilityCooldown: 0
+    abilityChance: 0
+    castTime: 0
+    damageMultiplier: 0
+  basicAttackCooldownTimer: 0
+  abilityCooldownTimer: 0
+  actionCooldownTimer: 0
+  abilityCounter: 0
+  longestAttackRange: 0
+  movement: {x: 0, y: 0, z: 0}
+  idleMovement: {x: 0, y: 0, z: 0}
+  elapsedTime: 0
+  isIdle: 0
+  enemyBody: {fileID: 1388246811}
+  playerBody: {fileID: 795224104}
+  player: {fileID: 795224105}
+  animator: {fileID: 1830376279}
+  animationFinished: 1
+  detectionRange: 5
+  healingSpeed: 0.1
+  dustPilePrefab: {fileID: 1475709386}
+  maxDustPiles: 5
+  cooldownTime: 5
+  cooldownRemaining: 0
+  fleeDuration: 1
+  fleeRemaining: 0
 --- !u!1001 &1408060274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13440,6 +13515,12 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3581260583902630463, guid: 2fa09ab60c67042668b8ee7129e793d6, type: 3}
+--- !u!95 &1830376279 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8446685595553216187, guid: a3e774df6e3d732419c69b0540e06dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 658531958}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1830778984
 PrefabInstance:
   m_ObjectHideFlags: 0
