@@ -115,8 +115,10 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     void Update()
     {
-        Debug.Log(playerVelocity.y);
+        // add gravity
+        ApplyGravity();
         lastY = controller.transform.position.y;
+        Debug.Log(lastY);
         jumpFrameChecker.checkFrames();
         groundedPlayer = controller.isGrounded;
         channeledAbility = ParseAbilityInput();
@@ -198,8 +200,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 ActivateAbility();
             }
         } 
-        // add gravity
-        ApplyGravity();
+        
 
         // cycle cooldowns
         ManageCooldowns(Time.deltaTime);
