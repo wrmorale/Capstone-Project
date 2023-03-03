@@ -126,6 +126,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         if (state == States.PlayerStates.Attacking) {
             attackManager.updateMe();
         }
+        
         if (state != States.PlayerStates.Attacking && state !=States.PlayerStates.Rolling) {
             SetState(States.PlayerStates.Idle);
             model.transform.localPosition = Vector3.zero;
