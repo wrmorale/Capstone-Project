@@ -62,8 +62,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.33966047, y: 0.52974284, z: 0.1835469}
-  m_Center: {x: -0.005716622, y: 0.23512793, z: 0.005323842}
+  m_Size: {x: 0.27435464, y: 0.52974284, z: 0.15412883}
+  m_Center: {x: 0.000967726, y: 0.2351245, z: -0.009385213}
 --- !u!114 &1817854267388228367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,33 +82,33 @@ MonoBehaviour:
   basicAttackDamage: 2
   basicAttackSpeed: 0.2
   attackRange: 3
-  movementSpeed: 1
-  movementRange: 3
+  movementSpeed: 0.3
+  movementRange: 2
   idleMovementRange: 0
-  staggerLimit: 0
+  staggerLimit: 5
   abilities:
   - abilityName: Spin
     abilityType: Sweep
     abilityDamage: 4
-    abilityRange: 4
+    abilityRange: 3
     abilityCooldown: 3
-    abilityChance: 99
+    abilityChance: 30
     castTime: 1
     damageMultiplier: 1
   - abilityName: Light1
     abilityType: Melee
     abilityDamage: 5
-    abilityRange: 4
+    abilityRange: 3
     abilityCooldown: 2
     abilityChance: 60
     castTime: 1
     damageMultiplier: 1
   - abilityName: Light2
     abilityType: Melee
-    abilityDamage: 6
-    abilityRange: 4
+    abilityDamage: 5
+    abilityRange: 3
     abilityCooldown: 2
-    abilityChance: 50
+    abilityChance: 0
     castTime: 1
     damageMultiplier: 1
   - abilityName: Dash

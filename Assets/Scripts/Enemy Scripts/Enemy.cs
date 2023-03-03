@@ -88,7 +88,9 @@ public class Enemy : MonoBehaviour
         health -= damage;
         if(health <= 0){
             // Destroy the cube when it has no health left
-            //Should also play death animation and then destroy once animation is finished
+            //this should work for death animation but not all enemies have one so it gets errors
+            animator.SetBool("Death", true);
+            StartCoroutine(waitForAnimation("Death"));
             Destroy(gameObject);
         }
     }

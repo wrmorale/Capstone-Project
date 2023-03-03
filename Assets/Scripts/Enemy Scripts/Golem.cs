@@ -66,6 +66,16 @@ public class Golem : Enemy
             checkCollision(abilities[abilityNum].abilityDamage);
             StartCoroutine(waitForAnimation("SpinAttack"));
         }
+        else if(abilities[abilityNum].abilityType == "Melee"){
+            animator.SetBool("Light1", true);
+            checkCollision(abilities[abilityNum].abilityDamage);
+            StartCoroutine(waitForAnimation("Light1"));
+            if(Vector3.Distance(enemyBody.position, playerBody.position) < movementRange){ //if player still in range finish combo
+                animator.SetBool("Light2", true);
+                checkCollision(abilities[abilityNum].abilityDamage);
+                StartCoroutine(waitForAnimation("Light2"));
+            } 
+        }
         //have other ability types as else if statments and we can add simple code to deal damage correctly. 
     }
 }
