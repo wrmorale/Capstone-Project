@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Duster : MonoBehaviour
 {
-    private float speed = 250f;
+    private float speed = 0.1f;
     private float lifetime = 1f;
     private float damage = 1f;
     private Vector3 heading = Vector3.forward;
-    private Enemy enemy;
     // Start is called before the first frame update
     public void Initialize(float speed, float lifetime, float damage, Vector3 heading)
     {
@@ -29,8 +28,15 @@ public class Duster : MonoBehaviour
     {
         if (other.tag == "Enemy") 
         {
+            Debug.Log("projectile hit");
+            Enemy enemy = other.GetComponent<Enemy>();
             enemy.isHit(damage);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("projectile destroyed");
     }
 }

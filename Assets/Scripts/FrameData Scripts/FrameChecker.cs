@@ -14,7 +14,6 @@ public interface IFrameCheckHandler
     void onAllCancelFrameEnd();
     void onLastFrameStart();
     void onLastFrameEnd();
-    void updateMe(float time);
 }
 
 [System.Serializable]

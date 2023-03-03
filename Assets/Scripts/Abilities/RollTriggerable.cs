@@ -4,29 +4,25 @@ using UnityEngine;
 using pState = States.PlayerStates;
 using aState = States.ActionState;
 
-public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
+public class RollTriggerable : PlayerAbility, IFrameCheckHandler
 {
     public override float baseCooldown
     {
         get { return 2f; }
     }
-    [SerializeField] private Duster projectile;
-    [HideInInspector] public Transform bulletSpawn;
-    [SerializeField] private float speed = 0.1f;
-    [SerializeField] private float lifetime = 1f;
-    [SerializeField] private float damage = 7f;
     [SerializeField] private FrameParser clip;
     [SerializeField] private FrameChecker frameChecker;
     
     private playerController player;
-    private Vector3 playerForward;
+    private Player playerManager;
     private aState state;
     public void onActiveFrameStart()
     {
-        SpawnProjectile(playerForward);
+        playerManager.isInvulnerable = true;
     }
     public void onActiveFrameEnd()
     {
+        playerManager.isInvulnerable = false;
     }
     public void onAttackCancelFrameStart()
     {
@@ -49,6 +45,8 @@ public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
     }
     public void onLastFrameEnd()
     {
+        clip.animator.SetBool("Rolling", false);
+        playerManager.isInvulnerable = false;
         player.SetState(States.PlayerStates.Idle);
     }
 
@@ -56,10 +54,11 @@ public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
     public override void updateMe(float time) 
     {
         frameChecker.checkFrames();
+        player.controller.Move(player.transform.forward * time * player.playerSpeed * 2f);
     }
     public override void Activate()
     {
-        playerForward = player.transform.forward;
+        clip.animator.SetBool("Rolling", true);
         clip.play();
         player.SetState(pState.Rolling);
         state = aState.Inactionable;
@@ -75,19 +74,13 @@ public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
         cooldownTimer = Mathf.Max(0f, cooldownTimer);
     }
     */
-    public void SpawnProjectile(Vector3 heading) 
-    {
-        Debug.Log("projectile spawned at " + bulletSpawn.position);
-        Duster clone = Instantiate(projectile, bulletSpawn.position, player.transform.rotation);
-        clone.Initialize(speed, lifetime, damage, heading);
-    }
 
     public override void Initialize(playerController player, Animator animator) 
     {
         this.player = player;
+        playerManager = player.GetComponent<Player>();
         clip.animator = animator;
         clip.initialize();
         frameChecker.initialize(this, clip);
-        bulletSpawn = player.transform.Find("maid68/metarig/hip/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R");
     }
 }

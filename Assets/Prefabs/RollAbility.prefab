@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5062879408268564508
+--- !u!1 &7477574427599351892
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7100970124268440133}
-  - component: {fileID: 3529802045003625735}
+  - component: {fileID: 2047912889295081450}
+  - component: {fileID: 7177310634722814464}
   m_Layer: 0
-  m_Name: DusterAbility
+  m_Name: RollAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7100970124268440133
+--- !u!4 &2047912889295081450
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5062879408268564508}
+  m_GameObject: {fileID: 7477574427599351892}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,33 +32,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3529802045003625735
+--- !u!114 &7177310634722814464
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5062879408268564508}
+  m_GameObject: {fileID: 7477574427599351892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cdd0cc70b1e7ee4a90870d5293e5331, type: 3}
+  m_Script: {fileID: 11500000, guid: 5e001271b3f8b4e478f05b509f89b5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTimer: 0.3671789
-  projectile: {fileID: 8433848472637791634, guid: 017d020e1607f7349a0531fbef632235,
-    type: 3}
-  bulletSpawn: {fileID: 0}
-  speed: 10
-  lifetime: 1
-  damage: 5
+  cooldownTimer: 0
   clip:
     animator: {fileID: 0}
-    clip: {fileID: 7400000, guid: c8a6f60c66a8e3a4885d0efeca217917, type: 2}
-    animatorStateName: throw
+    clip: {fileID: 7400000, guid: 80dfaf9b80e5c6d47a66784f9b888085, type: 2}
+    animatorStateName: roll
     layerNumber: 0
   frameChecker:
-    activeFrameStart: 4
-    activeFrameEnd: 8
+    activeFrameStart: 0
+    activeFrameEnd: 24
     attackCancelFrameStart: 0
     attackCancelFrameEnd: 0
     allCancelFrameStart: 0

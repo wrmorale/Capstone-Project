@@ -28,7 +28,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     [SerializeField]
     private FrameChecker jumpFrameChecker;
     [SerializeField]
-    private PlayerAbility ability1, ability2, ability3, ability4;
+    private PlayerAbility[] playerAbilities = new PlayerAbility[4];
 
     float turnSmoothVelocity;
 
@@ -36,6 +36,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private PlayerInput playerInput;
     private RollManager rollManager;
     private BroomAttackManager attackManager;
+    [HideInInspector] public PlayerAbility activeAbility;
     private GameObject model;
     private GameObject metarig;
     private GameObject hip;
@@ -49,15 +50,13 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     private Transform cam;
 
-    public InputAction moveAction;
-    public InputAction walkAction;
-    public InputAction jumpAction;
-    public InputAction rollAction;
-    public InputAction attackAction;
-    public InputAction abilityAction1;
-    public InputAction abilityAction2;
-    public InputAction abilityAction3;
-    public InputAction abilityAction4;
+    [HideInInspector] public InputAction moveAction;
+    [HideInInspector] public InputAction walkAction;
+    [HideInInspector] public InputAction jumpAction;
+    [HideInInspector] public InputAction attackAction;
+    [HideInInspector] public InputAction[] abilityActions;
+    [HideInInspector] public int channeledAbility;
+    
 
     public States.PlayerStates state;
 
@@ -98,12 +97,16 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         jumpAction   = playerInput.actions["Jump"];
         attackAction = playerInput.actions["Attack"];
         walkAction   = playerInput.actions["Walk"];
-        rollAction   = playerInput.actions["Roll"];
-        abilityAction1 = playerInput.actions["Ability_1"];
-        abilityAction2 = playerInput.actions["Ability_2"];
-        abilityAction3 = playerInput.actions["Ability_3"];
-        abilityAction4 = playerInput.actions["Ability_4"];
+        abilityActions = new InputAction[] { playerInput.actions["Ability_1"], playerInput.actions["Ability_2"], 
+                                             playerInput.actions["Ability_3"], playerInput.actions["Ability_4"]};
 
+        for (int i = 0; i < playerAbilities.Length; i++)
+        {
+            if (playerAbilities[i] != null)
+            {
+                playerAbilities[i].Initialize(this, animator);
+            }
+        }
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
         SetState(States.PlayerStates.Idle);
@@ -112,11 +115,11 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     void Update()
     {
-        //Debug.Log(state);
+        Debug.Log(playerVelocity.y);
         lastY = controller.transform.position.y;
         jumpFrameChecker.checkFrames();
         groundedPlayer = controller.isGrounded;
-
+        channeledAbility = ParseAbilityInput();
         // handle edge case where player lands without ever gaining downward velocity
         if (groundedPlayer && !inJumpsquat) { animator.SetBool("Jumping", false); }
         // stop falling animation on land
@@ -130,7 +133,8 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         rollCooldownTimer = Mathf.Max(0f, rollCooldownTimer - Time.deltaTime);
         if (state == States.PlayerStates.Rolling) {
-            rollManager.updateMe(Time.deltaTime);
+            // rollManager.updateMe(Time.deltaTime);
+            activeAbility.updateMe(Time.deltaTime);
         }
 
         if (state == States.PlayerStates.Attacking) {
@@ -174,8 +178,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
             // animate falling player
             if (controller.transform.position.y <= lastY && !groundedPlayer && !inJumpsquat)
             {
-                //Debug.Log(transform.position.y);
-                //Debug.Log(lastY);
                 animator.SetBool("Jumping", false);
                 animator.SetBool("Falling", true);
             }
@@ -191,18 +193,16 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 attackManager.handleAttacks();
             }
 
-            if (rollAction.triggered && rollCooldownTimer == 0 && groundedPlayer)
+            else if (channeledAbility >= 0) 
             {
-                SetState(States.PlayerStates.Rolling);
-                rollCooldownTimer = rollCooldown;
-                rollManager.Roll();
+                ActivateAbility();
             }
-        }
-
-        //TO DO: check if the player is in a valid attack state
-        
+        } 
         // add gravity
         ApplyGravity();
+
+        // cycle cooldowns
+        ManageCooldowns(Time.deltaTime);
     }
 
     private void ApplyGravity(){
@@ -222,6 +222,12 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         animator.Play("jump", 0);
     }
 
+    public void ActivateAbility() {
+        SetState(States.PlayerStates.Rolling);
+        activeAbility = playerAbilities[channeledAbility];
+        activeAbility.Activate();
+    }
+
     public Vector3 RotatePlayer(Vector2 input){
         // calculate model rotation
         float targetAngle = Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg + cam.eulerAngles.y; // from front facing position to direction pressed + camera angle.
@@ -236,10 +242,39 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     public void MoveRoot() {
         if (lastRootY != hip.transform.localPosition.y) {
             float diff = lastRootY - hip.transform.localPosition.y;
-            Debug.Log(diff);
+            Debug.Log("Diff:" + diff);
             controller.Move(transform.forward * diff * metarig.transform.localScale.y * transform.localScale.z);
             model.transform.localPosition = model.transform.localPosition + (Vector3.forward * -diff * metarig.transform.localScale.y);
         }
         lastRootY = hip.transform.localPosition.y;
+    }
+
+    public void ResetRoot() {
+        lastRootY = 0;
+        model.transform.localPosition = Vector3.zero;
+    }
+
+    public void ManageCooldowns(float time) 
+    {
+        for (int i = 0; i < playerAbilities.Length; i++) 
+        {
+            if (playerAbilities[i] != null) 
+            {
+                playerAbilities[i].UpdateCooldown(time);
+            }
+        }
+    }
+
+    // Returns the index of the first ability that was input and available to fire, -1 if none are input or available.
+    public int ParseAbilityInput()
+    {
+        for (int i = 0; i < playerAbilities.Length; i++)
+        {
+            if (abilityActions[i].triggered && playerAbilities[i] != null) 
+            {
+                if (playerAbilities[i].IsReady()) { return i; }
+            }
+        }
+        return -1;
     }
 }

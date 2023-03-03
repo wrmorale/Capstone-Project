@@ -10,9 +10,16 @@ public abstract class PlayerAbility : MonoBehaviour
     }
     [HideInInspector] public float cooldownTimer = 0f;
     public abstract void Activate();
-    public abstract void UpdateCooldown(float time);
+    public void UpdateCooldown(float time)
+    {
+        cooldownTimer -= time;
+        cooldownTimer = Mathf.Max(0f, cooldownTimer);
+    }
     public bool IsReady() 
     {
         return (cooldownTimer <= 0f);
     }
+
+    public abstract void updateMe(float time);
+    public abstract void Initialize(playerController player, Animator animator);
 }
