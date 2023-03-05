@@ -118,7 +118,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         // add gravity
         ApplyGravity();
         lastY = controller.transform.position.y;
-        Debug.Log(lastY);
         jumpFrameChecker.checkFrames();
         groundedPlayer = controller.isGrounded;
         channeledAbility = ParseAbilityInput();

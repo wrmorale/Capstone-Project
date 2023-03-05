@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Extensions;
 using pState = States.PlayerStates;
 using aState = States.ActionState;
 
 public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
 {
-    public override float baseCooldown
-    {
-        get { return 2f; }
-    }
-    [SerializeField] private Duster projectile;
+    [SerializeField] private Projectile projectile;
     [HideInInspector] public Transform bulletSpawn;
     [SerializeField] private float speed = 0.1f;
     [SerializeField] private float lifetime = 1f;
     [SerializeField] private float damage = 7f;
+    [SerializeField] private float stagger = 1f;
+    [SerializeField] private float spread = 120f;
+    [SerializeField] private int projectileCount = 3;
+    [SerializeField] private float firerate = .1f;
     [SerializeField] private FrameParser clip;
     [SerializeField] private FrameChecker frameChecker;
     
@@ -23,7 +24,7 @@ public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
     private aState state;
     public void onActiveFrameStart()
     {
-        SpawnProjectile(playerForward);
+        player.StartCoroutine(Fire());
     }
     public void onActiveFrameEnd()
     {
@@ -78,8 +79,8 @@ public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
     public void SpawnProjectile(Vector3 heading) 
     {
         Debug.Log("projectile spawned at " + bulletSpawn.position);
-        Duster clone = Instantiate(projectile, bulletSpawn.position, player.transform.rotation);
-        clone.Initialize(speed, lifetime, damage, heading);
+        Projectile clone = Instantiate(projectile, bulletSpawn.position, Quaternion.LookRotation(heading));
+        clone.Initialize(speed, lifetime, damage, stagger, heading);
     }
 
     public override void Initialize(playerController player, Animator animator) 
@@ -89,5 +90,17 @@ public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
         clip.initialize();
         frameChecker.initialize(this, clip);
         bulletSpawn = player.transform.Find("maid68/metarig/hip/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R");
+    }
+
+    IEnumerator Fire()
+    {
+        for (int i = 0; i < projectileCount; i++)
+        {
+            Debug.Log("we in");
+            float theta = ((float)i).map(0, projectileCount - 1, -(spread / 2), spread / 2);
+            Vector3 heading = Quaternion.Euler(0, -theta, 0) * playerForward;
+            SpawnProjectile(heading);
+            yield return new WaitForSeconds(firerate);
+        }
     }
 }

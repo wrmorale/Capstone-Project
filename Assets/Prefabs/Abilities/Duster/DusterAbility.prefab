@@ -44,21 +44,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cdd0cc70b1e7ee4a90870d5293e5331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cooldownTimer: 0.3671789
+  <baseCooldown>k__BackingField: 0.5
+  cooldownTimer: 0
   projectile: {fileID: 8433848472637791634, guid: 017d020e1607f7349a0531fbef632235,
     type: 3}
   bulletSpawn: {fileID: 0}
-  speed: 10
+  speed: 18
   lifetime: 1
   damage: 5
+  spread: 22.5
+  projectileCount: 3
+  firerate: 0.05
   clip:
     animator: {fileID: 0}
     clip: {fileID: 7400000, guid: c8a6f60c66a8e3a4885d0efeca217917, type: 2}
     animatorStateName: throw
     layerNumber: 0
   frameChecker:
-    activeFrameStart: 4
-    activeFrameEnd: 8
+    activeFrameStart: 10
+    activeFrameEnd: 12
     attackCancelFrameStart: 0
     attackCancelFrameEnd: 0
     allCancelFrameStart: 0

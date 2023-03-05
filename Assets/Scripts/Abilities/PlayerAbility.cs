@@ -4,9 +4,10 @@ using UnityEngine;
 
 public abstract class PlayerAbility : MonoBehaviour
 {
-    public virtual float baseCooldown
+    [field: SerializeField]
+    public float baseCooldown
     {
-        get { return 1f;}
+        get; set;
     }
     [HideInInspector] public float cooldownTimer = 0f;
     public abstract void Activate();

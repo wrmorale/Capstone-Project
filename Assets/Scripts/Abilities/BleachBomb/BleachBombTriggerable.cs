@@ -1,28 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Extensions;
 using pState = States.PlayerStates;
 using aState = States.ActionState;
 
-public class RollTriggerable : PlayerAbility, IFrameCheckHandler
+public class BleachBombTriggerable : PlayerAbility, IFrameCheckHandler
 {
-    public override float baseCooldown
-    {
-        get { return 2f; }
-    }
+    [SerializeField] private Projectile projectile;
+    [HideInInspector] public Transform bulletSpawn;
+    [SerializeField] private float speed = 0.1f;
+    [SerializeField] private float lifetime = 1f;
+    [SerializeField] private float damage = 7f;
+    [SerializeField] private float stagger = 1f;
     [SerializeField] private FrameParser clip;
     [SerializeField] private FrameChecker frameChecker;
     
     private playerController player;
-    private Player playerManager;
+    private Vector3 playerForward;
     private aState state;
     public void onActiveFrameStart()
     {
-        playerManager.isInvulnerable = true;
+        SpawnProjectile(playerForward);
     }
     public void onActiveFrameEnd()
     {
-        playerManager.isInvulnerable = false;
     }
     public void onAttackCancelFrameStart()
     {
@@ -45,8 +47,6 @@ public class RollTriggerable : PlayerAbility, IFrameCheckHandler
     }
     public void onLastFrameEnd()
     {
-        clip.animator.SetBool("Rolling", false);
-        playerManager.isInvulnerable = false;
         player.SetState(States.PlayerStates.Idle);
     }
 
@@ -54,11 +54,10 @@ public class RollTriggerable : PlayerAbility, IFrameCheckHandler
     public override void updateMe(float time) 
     {
         frameChecker.checkFrames();
-        player.controller.Move(player.transform.forward * time * player.playerSpeed * 2f);
     }
     public override void Activate()
     {
-        clip.animator.SetBool("Rolling", true);
+        playerForward = player.transform.forward;
         clip.play();
         player.SetState(pState.Rolling);
         state = aState.Inactionable;
@@ -66,21 +65,18 @@ public class RollTriggerable : PlayerAbility, IFrameCheckHandler
         frameChecker.checkFrames();
         cooldownTimer = baseCooldown;
     }
-
-    /*
-    public override void UpdateCooldown(float time)
+    public void SpawnProjectile(Vector3 heading) 
     {
-        cooldownTimer -= time;
-        cooldownTimer = Mathf.Max(0f, cooldownTimer);
+        Projectile clone = Instantiate(projectile, bulletSpawn.position, Quaternion.LookRotation(heading));
+        clone.Initialize(speed, lifetime, damage, stagger, heading);
     }
-    */
 
     public override void Initialize(playerController player, Animator animator) 
     {
         this.player = player;
-        playerManager = player.GetComponent<Player>();
         clip.animator = animator;
         clip.initialize();
         frameChecker.initialize(this, clip);
+        bulletSpawn = player.transform.Find("maid68/metarig/hip/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R");
     }
 }
