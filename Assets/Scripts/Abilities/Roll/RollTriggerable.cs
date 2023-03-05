@@ -56,20 +56,12 @@ public class RollTriggerable : PlayerAbility, IFrameCheckHandler
     {
         clip.animator.SetBool("Rolling", true);
         clip.play();
-        player.SetState(pState.Rolling);
+        player.SetState(pState.Ability);
         state = aState.Inactionable;
         frameChecker.initCheck();
         frameChecker.checkFrames();
         cooldownTimer = baseCooldown;
     }
-
-    /*
-    public override void UpdateCooldown(float time)
-    {
-        cooldownTimer -= time;
-        cooldownTimer = Mathf.Max(0f, cooldownTimer);
-    }
-    */
 
     public override void Initialize(playerController player, Animator animator) 
     {

@@ -38,7 +38,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     /* Attack frame data management */
     public void onActiveFrameStart() {
         // call hitbox detection
-        //Debug.Log("onActiveFrameStart");
         if (combo == 1){
             attack1_collider.SetActive(true);
         }
@@ -50,7 +49,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         }
     }
     public void onActiveFrameEnd() {
-        //Debug.Log("onActiveFrameEnd");
         if (combo == 1){
             attack1_collider.SetActive(false);
         }
@@ -82,11 +80,9 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onAllCancelFrameEnd() {
         if (actionState == ActionState.AllCancelable) actionState = ActionState.Inactionable;
     }
-    public void onLastFrameStart(){
-        //Debug.Log("onLastFrameStart");        
+    public void onLastFrameStart(){     
     }
     public void onLastFrameEnd(){
-        //Debug.Log("onLastFrameEnd");
         activeClip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
         combo = 0;

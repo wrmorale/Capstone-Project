@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     public bool alive;
     public int lives;
     [SerializeField]public float health;
-    public List<Ability> abilities; 
+    public List<PlayerAbility> abilities; 
     public Transform platform;
     public float fallLimit = -10; 
     

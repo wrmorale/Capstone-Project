@@ -59,7 +59,7 @@ public class BleachBombTriggerable : PlayerAbility, IFrameCheckHandler
     {
         playerForward = player.transform.forward;
         clip.play();
-        player.SetState(pState.Rolling);
+        player.SetState(pState.Ability);
         state = aState.Inactionable;
         frameChecker.initCheck();
         frameChecker.checkFrames();

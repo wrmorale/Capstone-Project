@@ -11,7 +11,7 @@ namespace States
         Running,
         Jumping,
         Falling,
-        Rolling,
+        Ability,
         Attacking,
         Blocking,
         AirAttacking,

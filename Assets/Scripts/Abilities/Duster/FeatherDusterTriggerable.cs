@@ -62,20 +62,13 @@ public class FeatherDusterTriggerable : PlayerAbility, IFrameCheckHandler
     {
         playerForward = player.transform.forward;
         clip.play();
-        player.SetState(pState.Rolling);
+        player.SetState(pState.Ability);
         state = aState.Inactionable;
         frameChecker.initCheck();
         frameChecker.checkFrames();
         cooldownTimer = baseCooldown;
     }
 
-    /*
-    public override void UpdateCooldown(float time)
-    {
-        cooldownTimer -= time;
-        cooldownTimer = Mathf.Max(0f, cooldownTimer);
-    }
-    */
     public void SpawnProjectile(Vector3 heading) 
     {
         Debug.Log("projectile spawned at " + bulletSpawn.position);

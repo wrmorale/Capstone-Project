@@ -21,9 +21,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     [SerializeField]
     public float turnSmoothTime = 0.0f;
     [SerializeField]
-    public float rollCooldown = 3.0f;
-    private float rollCooldownTimer = 0.0f;
-    [SerializeField]
     private FrameParser jumpClip;
     [SerializeField]
     private FrameChecker jumpFrameChecker;
@@ -34,7 +31,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
     public CharacterController controller;
     private PlayerInput playerInput;
-    private RollManager rollManager;
     private BroomAttackManager attackManager;
     [HideInInspector] public PlayerAbility activeAbility;
     private GameObject model;
@@ -88,7 +84,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         model       = transform.Find("maid68").gameObject;
         metarig     = transform.Find("maid68/metarig").gameObject;
         hip         = transform.Find("maid68/metarig/hip").gameObject;
-        rollManager = gameObject.GetComponent<RollManager>();
         attackManager = gameObject.GetComponent<BroomAttackManager>();
         cam = Camera.main.transform;
         lastRootY = hip.transform.localPosition.y;
@@ -131,9 +126,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
 
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
-
-        rollCooldownTimer = Mathf.Max(0f, rollCooldownTimer - Time.deltaTime);
-        if (state == States.PlayerStates.Rolling) {
+        if (state == States.PlayerStates.Ability) {
             // rollManager.updateMe(Time.deltaTime);
             activeAbility.updateMe(Time.deltaTime);
         }
@@ -141,7 +134,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         if (state == States.PlayerStates.Attacking) {
             attackManager.updateMe(Time.deltaTime);
         }
-        if (state != States.PlayerStates.Attacking && state !=States.PlayerStates.Rolling) {
+        if (state != States.PlayerStates.Attacking && state !=States.PlayerStates.Ability) {
             SetState(States.PlayerStates.Idle);
             model.transform.localPosition = Vector3.zero;
             
@@ -193,7 +186,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
                 attackManager.handleAttacks();
             }
 
-            else if (channeledAbility >= 0) 
+            else if (channeledAbility >= 0 && !inJumpsquat) 
             {
                 ActivateAbility();
             }
@@ -222,7 +215,7 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     }
 
     public void ActivateAbility() {
-        SetState(States.PlayerStates.Rolling);
+        SetState(States.PlayerStates.Ability);
         activeAbility = playerAbilities[channeledAbility];
         activeAbility.Activate();
     }
