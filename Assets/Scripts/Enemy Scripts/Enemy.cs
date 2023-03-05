@@ -19,18 +19,47 @@ public class Enemy : MonoBehaviour
     public List<Ability> abilities; 
     public Transform platform;
     public float fallLimit = -10; 
-    public enemyAttacks attacks;
+
     public enemyMovement movement;
+    public enemyAttacks attacks;
+
+    public Animator animator;
+    public AnimatorStateInfo stateInfo;
+    public bool animationFinished = true;
+
+    public float detectionRange = 5.0f;
+    public float healingSpeed = 0.1f;
+    public GameObject dustPilePrefab;
+    public int maxDustPiles = 5;
+    private List<DustPile> dustPiles = new List<DustPile>();
 
 
     
     void Start(){
-       health = maxHealth;
+        health = maxHealth;
     }
 
     void Update(){
         if (transform.position.y < platform.position.y + fallLimit){
             Destroy(gameObject);
+        }
+
+        // Check for nearby dust piles that need healing
+        foreach (DustPile dustPile in dustPiles) {
+            if (dustPile.health < dustPile.maxHealth) {
+                float distance = Vector3.Distance(transform.position, dustPile.transform.position);
+                if (distance <= detectionRange) {
+                    dustPile.IncreaseHealth(healingSpeed * Time.deltaTime);
+                }
+            }
+        }
+
+        // Check if we need to generate a new dust pile
+        if (dustPiles.Count < maxDustPiles) {
+            GameObject newDustPile = Instantiate(dustPilePrefab, transform.position + new Vector3(Random.Range(-1.0f, 1.0f), 0, Random.Range(-1.0f, 1.0f)), Quaternion.identity);
+            DustPile newDustPileScript = newDustPile.GetComponent<DustPile>();
+            newDustPileScript.SetHealth(0.1f); // set a low starting health
+            dustPiles.Add(newDustPileScript);
         }
     }
 
@@ -41,5 +70,11 @@ public class Enemy : MonoBehaviour
             // Destroy the cube when it has no health left
             Destroy(gameObject);
         }
+    }
+
+    public IEnumerator waitForAnimation(string animationName) {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0)[0].clip.length);
+        animator.SetBool(animationName, false);
+        animationFinished = true;
     }
 }

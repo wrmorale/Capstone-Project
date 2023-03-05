@@ -113,6 +113,8 @@ MonoBehaviour:
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
   enemy: {fileID: 0}
+  dustPile: {fileID: 0}
+  furniture: {fileID: 0}
 --- !u!1 &7428022770733803843
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,6 +228,8 @@ MonoBehaviour:
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
   enemy: {fileID: 0}
+  dustPile: {fileID: 0}
+  furniture: {fileID: 0}
 --- !u!1 &7428022771009043263
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,6 +343,8 @@ MonoBehaviour:
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
   enemy: {fileID: 0}
+  dustPile: {fileID: 0}
+  furniture: {fileID: 0}
 --- !u!1 &7428022771512999016
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,6 +360,7 @@ GameObject:
   - component: {fileID: 7428022771512999011}
   - component: {fileID: 7428022771512999012}
   - component: {fileID: 7428022771512999013}
+  - component: {fileID: 2330392013427656052}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -547,6 +554,9 @@ MonoBehaviour:
   abilities: []
   platform: {fileID: 0}
   fallLimit: -10
+  hud: {fileID: 0}
+  healthPercent: 1
+  isInvulnerable: 0
 --- !u!114 &7428022771512999013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,7 +608,6 @@ MonoBehaviour:
     attackCancelFrameEnd: 23
     allCancelFrameStart: 24
     allCancelFrameEnd: 25
---- !u!1001 &7528479105431351198
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
