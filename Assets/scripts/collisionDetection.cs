@@ -7,9 +7,6 @@ public class collisionDetection : MonoBehaviour
 {
     public playerController pc;
     public Player player;
-    public Enemy enemy;
-    public DustPile dustPile;
-    public Furniture furniture;
     
     private void OnTriggerEnter(Collider other){
         if(other.tag == "Enemy" && pc.state == States.PlayerStates.Attacking){

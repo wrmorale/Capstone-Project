@@ -7,7 +7,7 @@ using aState = States.ActionState;
 
 public class BleachBombTriggerable : PlayerAbility, IFrameCheckHandler
 {
-    [SerializeField] private Projectile projectile;
+    [SerializeField] private Bomb projectile;
     [HideInInspector] public Transform bulletSpawn;
     [SerializeField] private float speed = 0.1f;
     [SerializeField] private float lifetime = 1f;
@@ -67,8 +67,9 @@ public class BleachBombTriggerable : PlayerAbility, IFrameCheckHandler
     }
     public void SpawnProjectile(Vector3 heading) 
     {
-        Projectile clone = Instantiate(projectile, bulletSpawn.position, Quaternion.LookRotation(heading));
+        Bomb clone = Instantiate(projectile, bulletSpawn.position, Quaternion.LookRotation(heading));
         clone.Initialize(speed, lifetime, damage, stagger, heading);
+        clone.launch();
     }
 
     public override void Initialize(playerController player, Animator animator) 
