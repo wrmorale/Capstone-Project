@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class Bomb : Projectile
 {
-    protected override void Update()
+    private Rigidbody body;
+    [SerializeField] private Explosion explosion;
+    private void Awake()
     {
-        base.Update();
-        transform.position += heading * speed * Time.deltaTime;
+        body = GetComponent<Rigidbody>();
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy") 
+        if (other.tag != "Player" && !other.isTrigger) 
         {
-            Debug.Log("projectile hit");
-            Enemy enemy = other.GetComponent<Enemy>();
-            enemy.isHit(damage);
             Destroy(gameObject);
         }
+    }
+    public void launch() 
+    {
+        Vector3 force = (Vector3.up + transform.forward);
+        force.Normalize();
+        force *= speed;
+        body.AddForce(force);
     }
 
     private void OnDestroy()
     {
-        Debug.Log("projectile destroyed");
+        Explosion clone = Instantiate(explosion, transform);
+        clone.Initialize(damage, stagger);
+        clone.transform.SetParent(null);
     }
 }
