@@ -471,7 +471,7 @@ MonoBehaviour:
   turnSmoothTime: 0.1
   rollCooldown: 3
   jumpClip:
-    animator: {fileID: 0}
+    animator: {fileID: 5636604457870464056}
     clip: {fileID: 7400000, guid: 84d3e014aa1e37241a26ce746e1762a3, type: 2}
     animatorStateName: jump
     layerNumber: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   attack2_collider: {fileID: 7428022771009043263}
   attack3_collider: {fileID: 7428022769836866492}
   light1Clip:
-    animator: {fileID: 0}
+    animator: {fileID: 5636604457870464056}
     clip: {fileID: 7400000, guid: bc50abf456d7b9b4ea684d42c576bebd, type: 2}
     animatorStateName: light_1
     layerNumber: 0
@@ -582,7 +582,7 @@ MonoBehaviour:
     allCancelFrameStart: 17
     allCancelFrameEnd: 25
   light2Clip:
-    animator: {fileID: 0}
+    animator: {fileID: 5636604457870464056}
     clip: {fileID: 7400000, guid: 67f8d02c6d12c024e8e7e93441dcec4e, type: 2}
     animatorStateName: light_2
     layerNumber: 0
@@ -594,7 +594,7 @@ MonoBehaviour:
     allCancelFrameStart: 19
     allCancelFrameEnd: 25
   light3Clip:
-    animator: {fileID: 0}
+    animator: {fileID: 5636604457870464056}
     clip: {fileID: 7400000, guid: 53a8140dacf536d49a1ff780b9903e71, type: 2}
     animatorStateName: light_3
     layerNumber: 0
