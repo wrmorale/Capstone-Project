@@ -111,10 +111,10 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     // This custom update function can be called every frame from the Update() in playerController.cs to reduce overhead.
     // Only call if the player's state is Attacking.
 
-    public void updateMe() // yes we need this
+    public void updateMe(float time) // yes we need this
     {
         activeChecker.checkFrames();
-        player.MoveRoot();
+        
         if (actionState == ActionState.Inactionable)
         {  
         }
@@ -143,7 +143,16 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
                 activeClip.animator.SetBool("Attacking", false);
                 player.Jump();
             }
+            if (player.channeledAbility >= 0)
+            {
+                actionState = ActionState.Inactionable;
+                combo = 0;
+                activeClip.animator.SetBool("Attacking", false);
+                player.ActivateAbility();
+                player.ResetRoot();
+            }
         }
+        if (player.state == States.PlayerStates.Attacking) { player.MoveRoot(); }
     }
 
     public void handleAttacks()

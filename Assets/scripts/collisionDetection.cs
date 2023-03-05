@@ -11,7 +11,6 @@ public class collisionDetection : MonoBehaviour
     public DustPile dustPile;
     public Furniture furniture;
     
-    
     private void OnTriggerEnter(Collider other){
         if(other.tag == "Enemy" && pc.state == States.PlayerStates.Attacking){
             //applies to all with the enemy tag

@@ -19,4 +19,11 @@ namespace States
         Talking,
         Unknown,
     }
+
+    public enum ActionState
+    {
+        Inactionable,
+        AttackCancelable,
+        AllCancelable,
+    }
 }
