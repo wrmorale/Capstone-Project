@@ -49,7 +49,7 @@ MonoBehaviour:
   projectile: {fileID: 5784504715013987433, guid: e58eb1cadc1c3e84ea4deb045a09dd6f,
     type: 3}
   bulletSpawn: {fileID: 0}
-  speed: 0.1
+  speed: 250
   lifetime: 1
   damage: 7
   stagger: 1
@@ -59,8 +59,8 @@ MonoBehaviour:
     animatorStateName: lob
     layerNumber: 0
   frameChecker:
-    activeFrameStart: 4
-    activeFrameEnd: 5
+    activeFrameStart: 9
+    activeFrameEnd: 10
     attackCancelFrameStart: 0
     attackCancelFrameEnd: 0
     allCancelFrameStart: 0
