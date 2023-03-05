@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e001271b3f8b4e478f05b509f89b5a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <baseCooldown>k__BackingField: 0.5
   cooldownTimer: 0
   clip:
     animator: {fileID: 0}
