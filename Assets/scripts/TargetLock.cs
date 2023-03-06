@@ -28,16 +28,11 @@ public class TargetLock : MonoBehaviour
     [SerializeField] private float maxDistance;
     
     public bool isTargeting;
+    private playerController player;
     private CharacterController controller;
     private PlayerInput playerInput;
     private InputAction lockonAction;
     private InputAction cameraAction;
-
-    private float initMinRotation;
-    private float initMaxRotation;
-    private float minRotation = -45f;
-    private float maxRotation = 45f;
-
     
     private float maxAngle;
     private Transform currentTarget;
@@ -48,13 +43,9 @@ public class TargetLock : MonoBehaviour
     {
         maxAngle = 90f; // always 90 to target enemies in front of camera.
 
+        player = gameObject.GetComponent<playerController>();
         controller  = gameObject.GetComponent<CharacterController>();
         playerInput = gameObject.GetComponent<PlayerInput>();
-
-        // cinemachineFreeLook.m_XAxis.m_InputAxisName = "";
-        // cinemachineFreeLook.m_YAxis.m_InputAxisName = "";
-        initMinRotation = cinemachineFreeLook.m_XAxis.m_MinValue;
-        initMaxRotation = cinemachineFreeLook.m_XAxis.m_MaxValue;
 
         lockonAction = playerInput.actions["LockOn"];
         cameraAction = playerInput.actions["Camera"];
@@ -72,17 +63,13 @@ public class TargetLock : MonoBehaviour
         }
         else
         {
-            NewInputTarget(currentTarget);
-            // check distance to target,
-            // if too far set isTargeting to flase;
+            // handles being locked on a target
+            // TODO: rename this function to something better
+            NewInputTarget(currentTarget); 
         }
 
         if (aimIcon) 
             aimIcon.gameObject.SetActive(isTargeting);
-
-        //Debug.Log("inputX: " + mouseX + " and inputY: " + mouseY);
-        // cinemachineFreeLook.m_XAxis.m_InputAxisValue = mouseX;
-        // cinemachineFreeLook.m_YAxis.m_InputAxisValue = mouseY;
 
         if (lockonAction.triggered)
         {
@@ -121,21 +108,23 @@ public class TargetLock : MonoBehaviour
     {
         if (!currentTarget) return;
 
-        Vector3 viewPos = mainCamera.WorldToViewportPoint(target.position);
+        //Vector3 viewPos = mainCamera.WorldToViewportPoint(target.position);
         
         if(aimIcon)
             aimIcon.transform.position = mainCamera.WorldToScreenPoint(target.position);
 
-        if ((target.position - transform.position).magnitude < minDistance) return;
-        if ((target.position - transform.position).magnitude > maxDistance) {
+        // if too far or too close to enemy, deselect them
+        if ((target.position - transform.position).magnitude < minDistance ||
+            (target.position - transform.position).magnitude > maxDistance) { 
             AssignTarget(); 
             return;
         }
-        // mouseX = (viewPos.x - 0.5f + targetLockOffset.x) * 3f;              // you can change the [ 3f ] value to make it faster or  slower
-        // mouseY = (viewPos.y - 0.5f + targetLockOffset.y) * 3f;              // don't use delta time here.
-        Debug.Log(controller.transform.eulerAngles.y);
-        // cinemachineFreeLook.m_XAxis.m_MinValue = minRotation;
-        // cinemachineFreeLook.m_XAxis.m_MaxValue = maxRotation;
+
+        if (player.attackAction.triggered)
+        {
+            // turn player towards enemy when they attack.
+            controller.transform.LookAt(currentTarget); 
+        }
     }
 
 
