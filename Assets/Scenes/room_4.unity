@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7303,12 +7303,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c803e077be25f40a6ad03d7a6c66247d, type: 3}
---- !u!95 &579789626 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6870679871651066729, guid: 780a7481df1a48d4792aed7fd543ee02,
-    type: 3}
-  m_PrefabInstance: {fileID: 1857691450}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &585589741
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8047,7 +8041,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708557669}
-  m_LocalRotation: {x: 0.23441797, y: 0.0000000032205008, z: -7.7658213e-10, w: 0.9721359}
+  m_LocalRotation: {x: 0.23441796, y: -0.00000003096898, z: 0.000000007467768, w: 0.9721359}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11066,6 +11060,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1664518630860192573, guid: 780a7481df1a48d4792aed7fd543ee02,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1721438268121766036, guid: 780a7481df1a48d4792aed7fd543ee02,
         type: 3}
       propertyPath: m_RootOrder
@@ -11121,26 +11120,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2130117497}
-    - target: {fileID: 7428022771512999011, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: turnSmoothTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7428022771512999011, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: rollAction.m_Id
-      value: bda55f77-38d1-496a-a7d5-ba764ba307a8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7428022771512999011, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: jumpClip.animator
-      value: 
-      objectReference: {fileID: 579789626}
-    - target: {fileID: 7428022771512999011, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: rollAction.m_Name
-      value: Roll
-      objectReference: {fileID: 0}
     - target: {fileID: 7428022771512999012, guid: 780a7481df1a48d4792aed7fd543ee02,
         type: 3}
       propertyPath: hud
@@ -11151,41 +11130,6 @@ PrefabInstance:
       propertyPath: platform
       value: 
       objectReference: {fileID: 318758363}
-    - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: light1Clip.animator
-      value: 
-      objectReference: {fileID: 579789626}
-    - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: light2Clip.animator
-      value: 
-      objectReference: {fileID: 579789626}
-    - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: light3Clip.animator
-      value: 
-      objectReference: {fileID: 579789626}
-    - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: light3Checker.activeFrameEnd
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: light3Checker.allCancelFrameStart
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: light3Checker.attackCancelFrameEnd
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7428022771512999013, guid: 780a7481df1a48d4792aed7fd543ee02,
-        type: 3}
-      propertyPath: light3Checker.attackCancelFrameStart
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7428022771512999014, guid: 780a7481df1a48d4792aed7fd543ee02,
         type: 3}
       propertyPath: m_RootOrder
@@ -12147,7 +12091,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130117496}
-  m_LocalRotation: {x: 0.23441797, y: 0.000000014839626, z: -0.0000000035783838, w: 0.9721359}
+  m_LocalRotation: {x: 0.23441797, y: -0.00000003418948, z: 0.00000000824435, w: 0.9721359}
   m_LocalPosition: {x: -0.121, y: 3.9169998, z: 5.2460003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
