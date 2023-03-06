@@ -19,8 +19,8 @@ public class Player : MonoBehaviour
     public int lives;
     [SerializeField]public float health;
     public List<PlayerAbility> abilities; 
-    public Transform platform;
-    public float fallLimit = -10; 
+    // public Transform platform;
+    // public float fallLimit = -10; 
     
     //UI stuff
     public UIDocument hud;
@@ -47,10 +47,14 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
+        instead of this, we can create a prefab "kill plane" that's scaled up by a huge factor,
+        and has a script attached to detect player (or any object) colliding with it and kill them
         if (transform.position.y < platform.position.y + fallLimit){
             health = 0;
             alive = false;
         }
+        */
     }
 
     public void isHit(float damage){
