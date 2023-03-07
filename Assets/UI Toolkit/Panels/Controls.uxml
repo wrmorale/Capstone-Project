@@ -1,6 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="ControlImage" style="width: 1920px; height: 1080px; background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/CurrentControllerLayout.png?fileID=2800000&amp;guid=678d32f0fd7f74211a2d0a902088f8f6&amp;type=3#CurrentControllerLayout&apos;);">
+    <ui:VisualElement name="ControlImage" style="width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/CurrentControllerLayout.png?fileID=2800000&amp;guid=678d32f0fd7f74211a2d0a902088f8f6&amp;type=3#CurrentControllerLayout&apos;);">
         <ui:Button display-tooltip-when-elided="true" name="BackButton" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/back.png?fileID=2800000&amp;guid=2c57cff24a2944c4681a7deb9117bf30&amp;type=3#back&apos;); position: absolute; height: 135px; width: 372px; top: 500px; left: 8px;" />
     </ui:VisualElement>
-    <ui:VisualElement name="Back" />
 </ui:UXML>
