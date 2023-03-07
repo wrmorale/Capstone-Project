@@ -27,9 +27,9 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     [SerializeField]
     private PlayerAbility[] playerAbilities = new PlayerAbility[4];
 
-    float turnSmoothVelocity;
+    private float turnSmoothVelocity;
 
-    public CharacterController controller;
+    [HideInInspector] public CharacterController controller;
     private PlayerInput playerInput;
     private BroomAttackManager attackManager;
     [HideInInspector] public PlayerAbility activeAbility;
