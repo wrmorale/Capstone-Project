@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DamageFlash;
 
 public class Enemy : MonoBehaviour
 {
@@ -33,10 +34,14 @@ public class Enemy : MonoBehaviour
     public int maxDustPiles = 5;
     private List<DustPile> dustPiles = new List<DustPile>();
 
-
+    public GameObject damageFlashPrefab;
+    public DamageFlash damageFlash;
     
+    GameObject damageFlashObject;
     void Start(){
         health = maxHealth;
+        GameObject damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
+        damageFlash = damageFlashObject.GetComponent<DamageFlash>();
     }
 
     void Update(){
@@ -66,9 +71,12 @@ public class Enemy : MonoBehaviour
     public void isHit(float damage){
         print("EnemyTookDamage");
         health -= damage;
+        damageFlash.FlashStart();
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);
+            Destroy(damageFlashPrefab);
+            Destroy(damageFlashObject);
         }
     }
 
