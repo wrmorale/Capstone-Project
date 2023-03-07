@@ -73,6 +73,7 @@ public class TargetLock : MonoBehaviour
 
         if (lockonAction.triggered)
         {
+            Debug.Log("targeting");
             AssignTarget();
         }
     }
