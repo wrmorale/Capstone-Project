@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8732356840494198416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7513407232800490976}
+  - component: {fileID: 5318415682540987213}
+  m_Layer: 0
+  m_Name: BleachBombAbility
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7513407232800490976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732356840494198416}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5318415682540987213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8732356840494198416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cbdf056ebd6fb24c92a2fbe459bda8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <baseCooldown>k__BackingField: 0.5
+  cooldownTimer: 0
+  projectile: {fileID: 5784504715013987433, guid: e58eb1cadc1c3e84ea4deb045a09dd6f,
+    type: 3}
+  bulletSpawn: {fileID: 0}
+  speed: 250
+  lifetime: 1
+  damage: 7
+  stagger: 1
+  clip:
+    animator: {fileID: 0}
+    clip: {fileID: 7400000, guid: 2ca5961c8026cd747a404d2df3cf39c6, type: 2}
+    animatorStateName: lob
+    layerNumber: 0
+  frameChecker:
+    activeFrameStart: 9
+    activeFrameEnd: 10
+    attackCancelFrameStart: 0
+    attackCancelFrameEnd: 0
+    allCancelFrameStart: 0
+    allCancelFrameEnd: 0

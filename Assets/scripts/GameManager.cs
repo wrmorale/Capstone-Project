@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour{
     public float timer;
     public Text timerText;
     public bool roomCleared;
+    public static int currRoom = 1;
+    private int roomCount = 4;
     public int currentGold; 
     public List<String> availableAbilities = new List<String>(); //not sure how we will keep track of abilities yet but a list of strings to hold ablities that can be learned
     //
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour{
         roomCleared = false;
         currentGold = 0;
         numberOfDustPiles = maxDustPiles;
+        float spawnAreaY = spawnArea.transform.position.y;
         //Dust Pile Spawn
         if(!objectsInstantiated){
             Bounds spawnBounds = spawnArea.GetComponent<MeshCollider>().bounds;
@@ -69,7 +72,7 @@ public class GameManager : MonoBehaviour{
             {
                 Vector3 position = new Vector3(
                     UnityEngine.Random.Range(spawnBounds.min.x, spawnBounds.max.x),
-                    2.125f,
+                    spawnAreaY,
                     UnityEngine.Random.Range(spawnBounds.min.z, spawnBounds.max.z)
                 );
                 Instantiate(dustPilePrefab, position, Quaternion.identity);
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour{
                 do {
                     position = new Vector3(
                         UnityEngine.Random.Range(spawnBounds.min.x, spawnBounds.max.x),
-                        playerPos.y,
+                        spawnAreaY,
                         UnityEngine.Random.Range(spawnBounds.min.z, spawnBounds.max.z)
                     );
                 } while (Vector3.Distance(playerPos, position) < 3);
@@ -129,6 +132,13 @@ public class GameManager : MonoBehaviour{
             //Room clear condition successfully logged
             Debug.Log("Room clear");
             //Add some code to advance to next scene
+            if (currRoom < roomCount) {
+                Debug.Log(currRoom);
+                currRoom++;
+                SceneManager.LoadScene("room_" + currRoom);
+            } else {
+                // show end credits, player went through all rooms.
+            }
         }
         numberOfEnemies = enemies.Length;
         numberOfDustPiles = dustPiles.Length;

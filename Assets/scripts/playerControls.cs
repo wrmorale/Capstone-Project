@@ -73,7 +73,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Speacial "",
+                    ""name"": ""Special "",
                     ""type"": ""Button"",
                     ""id"": ""03f8e1f9-f4f4-432f-8975-1305a2415f8a"",
                     ""expectedControlType"": ""Button"",
@@ -245,7 +245,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Speacial "",
+                    ""action"": ""Special "",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -876,7 +876,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_CharacterControls_Walk = m_CharacterControls.FindAction("Walk", throwIfNotFound: true);
         m_CharacterControls_Jump = m_CharacterControls.FindAction("Jump", throwIfNotFound: true);
         m_CharacterControls_Attack = m_CharacterControls.FindAction("Attack", throwIfNotFound: true);
-        m_CharacterControls_Speacial = m_CharacterControls.FindAction("Speacial ", throwIfNotFound: true);
+        m_CharacterControls_Special = m_CharacterControls.FindAction("Special ", throwIfNotFound: true);
         m_CharacterControls_Ability_1 = m_CharacterControls.FindAction("Ability_1", throwIfNotFound: true);
         m_CharacterControls_Ability_2 = m_CharacterControls.FindAction("Ability_2", throwIfNotFound: true);
         m_CharacterControls_Ability_3 = m_CharacterControls.FindAction("Ability_3", throwIfNotFound: true);
@@ -958,7 +958,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_CharacterControls_Walk;
     private readonly InputAction m_CharacterControls_Jump;
     private readonly InputAction m_CharacterControls_Attack;
-    private readonly InputAction m_CharacterControls_Speacial;
+    private readonly InputAction m_CharacterControls_Special;
     private readonly InputAction m_CharacterControls_Ability_1;
     private readonly InputAction m_CharacterControls_Ability_2;
     private readonly InputAction m_CharacterControls_Ability_3;
@@ -973,7 +973,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Walk => m_Wrapper.m_CharacterControls_Walk;
         public InputAction @Jump => m_Wrapper.m_CharacterControls_Jump;
         public InputAction @Attack => m_Wrapper.m_CharacterControls_Attack;
-        public InputAction @Speacial => m_Wrapper.m_CharacterControls_Speacial;
+        public InputAction @Special => m_Wrapper.m_CharacterControls_Special;
         public InputAction @Ability_1 => m_Wrapper.m_CharacterControls_Ability_1;
         public InputAction @Ability_2 => m_Wrapper.m_CharacterControls_Ability_2;
         public InputAction @Ability_3 => m_Wrapper.m_CharacterControls_Ability_3;
@@ -1003,9 +1003,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAttack;
-                @Speacial.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnSpeacial;
-                @Speacial.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnSpeacial;
-                @Speacial.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnSpeacial;
+                @Special.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnSpecial;
+                @Special.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnSpecial;
+                @Special.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnSpecial;
                 @Ability_1.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAbility_1;
                 @Ability_1.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAbility_1;
                 @Ability_1.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnAbility_1;
@@ -1040,9 +1040,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @Speacial.started += instance.OnSpeacial;
-                @Speacial.performed += instance.OnSpeacial;
-                @Speacial.canceled += instance.OnSpeacial;
+                @Special.started += instance.OnSpecial;
+                @Special.performed += instance.OnSpecial;
+                @Special.canceled += instance.OnSpecial;
                 @Ability_1.started += instance.OnAbility_1;
                 @Ability_1.performed += instance.OnAbility_1;
                 @Ability_1.canceled += instance.OnAbility_1;
@@ -1174,7 +1174,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnWalk(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnSpeacial(InputAction.CallbackContext context);
+        void OnSpecial(InputAction.CallbackContext context);
         void OnAbility_1(InputAction.CallbackContext context);
         void OnAbility_2(InputAction.CallbackContext context);
         void OnAbility_3(InputAction.CallbackContext context);

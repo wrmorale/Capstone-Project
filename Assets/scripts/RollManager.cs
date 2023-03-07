@@ -45,7 +45,7 @@ public class RollManager : MonoBehaviour, IFrameCheckHandler
     }
 
     // Update is called once per frame
-    public void updateMe()
+    public void updateMe(float time)
     {
         rollFrameChecker.checkFrames();
         player.MoveRoot();

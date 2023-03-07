@@ -1,5 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="title" style="background-image: url(&apos;project://database/Assets/Art%20Assets/UI-Assets/menuscreen.png?fileID=2800000&amp;guid=8154f4cb989d0644388011cef597e45e&amp;type=3#menuscreen&apos;); width: auto; height: 1080px;">
-        <ui:Button text="Button" display-tooltip-when-elided="true" style="background-image: url(&apos;project://database/Assets/Art%20Assets/UI-Assets/startbutton.png?fileID=2800000&amp;guid=9561671bbe390fa4dbd48c6fb6cea1b9&amp;type=3#startbutton&apos;); width: 295px; height: 91px; position: absolute; top: 734px; left: 803px;" />
-    </ui:VisualElement>
-</ui:UXML>
