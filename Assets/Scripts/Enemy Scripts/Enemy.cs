@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
     GameObject damageFlashObject;
     void Start(){
         health = maxHealth;
-        GameObject damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
+        damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
         damageFlash = damageFlashObject.GetComponent<DamageFlash>();
     }
 
@@ -75,7 +75,6 @@ public class Enemy : MonoBehaviour
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);
-            Destroy(damageFlashPrefab);
             Destroy(damageFlashObject);
         }
     }
