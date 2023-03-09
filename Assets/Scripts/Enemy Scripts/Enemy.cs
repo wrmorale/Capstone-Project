@@ -33,10 +33,13 @@ public class Enemy : MonoBehaviour
     public int maxDustPiles = 5;
     private List<DustPile> dustPiles = new List<DustPile>();
 
+    public EnemyHealthBar enemyHealthBar;
+
 
     
     void Start(){
         health = maxHealth;
+        enemyHealthBar.SetMaxHealth((float)health);
     }
 
     void Update(){
@@ -66,6 +69,7 @@ public class Enemy : MonoBehaviour
     public void isHit(float damage){
         print("EnemyTookDamage");
         health -= damage;
+        enemyHealthBar.SetHealth((float)health);
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);
