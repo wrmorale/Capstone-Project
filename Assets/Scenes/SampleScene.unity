@@ -13253,7 +13253,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.25329039, y: -0.21509029, z: 0.057871662, w: 0.9413985}
+  m_LocalRotation: {x: 0.25329039, y: -0.2150903, z: 0.057871666, w: 0.9413985}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -22303,7 +22303,7 @@ MonoBehaviour:
   isNextToExit: 0
   currentGold: 0
   availableAbilities: []
-  numberOfEnemies: 5
+  numberOfEnemies: 1
   maxDustPiles: 1
   enemyPrefab: {fileID: 906402153}
   player: {fileID: 795224103}
