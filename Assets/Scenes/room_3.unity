@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -637,6 +637,8 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
+  damageFlashPrefab: {fileID: 0}
+  damageFlash: {fileID: 0}
 --- !u!54 &197679916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2205,9 +2207,19 @@ PrefabInstance:
       objectReference: {fileID: 2029081641}
     - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
+      propertyPath: damageFlash
+      value: 
+      objectReference: {fileID: 636425216}
+    - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
       propertyPath: dustPilePrefab
       value: 
       objectReference: {fileID: 1871810618}
+    - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: damageFlashPrefab
+      value: 
+      objectReference: {fileID: 636425215}
     - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
       propertyPath: abilities.Array.data[0].abilityChance
@@ -2237,6 +2249,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbbbd7cf0337d1e43baa02a33100e247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &636425215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 49747922834135741, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+    type: 3}
+  m_PrefabInstance: {fileID: 636425212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &636425216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636425215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &639333493 stripped
@@ -2538,7 +2568,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708557669}
-  m_LocalRotation: {x: 0.25201324, y: 0.00000003099104, z: -0.000000008070642, w: 0.9677238}
+  m_LocalRotation: {x: 0.25201324, y: 0.000000030991046, z: -0.000000008070644, w: 0.9677238}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2923,9 +2953,19 @@ PrefabInstance:
       objectReference: {fileID: 2029081641}
     - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
         type: 3}
+      propertyPath: damageFlash
+      value: 
+      objectReference: {fileID: 875573173}
+    - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
+        type: 3}
       propertyPath: dustPilePrefab
       value: 
       objectReference: {fileID: 1871810618}
+    - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
+        type: 3}
+      propertyPath: damageFlashPrefab
+      value: 
+      objectReference: {fileID: 875573172}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3e774df6e3d732419c69b0540e06dd2, type: 3}
 --- !u!95 &875573169 stripped
@@ -2956,6 +2996,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbbbd7cf0337d1e43baa02a33100e247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &875573172 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4962231417127877380, guid: a3e774df6e3d732419c69b0540e06dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 875573168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &875573173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875573172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &967666964
@@ -3142,7 +3200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1018978639}
-  m_LocalRotation: {x: 0.21332423, y: -0.00000000466712, z: 0.0000000010190674, w: 0.97698146}
+  m_LocalRotation: {x: 0.21332423, y: 0.000000020372093, z: -0.0000000044482533, w: 0.97698146}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -15062,7 +15120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130117496}
-  m_LocalRotation: {x: 0.25201324, y: 0.00000004472311, z: -0.000000011646728, w: 0.9677238}
+  m_LocalRotation: {x: 0.25201324, y: 0.000000044723112, z: -0.000000011646729, w: 0.9677238}
   m_LocalPosition: {x: -1.1930001, y: 1.3077443, z: -2.3431828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028328, g: 0.22571322, b: 0.30692163, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5493,6 +5493,8 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
+  damageFlashPrefab: {fileID: 0}
+  damageFlash: {fileID: 0}
 --- !u!54 &197679916
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6989,9 +6991,19 @@ PrefabInstance:
       objectReference: {fileID: 2029081641}
     - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
+      propertyPath: damageFlash
+      value: 
+      objectReference: {fileID: 636425214}
+    - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
       propertyPath: dustPilePrefab
       value: 
       objectReference: {fileID: 921964182}
+    - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+        type: 3}
+      propertyPath: damageFlashPrefab
+      value: 
+      objectReference: {fileID: 636425213}
     - target: {fileID: 8327740662560138382, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
         type: 3}
       propertyPath: abilities.Array.data[0].abilityChance
@@ -6999,6 +7011,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fec4a32b1661b648bdcb0b9faccc35d, type: 3}
+--- !u!1 &636425213 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 49747922834135741, guid: 3fec4a32b1661b648bdcb0b9faccc35d,
+    type: 3}
+  m_PrefabInstance: {fileID: 636425212}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &636425214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636425213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &691922169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7340,7 +7370,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 875573168}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 875573169}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f4e05bbf7ab93642a6bda59b581791a, type: 3}
@@ -7352,7 +7382,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 875573168}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 875573169}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbbbd7cf0337d1e43baa02a33100e247, type: 3}
@@ -7516,11 +7546,57 @@ PrefabInstance:
       objectReference: {fileID: 2029081641}
     - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
         type: 3}
+      propertyPath: damageFlash
+      value: 
+      objectReference: {fileID: 875573172}
+    - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
+        type: 3}
       propertyPath: dustPilePrefab
       value: 
       objectReference: {fileID: 921964182}
+    - target: {fileID: 8327740662560138382, guid: a3e774df6e3d732419c69b0540e06dd2,
+        type: 3}
+      propertyPath: damageFlashPrefab
+      value: 
+      objectReference: {fileID: 875573170}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3e774df6e3d732419c69b0540e06dd2, type: 3}
+--- !u!1 &875573169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8327740662560138380, guid: a3e774df6e3d732419c69b0540e06dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 875573168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &875573170 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4962231417127877380, guid: a3e774df6e3d732419c69b0540e06dd2,
+    type: 3}
+  m_PrefabInstance: {fileID: 875573168}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &875573171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875573169}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &875573172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875573170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &918820672 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6902722777388130327, guid: 85bb00ea2a6e944149c139ccdba1c983,
@@ -13309,6 +13385,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbbbd7cf0337d1e43baa02a33100e247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1161768993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161768988}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1163156872
