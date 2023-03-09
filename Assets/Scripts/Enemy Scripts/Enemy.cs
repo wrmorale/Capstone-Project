@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DamageFlash;
 
 public class Enemy : MonoBehaviour
 {
@@ -36,10 +37,15 @@ public class Enemy : MonoBehaviour
     public EnemyHealthBar enemyHealthBar;
 
 
+    public GameObject damageFlashPrefab;
+    public DamageFlash damageFlash;
     
+    GameObject damageFlashObject;
     void Start(){
         health = maxHealth;
         enemyHealthBar.SetMaxHealth((float)health);
+        damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
+        damageFlash = damageFlashObject.GetComponent<DamageFlash>();
     }
 
     void Update(){
@@ -70,9 +76,11 @@ public class Enemy : MonoBehaviour
         print("EnemyTookDamage");
         health -= damage;
         enemyHealthBar.SetHealth((float)health);
+        damageFlash.FlashStart();
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);
+            Destroy(damageFlashObject);
         }
     }
 
