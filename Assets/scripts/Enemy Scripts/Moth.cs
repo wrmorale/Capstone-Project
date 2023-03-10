@@ -15,6 +15,7 @@ public class Moth : Enemy
     }
 
     void Update(){
+        print("HI");
         enemyAttack();
     }
 

@@ -113,7 +113,6 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
         if (actionState == ActionState.AttackCancelable)
         {
             actionState = ActionState.Inactionable;
-            //handleAttacks();
         }
     }
     public void handleAttacks(Ability ability)
@@ -123,9 +122,7 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
         enemyInstance.state = Golem.GolemState.Attacking;
 
         currentAttack = ability.abilityName;
-        //print(currentAttack);
 
-        // first attack
         if (currentAttack == "Light1")
         {
             activeChecker = light1Checker;

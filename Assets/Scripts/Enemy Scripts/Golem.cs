@@ -7,6 +7,10 @@ using Extensions;
 public class Golem : Enemy
 {
     private GolemAttackManager attackManager;
+    private Vector3 directionToPlayer;
+    private float distanceToPlayer;
+    private bool isDashing;
+
     public enum GolemState{
         Idle,
         Attacking
@@ -14,6 +18,7 @@ public class Golem : Enemy
     public GolemState state = GolemState.Idle;
 
     private void Awake(){
+        isDashing = false;
         attackManager = gameObject.GetComponent<GolemAttackManager>();
     }
 
@@ -35,13 +40,24 @@ public class Golem : Enemy
         }
     }
 
+    void FixedUpdate() {
+        if (isDashing) {
+            // move enemy towards player during dash animation
+            directionToPlayer = playerBody.position - enemyBody.position;
+            movement = directionToPlayer.normalized * movementSpeed * Time.fixedDeltaTime;
+            enemyBody.MovePosition(enemyBody.position + movement);
+        }
+    }
+
     private void enemyMovement() {
+        directionToPlayer = playerBody.position - enemyBody.position;
+        distanceToPlayer = directionToPlayer.magnitude;
         stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         // if player is in range
         if(playerInRange(movementRange)) {
             // move enemy towards player
             if (stateInfo.normalizedTime >= 1f){
-                animator.SetBool("Dash", true);
+                //animator.SetBool("Dash", true);
                 movement = (playerBody.position - enemyBody.position) * movementSpeed;
                 enemyBody.MovePosition(enemyBody.position + (movement * Time.fixedDeltaTime));
             }
@@ -58,12 +74,16 @@ public class Golem : Enemy
     }
 
     public void enemyAction(){
+        directionToPlayer = playerBody.position - enemyBody.position;
+        distanceToPlayer = directionToPlayer.magnitude;
         //first checks if it can dash to player
-        if (playerInRange(abilities[3].abilityRange) && dashCooldownTimer <= 0){
+        if (distanceToPlayer <= abilities[3].abilityRange && dashCooldownTimer <= 0){
+            isDashing = true;
             dashCooldownTimer = abilities[3].abilityCooldown;
             state = GolemState.Attacking;
             attackManager.handleAttacks(abilities[3]);
-            //actionCooldownTimer = ability.abilityCooldown;
+            
+            actionCooldownTimer = abilities[3].abilityCooldown;
         }
 
         /*

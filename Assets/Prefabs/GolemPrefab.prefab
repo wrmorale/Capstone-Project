@@ -346,7 +346,7 @@ MonoBehaviour:
     abilityType: Movement
     abilityDamage: 4
     abilityRange: 4
-    abilityCooldown: 2
+    abilityCooldown: 5
     abilityChance: 1
     castTime: 1
     damageMultiplier: 1

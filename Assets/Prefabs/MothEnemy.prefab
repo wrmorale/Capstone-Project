@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8327740662560138378}
   - component: {fileID: 8327740662560138379}
-  - component: {fileID: 8327740662560138382}
   - component: {fileID: 8327740662560138383}
+  - component: {fileID: 8372967417428799471}
   m_Layer: 0
   m_Name: MothEnemy
   m_TagString: Enemy
@@ -51,48 +51,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &8327740662560138382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8327740662560138380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03708d928965a0841872a9759fccccec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyName: Moth
-  maxHealth: 8
-  health: 8
-  basicAttackDamage: 3
-  basicAttackSpeed: 0.1
-  attackRange: 1
-  movementSpeed: -0.4
-  movementRange: 3
-  idleMovementRange: 0
-  staggerLimit: 0
-  abilities:
-  - abilityName: Big Spit Attack
-    abilityType: Ranged Projectile
-    abilityDamage: 7
-    abilityRange: 10
-    abilityCooldown: 5
-    abilityChance: 80
-    castTime: 1
-    damageMultiplier: 1
-  enemyCollider: {fileID: 0}
-  enemyBody: {fileID: 0}
-  playerBody: {fileID: 0}
-  player: {fileID: 0}
-  animator: {fileID: 0}
-  animationFinished: 1
-  detectionRange: 5
-  healingSpeed: 0.1
-  dustPilePrefab: {fileID: 0}
-  maxDustPiles: 5
-  enemyInstance: {fileID: 0}
 --- !u!65 &8327740662560138383
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,6 +64,62 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.08431864, y: 0.124056816, z: 0.07837236}
   m_Center: {x: 0, y: 0.061112642, z: -0.0017233491}
+--- !u!114 &8372967417428799471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327740662560138380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f2cecec161384468db4388929a6877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: Moth
+  maxHealth: 8
+  health: 8
+  basicAttackDamage: 3
+  basicAttackSpeed: 0.8
+  attackRange: 6
+  movementSpeed: 0.5
+  movementRange: 3
+  idleMovementRange: 2
+  staggerLimit: 0
+  abilities:
+  - abilityName: Shoot
+    abilityType: Ranged
+    abilityDamage: 6
+    abilityRange: 10
+    abilityCooldown: 4
+    abilityChance: 99
+    castTime: 1
+    damageMultiplier: 1
+  abilityCooldownTimer: 0
+  dashCooldownTimer: 0
+  actionCooldownTimer: 0
+  abilityCounter: 0
+  longestAttackRange: 0
+  isAttacking: 0
+  movement: {x: 0, y: 0, z: 0}
+  idleMovement: {x: 0, y: 0, z: 0}
+  elapsedTime: 0
+  isIdle: 0
+  enemyInstance: {fileID: 8327740662560138380}
+  bodyCollider: {fileID: 8327740662560138380}
+  enemyBody: {fileID: 8327740662560138379}
+  playerBody: {fileID: 0}
+  player: {fileID: 0}
+  animator: {fileID: 8446685595553216187}
+  animationFinished: 1
+  detectionRange: 5
+  healingSpeed: 0.1
+  dustPilePrefab: {fileID: 0}
+  maxDustPiles: 5
+  cooldownTime: 5
+  cooldownRemaining: 0
+  fleeDuration: 1
+  fleeRemaining: 0
 --- !u!1001 &1756683609672880476
 PrefabInstance:
   m_ObjectHideFlags: 0
