@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
     [Header("Movement info")]
     public Vector3 movement;
     public Vector3 idleMovement;
+    public float rotationSpeed;
     public float elapsedTime = 0;
     public bool isIdle = false;
 

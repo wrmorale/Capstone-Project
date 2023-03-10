@@ -4384,13 +4384,23 @@ PrefabInstance:
       objectReference: {fileID: 795224104}
     - target: {fileID: 1817854267388228367, guid: be38b0afef5afa646ae6a07f600dbae2,
         type: 3}
+      propertyPath: rotationSpeed
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817854267388228367, guid: be38b0afef5afa646ae6a07f600dbae2,
+        type: 3}
       propertyPath: dustPilePrefab
       value: 
       objectReference: {fileID: 919132148348794008}
     - target: {fileID: 1817854267388228367, guid: be38b0afef5afa646ae6a07f600dbae2,
         type: 3}
-      propertyPath: abilities.Array.data[0].abilityChance
-      value: 2
+      propertyPath: abilities.Array.data[0].abilityCooldown
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1817854267388228367, guid: be38b0afef5afa646ae6a07f600dbae2,
+        type: 3}
+      propertyPath: abilities.Array.data[1].abilityCooldown
+      value: 1.8
       objectReference: {fileID: 0}
     - target: {fileID: 2181674869418801407, guid: be38b0afef5afa646ae6a07f600dbae2,
         type: 3}
@@ -4451,6 +4461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: GolemPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5875378272749639627, guid: be38b0afef5afa646ae6a07f600dbae2,
+        type: 3}
+      propertyPath: m_Mass
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: be38b0afef5afa646ae6a07f600dbae2, type: 3}
@@ -7997,7 +8012,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.24820504, y: -0.0024146866, z: 0.0006187, w: 0.96870434}
+  m_LocalRotation: {x: 0.24820505, y: -0.0024146931, z: 0.0006187018, w: 0.96870434}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
