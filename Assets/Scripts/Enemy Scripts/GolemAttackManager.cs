@@ -42,6 +42,7 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
     private ActionState actionState;
 
     public void onActiveFrameStart() {
+        enemyInstance.light1Complete = false;
         //have if statements to see which ability to play here
         if(currentAttack == "Light1"){
             light1Collider.SetActive(true);
@@ -59,7 +60,9 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
     }
     public void onActiveFrameEnd() {
         enemyInstance.state = Golem.GolemState.Idle;
+        enemyInstance.isDashing = false;
         if(currentAttack == "Light1"){
+            enemyInstance.light1Complete = true;
             light1Collider.SetActive(false);
         }
         else if(currentAttack == "Light2"){

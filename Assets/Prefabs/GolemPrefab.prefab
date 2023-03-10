@@ -50,7 +50,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629870976696930832}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -93,7 +93,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629870976696930832}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -163,7 +163,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250803297610215111}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -206,7 +206,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1250803297610215111}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -261,7 +261,7 @@ Transform:
   - {fileID: 4008115417754378342}
   - {fileID: 8569674675143406367}
   - {fileID: 6548740817008165245}
-  - {fileID: 5461539172445601806}
+  - {fileID: 6167770674353366193}
   - {fileID: 567324920048128663}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -321,23 +321,23 @@ MonoBehaviour:
   - abilityName: SpinAttack
     abilityType: Sweep
     abilityDamage: 4
-    abilityRange: 3
+    abilityRange: 1.8
     abilityCooldown: 3
-    abilityChance: 99
+    abilityChance: 30
     castTime: 1
     damageMultiplier: 1
   - abilityName: Light1
     abilityType: Melee
     abilityDamage: 5
-    abilityRange: 3
+    abilityRange: 1.8
     abilityCooldown: 2
-    abilityChance: 5
+    abilityChance: 50
     castTime: 1
     damageMultiplier: 1
   - abilityName: Light2
     abilityType: Melee
     abilityDamage: 5
-    abilityRange: 3
+    abilityRange: 2.5
     abilityCooldown: 2
     abilityChance: 0
     castTime: 1
@@ -345,9 +345,9 @@ MonoBehaviour:
   - abilityName: Dash
     abilityType: Movement
     abilityDamage: 4
-    abilityRange: 4
+    abilityRange: 3
     abilityCooldown: 5
-    abilityChance: 1
+    abilityChance: 0
     castTime: 1
     damageMultiplier: 1
   abilityCooldownTimer: 0
@@ -361,7 +361,7 @@ MonoBehaviour:
   elapsedTime: 0
   isIdle: 0
   enemyInstance: {fileID: 2606690603601728555}
-  bodyCollider: {fileID: 0}
+  bodyCollider: {fileID: 2606690603601728555}
   enemyBody: {fileID: 5875378272749639627}
   playerBody: {fileID: 0}
   player: {fileID: 0}
@@ -371,6 +371,8 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
+  isDashing: 0
+  light1Complete: 0
   state: 0
 --- !u!114 &6275697687067305316
 MonoBehaviour:
@@ -387,7 +389,7 @@ MonoBehaviour:
   enemyInstance: {fileID: 1817854267388228367}
   light1Collider: {fileID: 629870976696930832}
   light2Collider: {fileID: 6355576061597113706}
-  spinAttackCollider: {fileID: 6726013549867798617}
+  spinAttackCollider: {fileID: 8750645048523731814}
   dashCollider: {fileID: 1250803297610215111}
   light1Clip:
     animator: {fileID: 907608586443398915}
@@ -464,14 +466,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6355576061597113706}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.13391246, y: -0, z: -0, w: 0.9909932}
   m_LocalPosition: {x: -0.005, y: 0.245, z: 0.427}
-  m_LocalScale: {x: 0.2625, y: 0.25641075, z: 0.7748438}
+  m_LocalScale: {x: 0.20015624, y: 0.16702083, z: 0.73235136}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2181674869418801407}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 15.391, y: 0, z: 0}
 --- !u!33 &5764175712384544861
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -487,7 +489,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6355576061597113706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -530,7 +532,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6355576061597113706}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -550,7 +552,7 @@ MonoBehaviour:
   pc: {fileID: 0}
   player: {fileID: 0}
   enemy: {fileID: 1817854267388228367}
---- !u!1 &6726013549867798617
+--- !u!1 &8750645048523731814
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -558,11 +560,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5461539172445601806}
-  - component: {fileID: 4466401188812312713}
-  - component: {fileID: 727058387472852668}
-  - component: {fileID: 4003970971619292673}
-  - component: {fileID: 5365567569377756412}
+  - component: {fileID: 6167770674353366193}
+  - component: {fileID: 8764197921776693570}
+  - component: {fileID: 3147499670055616878}
+  - component: {fileID: 7562643564875331965}
+  - component: {fileID: 3797623945938121093}
   m_Layer: 0
   m_Name: SpinHitBox
   m_TagString: Untagged
@@ -570,37 +572,37 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!4 &5461539172445601806
+--- !u!4 &6167770674353366193
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6726013549867798617}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.024, y: 0.364, z: 0.40357}
-  m_LocalScale: {x: 1.1990097, y: 0.39853123, z: 0.65274256}
+  m_GameObject: {fileID: 8750645048523731814}
+  m_LocalRotation: {x: 0.046136066, y: -0.0018844268, z: 0.040767428, w: 0.9981012}
+  m_LocalPosition: {x: -0.001, y: 0.386, z: 0.316}
+  m_LocalScale: {x: 0.9421699, y: 0.3106044, z: 0.8851953}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2181674869418801407}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4466401188812312713
+  m_LocalEulerAnglesHint: {x: 5.293, y: 0, z: 4.678}
+--- !u!33 &8764197921776693570
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6726013549867798617}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &727058387472852668
+  m_GameObject: {fileID: 8750645048523731814}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3147499670055616878
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6726013549867798617}
-  m_Enabled: 1
+  m_GameObject: {fileID: 8750645048523731814}
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -635,26 +637,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4003970971619292673
-BoxCollider:
+--- !u!135 &7562643564875331965
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6726013549867798617}
+  m_GameObject: {fileID: 8750645048523731814}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5365567569377756412
+--- !u!114 &3797623945938121093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6726013549867798617}
+  m_GameObject: {fileID: 8750645048523731814}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c4c640e31c5811348922c843fc81aec6, type: 3}
