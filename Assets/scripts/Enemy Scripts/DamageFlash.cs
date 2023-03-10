@@ -13,11 +13,6 @@ public class DamageFlash : MonoBehaviour{
         origColor = mesh.material.GetColor("_MainTex_ST");
     }
 
-    void Update(){
-        if(Input.GetKeyDown(KeyCode.Space)){
-            FlashStart();
-        }
-    }
 
     public void FlashStart(){
         mesh.material.SetColor("_MainTex_ST", Color.red);
