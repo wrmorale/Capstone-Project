@@ -28,10 +28,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     private FrameParser activeClip;
     private FrameChecker activeChecker;
 
-    private GameObject broom;
-    private GameObject pan;
-    private Animator broomAnimator;
-
     private playerController player;
     private Vector2 input = Vector2.zero;
 
@@ -89,17 +85,12 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onLastFrameEnd(){
         activeClip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
-        broom.SetActive(false);
-        pan.SetActive(false);
         combo = 0;
     }
 
     void Awake()
     {
         player = gameObject.GetComponent<playerController>();
-        broom = transform.Find("maid68/metarig/hip/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/broom1").gameObject;
-        broomAnimator = broom.GetComponent<Animator>();
-        pan = transform.Find("maid68/metarig/hip/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/pan").gameObject;
 
         light1Clip.initialize();
         light1Checker.initialize(this, light1Clip);
@@ -147,8 +138,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
                 combo = 0;
                 activeClip.animator.SetBool("Attacking", false);
                 player.Jump();
-                broom.SetActive(false);
-                pan.SetActive(false);
             }
             if (player.channeledAbility >= 0)
             {
@@ -157,8 +146,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
                 activeClip.animator.SetBool("Attacking", false);
                 player.ActivateAbility();
                 player.ResetRoot();
-                broom.SetActive(false);
-                pan.SetActive(false);
             }
         }
         if (player.state == States.PlayerStates.Attacking) { player.MoveRoot(); }
@@ -166,9 +153,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 
     public void handleAttacks()
     {
-        broom.SetActive(true);
-        pan.SetActive(true);
-        
         int frames = 0; // amount of frames in anim 
         actionState = ActionState.Inactionable;
 
@@ -185,7 +169,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         }
         else if (combo == 2)
         {
-            broomAnimator.Play("light_3", 0);
             activeChecker = light3Checker;
             activeClip = light3Clip;
         }
@@ -196,7 +179,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 
         frames = activeClip.getTotalFrames();
         activeClip.animator.SetBool("Attacking", true);
-        activeClip.play();
+        activeClip.animator.Play(activeClip.animatorStateName, 0);
         activeChecker.initCheck();
         activeChecker.checkFrames();
     }
