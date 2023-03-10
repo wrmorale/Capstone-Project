@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public float actionCooldownTimer = 0;
     public int abilityCounter = 0;
     public float longestAttackRange = 0;
+    public bool isAttacking = false;
 
     [Header("Movement info")]
     public Vector3 movement;
@@ -31,7 +32,8 @@ public class Enemy : MonoBehaviour
     public bool isIdle = false;
 
     [Header("Collider + Physics info")]
-    //public MeshCollider enemyCollider; //having issues with meshcollider
+    private Collider[] colliders;
+    public GameObject bodyCollider;
     public Rigidbody enemyBody;
     public Rigidbody playerBody;
     public Transform player;
@@ -49,6 +51,8 @@ public class Enemy : MonoBehaviour
     private List<DustPile> dustPiles = new List<DustPile>();
 
     void Start(){
+        colliders = GetComponentsInChildren<Collider>();
+        Debug.Log(colliders.Length);
         enemyBody = GetComponent<Rigidbody>();
         playerBody = player.GetComponent<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
@@ -94,11 +98,30 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
+    public bool playerInRange(float maxRange){
+        //checks to see if enemy is in range for an attack or movement
+        if(Vector2.Distance(enemyBody.position, playerBody.position) < maxRange) {
+            return true;
+        }
+        return false;
+    }
+
+    public bool canAttack(){
+        if(actionCooldownTimer < 0) {
+            return true;
+        }
+        return false;
+    }
 
     public void attack(){
         //play basic attack animation of this enemy - for now something generic for our enemy (makes enemy jump)
         //the attack animation should be checking for collisions so it should do damage that way. 
         checkCollision(basicAttackDamage); //temp damage dealing
+    }
+
+    public void dealDamage(float damage){
+        //print("HI");
     }
 
     public void checkCollision(float damage){ //for now just checks for collisions to deal damage. Will probably change once hitboxes and animations are in for enemies
@@ -107,6 +130,7 @@ public class Enemy : MonoBehaviour
         foreach (Collider collider in colliders) {
             if (collider.tag == "Player") {
                 // apply damage to player
+                print("Collide");
                 Player player = collider.GetComponent<Player>();
                 player.isHit(damage);
             }
