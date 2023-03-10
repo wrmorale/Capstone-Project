@@ -8,6 +8,8 @@ public class Moth : Enemy
     public float cooldownRemaining = 0f;
     public float fleeDuration = 1f;
     public float fleeRemaining = 0f;
+
+    public GameObject projectilePrefab;
     
     void FixedUpdate()
     {
@@ -107,5 +109,12 @@ public class Moth : Enemy
             StartCoroutine(waitForAnimation("RangedAbility"));
         }
         //have other ability types as else if statments and we can add simple code to deal damage correctly. 
+    }
+
+    public void LaunchProjectile()
+    {
+        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        Vector3 direction = (playerBody.position - transform.position).normalized;
+        projectile.GetComponent<MothProjectile>().Launch(direction);
     }
 }
