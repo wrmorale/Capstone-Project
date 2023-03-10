@@ -1,23 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using States;
+using Extensions;
 
 public class Golem : Enemy
 {
     private GolemAttackManager attackManager;
+    public enum GolemState{
+        Idle,
+        Attacking
+    }
+    public GolemState state = GolemState.Idle;
 
     private void Awake(){
         attackManager = gameObject.GetComponent<GolemAttackManager>();
     }
 
     void Update() {
-        if (enemyAttack()){
+        if (enemyCanAttack()){
             enemyAction();
-            
+        }
+        if (state == GolemState.Attacking){
+            attackManager.updateMe(Time.deltaTime);
         }
         else{
-            enemyMovement();
+            //enemyMovement();
         }
+        dashCooldownTimer -= Time.deltaTime;
         actionCooldownTimer -= Time.deltaTime;
         abilityCooldownTimer -= Time.deltaTime;
         if(abilityCooldownTimer < 0) {
@@ -38,26 +48,35 @@ public class Golem : Enemy
         }
     }
 
-    public bool enemyAttack(){
+    public bool enemyCanAttack(){
         //if able to attack, the enemy does so
         //first checks to see if enemy is in range for an attack
         if(playerInRange(longestAttackRange) && canAttack()) {
             return true;
         }
-        
         return false;
     }
 
     public void enemyAction(){
-        //if off ability cooldown can use ability depending on chance to use that ability
+        //first checks if it can dash to player
+        if (playerInRange(abilities[3].abilityRange) && dashCooldownTimer <= 0){
+            dashCooldownTimer = abilities[3].abilityCooldown;
+            state = GolemState.Attacking;
+            attackManager.handleAttacks(abilities[3]);
+            //actionCooldownTimer = ability.abilityCooldown;
+        }
+
+        /*
         if(abilityCooldownTimer == 0){
             abilityCounter = 0;
             foreach (Ability ability in abilities) {
+                
                 //before checking if an ability can be cast check if the player is in ability range
                 if(playerInRange(ability.abilityRange)){
+                    
                     float randomNumber = Random.Range(0, 100);
                     if (randomNumber < ability.abilityChance) {
-                        attackManager.updateMe(Time.deltaTime);
+                        state = GolemState.Attacking;
                         attackManager.handleAttacks(ability);
                         actionCooldownTimer = ability.abilityCooldown;
                         break;
@@ -65,36 +84,6 @@ public class Golem : Enemy
                     abilityCounter++;
                 }
             }
-        }
-    }
-
-    private void useAbility(int abilityNum){
-        abilityCooldownTimer = abilities[abilityNum].abilityCooldown;
-        //first check what type of ability it is and will do stuff depending on type of ability
-        if(abilities[abilityNum].abilityType == "Movement"){
-            animator.SetBool("Dash", true);
-            dealDamage(abilities[abilityNum].abilityDamage);
-            //checkCollision(abilities[abilityNum].abilityDamage);
-            StartCoroutine(waitForAnimation("Dash"));
-        }
-        else if(abilities[abilityNum].abilityType == "Sweep"){
-            animator.SetBool("SpinAttack", true);
-            dealDamage(abilities[abilityNum].abilityDamage);
-            //checkCollision(abilities[abilityNum].abilityDamage);
-            StartCoroutine(waitForAnimation("SpinAttack"));
-        }
-        else if(abilities[abilityNum].abilityType == "Melee"){
-            animator.SetBool("Light1", true);
-            dealDamage(abilities[abilityNum].abilityDamage);
-            //checkCollision(abilities[abilityNum].abilityDamage);
-            StartCoroutine(waitForAnimation("Light1"));
-            if(Vector3.Distance(enemyBody.position, playerBody.position) < movementRange){ //if player still in range finish combo
-                animator.SetBool("Light2", true);
-                dealDamage(abilities[abilityNum].abilityDamage);
-                //checkCollision(abilities[abilityNum].abilityDamage);
-                StartCoroutine(waitForAnimation("Light2"));
-            } 
-        }
-        //have other ability types as else if statments and we can add simple code to deal damage correctly. 
+        }*/
     }
 }

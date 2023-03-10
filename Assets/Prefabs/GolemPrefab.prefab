@@ -27,14 +27,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629870976696930832}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.15891778, w: 0.9872918}
   m_LocalPosition: {x: -0.167, y: 0.259, z: 0.244}
-  m_LocalScale: {x: 0.87407225, y: 0.5, z: 0.31571412}
+  m_LocalScale: {x: 0.87407225, y: 0.18734819, z: 0.31571412}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2181674869418801407}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.288}
 --- !u!33 &7119237310232890118
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -318,12 +318,12 @@ MonoBehaviour:
   idleMovementRange: 0
   staggerLimit: 5
   abilities:
-  - abilityName: Spin
+  - abilityName: SpinAttack
     abilityType: Sweep
     abilityDamage: 4
     abilityRange: 3
     abilityCooldown: 3
-    abilityChance: 30
+    abilityChance: 99
     castTime: 1
     damageMultiplier: 1
   - abilityName: Light1
@@ -331,7 +331,7 @@ MonoBehaviour:
     abilityDamage: 5
     abilityRange: 3
     abilityCooldown: 2
-    abilityChance: 60
+    abilityChance: 5
     castTime: 1
     damageMultiplier: 1
   - abilityName: Light2
@@ -347,11 +347,11 @@ MonoBehaviour:
     abilityDamage: 4
     abilityRange: 4
     abilityCooldown: 2
-    abilityChance: 50
+    abilityChance: 1
     castTime: 1
     damageMultiplier: 1
-  basicAttackCooldownTimer: 0
   abilityCooldownTimer: 0
+  dashCooldownTimer: 0
   actionCooldownTimer: 0
   abilityCounter: 0
   longestAttackRange: 0
@@ -360,6 +360,7 @@ MonoBehaviour:
   idleMovement: {x: 0, y: 0, z: 0}
   elapsedTime: 0
   isIdle: 0
+  enemyInstance: {fileID: 2606690603601728555}
   bodyCollider: {fileID: 0}
   enemyBody: {fileID: 5875378272749639627}
   playerBody: {fileID: 0}
@@ -370,6 +371,7 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
+  state: 0
 --- !u!114 &6275697687067305316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,10 +384,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0daee3893c944a14897a141defefce06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyInstance: {fileID: 1817854267388228367}
   light1Collider: {fileID: 629870976696930832}
   light2Collider: {fileID: 6355576061597113706}
-  spinAttackCollider: {fileID: 1250803297610215111}
-  dashCollider: {fileID: 6726013549867798617}
+  spinAttackCollider: {fileID: 6726013549867798617}
+  dashCollider: {fileID: 1250803297610215111}
   light1Clip:
     animator: {fileID: 907608586443398915}
     clip: {fileID: 7400000, guid: 004ff1c6fb69e5c42b2f530b3251c82f, type: 2}

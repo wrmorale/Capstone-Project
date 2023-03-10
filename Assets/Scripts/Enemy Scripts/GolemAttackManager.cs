@@ -7,6 +7,8 @@ using Extensions;
 public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
 {
     [SerializeField]
+    private Golem enemyInstance;
+    [SerializeField]
     public GameObject light1Collider;
     [SerializeField]
     public GameObject light2Collider;
@@ -34,17 +36,41 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
     private FrameParser activeClip;
     private FrameChecker activeChecker;
 
-    private Enemy enemyInstance;
     private string currentAttack;
 
     enum ActionState {Inactionable, AttackCancelable}
     private ActionState actionState;
 
     public void onActiveFrameStart() {
-        light1Collider.SetActive(true);
+        //have if statements to see which ability to play here
+        if(currentAttack == "Light1"){
+            light1Collider.SetActive(true);
+        }
+        else if(currentAttack == "Light2"){
+            light2Collider.SetActive(true);
+        }
+        else if(currentAttack == "SpinAttack"){
+            spinAttackCollider.SetActive(true);
+        }
+        else if(currentAttack == "Dash"){
+            dashCollider.SetActive(true);
+        }
+        
     }
     public void onActiveFrameEnd() {
-        light1Collider.SetActive(false);
+        enemyInstance.state = Golem.GolemState.Idle;
+        if(currentAttack == "Light1"){
+            light1Collider.SetActive(false);
+        }
+        else if(currentAttack == "Light2"){
+            light2Collider.SetActive(false);
+        }
+        else if(currentAttack == "SpinAttack"){
+            spinAttackCollider.SetActive(false);
+        }
+        else if(currentAttack == "Dash"){
+            dashCollider.SetActive(false);
+        }
     }
     public void onAttackCancelFrameStart() {
         actionState = ActionState.AttackCancelable;
@@ -59,6 +85,9 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onLastFrameStart(){}
     public void onLastFrameEnd(){
         activeClip.animator.SetBool("Light1", false);
+        activeClip.animator.SetBool("Light2", false);
+        activeClip.animator.SetBool("SpinAttack", false);
+        activeClip.animator.SetBool("Dash", false);
     }
 
     void Awake()
@@ -79,6 +108,7 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
     public void updateMe(float time) // yes we need this
     {
         activeChecker.checkFrames();
+
         if (actionState == ActionState.Inactionable){}
         if (actionState == ActionState.AttackCancelable)
         {
@@ -90,31 +120,34 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
     {
         int frames = 0; // amount of frames in anim 
         actionState = ActionState.Inactionable;
+        enemyInstance.state = Golem.GolemState.Attacking;
+
+        currentAttack = ability.abilityName;
+        //print(currentAttack);
 
         // first attack
-        if (ability.abilityName == "Light1")
+        if (currentAttack == "Light1")
         {
             activeChecker = light1Checker;
             activeClip = light1Clip;
         }
-        else if (ability.abilityName == "Light2")
+        else if (currentAttack == "Light2")
         {
             activeChecker = light2Checker;
             activeClip = light2Clip;
         }
-        else if (ability.abilityName == "Spin")
+        else if (currentAttack == "SpinAttack")
         {
             activeChecker = spinAttackChecker;
             activeClip = spinAttackClip;
         }
-        else if (ability.abilityName == "Dash")
+        else if (currentAttack == "Dash")
         {
             activeChecker = dashChecker;
             activeClip = dashClip;
         }
-
         frames = activeClip.getTotalFrames();
-        activeClip.animator.SetBool("Attacking", true);
+        activeClip.animator.SetBool(ability.abilityName, true);
         activeClip.animator.Play(activeClip.animatorStateName, 0);
         activeChecker.initCheck();
         activeChecker.checkFrames();

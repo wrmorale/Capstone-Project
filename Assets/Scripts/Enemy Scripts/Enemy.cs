@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using States;
+using Extensions;
 
 public class Enemy : MonoBehaviour
 {
@@ -18,8 +20,9 @@ public class Enemy : MonoBehaviour
     public List<Ability> abilities; 
 
     [Header("Attacks info")]
-    public float basicAttackCooldownTimer = 0;
+    //public float basicAttackCooldownTimer = 0;
     public float abilityCooldownTimer = 0;
+    public float dashCooldownTimer = 0;
     public float actionCooldownTimer = 0;
     public int abilityCounter = 0;
     public float longestAttackRange = 0;
@@ -32,7 +35,7 @@ public class Enemy : MonoBehaviour
     public bool isIdle = false;
 
     [Header("Collider + Physics info")]
-    private Collider[] colliders;
+    public GameObject enemyInstance;
     public GameObject bodyCollider;
     public Rigidbody enemyBody;
     public Rigidbody playerBody;
@@ -51,8 +54,6 @@ public class Enemy : MonoBehaviour
     private List<DustPile> dustPiles = new List<DustPile>();
 
     void Start(){
-        colliders = GetComponentsInChildren<Collider>();
-        Debug.Log(colliders.Length);
         enemyBody = GetComponent<Rigidbody>();
         playerBody = player.GetComponent<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
@@ -117,20 +118,16 @@ public class Enemy : MonoBehaviour
     public void attack(){
         //play basic attack animation of this enemy - for now something generic for our enemy (makes enemy jump)
         //the attack animation should be checking for collisions so it should do damage that way. 
-        checkCollision(basicAttackDamage); //temp damage dealing
-    }
-
-    public void dealDamage(float damage){
-        //print("HI");
+        //checkCollision(basicAttackDamage); //temp damage dealing
     }
 
     public void checkCollision(float damage){ //for now just checks for collisions to deal damage. Will probably change once hitboxes and animations are in for enemies
         //checks to see if "attack" collides with player
-        Collider[] colliders = Physics.OverlapSphere(enemyBody.position, attackRange);
-        foreach (Collider collider in colliders) {
+        Collider[] collidersFF = Physics.OverlapSphere(enemyBody.position, attackRange);
+        foreach (Collider collider in collidersFF) {
             if (collider.tag == "Player") {
                 // apply damage to player
-                print("Collide");
+                //print("Collide");
                 Player player = collider.GetComponent<Player>();
                 player.isHit(damage);
             }
