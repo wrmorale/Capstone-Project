@@ -56,7 +56,6 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
         else if(currentAttack == "Dash"){
             dashCollider.SetActive(true);
         }
-        
     }
     public void onActiveFrameEnd() {
         enemyInstance.state = Golem.GolemState.Idle;
@@ -64,15 +63,19 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
         if(currentAttack == "Light1"){
             enemyInstance.light1Complete = true;
             light1Collider.SetActive(false);
+            activeClip.animator.SetBool("Light1", false);
         }
         else if(currentAttack == "Light2"){
             light2Collider.SetActive(false);
+            activeClip.animator.SetBool("Light2", false);
         }
         else if(currentAttack == "SpinAttack"){
             spinAttackCollider.SetActive(false);
+            activeClip.animator.SetBool("SpinAttack", false);
         }
         else if(currentAttack == "Dash"){
             dashCollider.SetActive(false);
+            activeClip.animator.SetBool("Dash", false);
         }
     }
     public void onAttackCancelFrameStart() {
