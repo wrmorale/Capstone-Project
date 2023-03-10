@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static DamageFlash;
 using States;
 using Extensions;
 
@@ -54,11 +55,17 @@ public class Enemy : MonoBehaviour
     public int maxDustPiles = 5;
     private List<DustPile> dustPiles = new List<DustPile>();
 
+    public GameObject damageFlashPrefab;
+    public DamageFlash damageFlash;
+    
+    GameObject damageFlashObject;
     void Start(){
         enemyBody = GetComponent<Rigidbody>();
         playerBody = player.GetComponent<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
         health = maxHealth;
+        damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
+        damageFlash = damageFlashObject.GetComponent<DamageFlash>();
         //this just gets longest range to see when the enemy can start to cast abilities or attacking the player
         foreach (Ability ability in abilities) {
             if(longestAttackRange < ability.abilityRange){
@@ -92,6 +99,7 @@ public class Enemy : MonoBehaviour
 
     public void isHit(float damage){
         health -= damage;
+        damageFlash.FlashStart();
         if(health <= 0){
             // Destroy the cube when it has no health left
             //this should work for death animation but not all enemies have one so it gets errors
