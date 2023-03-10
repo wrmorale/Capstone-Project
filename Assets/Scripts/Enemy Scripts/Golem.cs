@@ -30,6 +30,8 @@ public class Golem : Enemy
             attackManager.updateMe(Time.deltaTime);
         }
         else{
+            //state = GolemState.Idle;
+            isDashing = false;
             //enemyMovement();
         }
         dashCooldownTimer -= Time.deltaTime;
@@ -44,7 +46,7 @@ public class Golem : Enemy
         if (isDashing) {
             // move enemy towards player during dash animation
             directionToPlayer = playerBody.position - enemyBody.position;
-            movement = directionToPlayer.normalized * movementSpeed * Time.fixedDeltaTime;
+            movement = directionToPlayer.normalized * (movementSpeed * 5) * Time.fixedDeltaTime;
             enemyBody.MovePosition(enemyBody.position + movement);
         }
     }
