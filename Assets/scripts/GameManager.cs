@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour{
     public Text timerText;
     public bool roomCleared;
     public bool isNextToExit;
+    public bool gamePaused;
     public static int currRoom = 1;
     private int roomCount = 4;
     public int currentGold; 
@@ -65,6 +66,7 @@ public class GameManager : MonoBehaviour{
         timer = 0;
         roomCleared = false;
         isNextToExit = false;
+        gamePaused = false;
         currentGold = 0;
         numberOfDustPiles = maxDustPiles;
         float spawnAreaY = spawnArea.transform.position.y;
@@ -153,6 +155,12 @@ public class GameManager : MonoBehaviour{
         numberOfDustPiles = Mathf.Clamp(numberOfDustPiles, 0, maxDustPiles);
         cleaningPercent = dustPilesCleaned/maxDustPiles;
         cleaningbar.value = cleaningPercent;
+
+        if (gamePaused){
+            Time.timeScale = 0;
+        } else {
+            Time.timeScale = 1;
+        }
     }
 
     void HandleRoomTransition() {
