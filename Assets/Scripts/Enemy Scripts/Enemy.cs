@@ -99,7 +99,7 @@ public class Enemy : MonoBehaviour
 
     public void isHit(float damage){
         health -= damage;
-        damageFlash.FlashStart();
+        //damageFlash.FlashStart();
         if(health <= 0){
             // Destroy the cube when it has no health left
             //this should work for death animation but not all enemies have one so it gets errors

@@ -160,7 +160,7 @@ public class GameManager : MonoBehaviour{
             isNextToExit = false;
             doorPortal.SetActive(false);
             if (currRoom < roomCount) {
-                Debug.Log(currRoom);
+                //Debug.Log(currRoom);
                 currRoom++;
                 SceneManager.LoadScene("room_" + currRoom);
             } else {
