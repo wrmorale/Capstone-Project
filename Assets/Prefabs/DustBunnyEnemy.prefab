@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8327740662560138379}
   - component: {fileID: 8327740662560138383}
   - component: {fileID: 4479651422631388256}
+  - component: {fileID: 1133196839942710766}
   m_Layer: 0
   m_Name: DustBunnyEnemy
   m_TagString: Enemy
@@ -95,15 +96,19 @@ MonoBehaviour:
     abilityChance: 80
     castTime: 0
     damageMultiplier: 0
-  basicAttackCooldownTimer: 0
   abilityCooldownTimer: 0
+  dashCooldownTimer: 0
   actionCooldownTimer: 0
   abilityCounter: 0
   longestAttackRange: 0
+  isAttacking: 0
   movement: {x: 0, y: 0, z: 0}
   idleMovement: {x: 0, y: 0, z: 0}
+  rotationSpeed: 0
   elapsedTime: 0
   isIdle: 0
+  enemyInstance: {fileID: 8327740662560138380}
+  bodyCollider: {fileID: 8327740662560138380}
   enemyBody: {fileID: 8327740662560138379}
   playerBody: {fileID: 0}
   player: {fileID: 0}
@@ -113,6 +118,20 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
+  damageFlashPrefab: {fileID: 49747922834135741}
+  damageFlash: {fileID: 1133196839942710766}
+--- !u!114 &1133196839942710766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327740662560138380}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &809767176353720537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,6 +201,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09869c1c6b7961642894c6beecf7b8e3, type: 3}
+--- !u!1 &49747922834135741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 09869c1c6b7961642894c6beecf7b8e3,
+    type: 3}
+  m_PrefabInstance: {fileID: 809767176353720537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &575817697004656008 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 09869c1c6b7961642894c6beecf7b8e3,
