@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 using HudElements;
 
 
@@ -47,6 +48,9 @@ public class GameManager : MonoBehaviour{
 
     private bool objectsInstantiated = false;
 
+    [SerializeField] private PlayerInput playerInput;
+    private InputAction pauseAction;
+
     //UI stuff
     public UIDocument hud;
     private CleaningBar cleaningbar;
@@ -63,6 +67,9 @@ public class GameManager : MonoBehaviour{
     }
 
     void Start() {
+        // Adds the pause button to the script
+        pauseAction = playerInput.actions["Pause"];
+
         timer = 0;
         roomCleared = false;
         isNextToExit = false;
@@ -156,10 +163,15 @@ public class GameManager : MonoBehaviour{
         cleaningPercent = dustPilesCleaned/maxDustPiles;
         cleaningbar.value = cleaningPercent;
 
-        if (gamePaused){
-            Time.timeScale = 0;
-        } else {
-            Time.timeScale = 1;
+        // Checks if player paused the game, if so stops time 
+        if (pauseAction.triggered){
+            if (gamePaused) {
+                gamePaused = false;
+                Time.timeScale = 1;
+            } else {
+                gamePaused = true;
+                Time.timeScale = 0;
+            }
         }
     }
 
