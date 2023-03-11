@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     [Header("stats")]
     [SerializeField]public string enemyName;
-    [SerializeField]public double maxHealth;
-    [SerializeField]public double health;
+    [SerializeField]public float maxHealth;
+    [SerializeField]public float health;
     [SerializeField]public float basicAttackDamage;
     [SerializeField]public float basicAttackSpeed;
     [SerializeField]public float attackRange;
@@ -33,13 +33,15 @@ public class Enemy : MonoBehaviour
     public int maxDustPiles = 5;
     private List<DustPile> dustPiles = new List<DustPile>();
 
-    public EnemyHealthBar enemyHealthBar;
+    private EnemyHealthBar enemyHealthBar;
 
-
+    private float healthPercent = 1;
     
     void Start(){
+
         health = maxHealth;
-        enemyHealthBar.SetMaxHealth((float)health);
+        enemyHealthBar = GetComponentInChildren<EnemyHealthBar>();
+        enemyHealthBar.SetMaxHealth(healthPercent);
     }
 
     void Update(){
@@ -69,7 +71,9 @@ public class Enemy : MonoBehaviour
     public void isHit(float damage){
         print("EnemyTookDamage");
         health -= damage;
-        enemyHealthBar.SetHealth((float)health);
+        health = Mathf.Clamp(health, 0, maxHealth);
+        healthPercent = health / maxHealth;
+        enemyHealthBar.SetHealth(healthPercent);
         if(health <= 0){
             // Destroy the cube when it has no health left
             Destroy(gameObject);
