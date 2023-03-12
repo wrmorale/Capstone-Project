@@ -4800,6 +4800,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 934100d95ea2bc940ab103c688380ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &795224110 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7428022771512999010, guid: 780a7481df1a48d4792aed7fd543ee02,
+    type: 3}
+  m_PrefabInstance: {fileID: 7428022770999317583}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 795224103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &802068098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8002,7 +8014,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.24820505, y: -0.0024147206, z: 0.0006187087, w: 0.96870434}
+  m_LocalRotation: {x: 0.24820505, y: -0.0024146931, z: 0.0006187018, w: 0.96870434}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13831,7 +13843,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29896
+  m_Name: pb_Mesh29828
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16926,6 +16938,7 @@ MonoBehaviour:
   timerText: {fileID: 0}
   roomCleared: 0
   isNextToExit: 0
+  gamePaused: 0
   currentGold: 0
   availableAbilities: []
   numberOfEnemies: 2
@@ -16936,6 +16949,7 @@ MonoBehaviour:
   spawnArea: {fileID: 501613309}
   dustPilePrefab: {fileID: 919132148348794008}
   playerStats: {fileID: 795224107}
+  playerInput: {fileID: 795224110}
   hud: {fileID: 1639332890}
   cleaningPercent: 0
 --- !u!4 &1928179609
