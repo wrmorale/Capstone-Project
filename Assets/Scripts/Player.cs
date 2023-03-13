@@ -15,9 +15,10 @@ public class Player : MonoBehaviour
     [SerializeField]public float basicDamage;
     [SerializeField]public float attackSpeed;
     [SerializeField]public float cooldownReduction;
+    [SerializeField]public float health;
     public bool alive;
     public int lives;
-    [SerializeField]public float health;
+    
     public List<Ability> abilities; 
     public Transform platform;
     public float fallLimit = -10; 
