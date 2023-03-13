@@ -58,6 +58,13 @@ public class GameManager : MonoBehaviour{
 
     //setup singleton
     private void Awake() {
+
+        if(instance != null){
+            Destroy(this.gameObject);
+            return;
+        }
+
+
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
