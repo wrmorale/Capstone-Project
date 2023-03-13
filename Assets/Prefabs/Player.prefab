@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
+  enemy: {fileID: 0}
 --- !u!1 &7428022770733803843
 GameObject:
   m_ObjectHideFlags: 0
@@ -224,6 +225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
+  enemy: {fileID: 0}
 --- !u!1 &7428022771009043263
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pc: {fileID: 7428022771512999011}
   player: {fileID: 7428022771512999012}
+  enemy: {fileID: 0}
 --- !u!1 &7428022771512999016
 GameObject:
   m_ObjectHideFlags: 0
