@@ -486,7 +486,7 @@ MonoBehaviour:
   enemyName: Moth
   maxHealth: 8
   health: 8
-  basicAttackDamage: 3
+  basicAttackDamage: 1
   basicAttackSpeed: 0.8
   attackRange: 6
   movementSpeed: 0.5

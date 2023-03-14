@@ -375,7 +375,7 @@ MonoBehaviour:
   enemyName: Dust Bunny
   maxHealth: 10
   health: 2
-  basicAttackDamage: 2
+  basicAttackDamage: 1
   basicAttackSpeed: 0.4
   attackRange: 3
   movementSpeed: 0.4
@@ -413,8 +413,6 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
-  damageFlashPrefab: {fileID: 49747922834135741}
-  damageFlash: {fileID: 1133196839942710766}
 --- !u!114 &1133196839942710766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,12 +494,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09869c1c6b7961642894c6beecf7b8e3, type: 3}
---- !u!1 &49747922834135741 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8391222552659086748, guid: 09869c1c6b7961642894c6beecf7b8e3,
-    type: 3}
-  m_PrefabInstance: {fileID: 809767176353720537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &575817697004656008 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 09869c1c6b7961642894c6beecf7b8e3,

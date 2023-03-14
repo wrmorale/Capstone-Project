@@ -403,7 +403,7 @@ MonoBehaviour:
   enemyName: Golem
   maxHealth: 18
   health: 2
-  basicAttackDamage: 2
+  basicAttackDamage: 3
   basicAttackSpeed: 0.2
   attackRange: 3
   movementSpeed: 0.3
@@ -465,8 +465,6 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
-  damageFlashPrefab: {fileID: 8853600409899599856}
-  damageFlash: {fileID: 2700265989810680977}
   isDashing: 0
   light1Complete: 0
   state: 0
@@ -1137,9 +1135,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!1 &8853600409899599856 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -3833873437300309891, guid: 79aa66d911f0d724dac97bc2fc806eef,
-    type: 3}
-  m_PrefabInstance: {fileID: 3464700510554638221}
-  m_PrefabAsset: {fileID: 0}
