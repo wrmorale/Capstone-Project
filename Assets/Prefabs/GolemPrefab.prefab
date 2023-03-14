@@ -359,7 +359,7 @@ MonoBehaviour:
   isAttacking: 0
   movement: {x: 0, y: 0, z: 0}
   idleMovement: {x: 0, y: 0, z: 0}
-  rotationSpeed: 3
+  rotationSpeed: 1
   elapsedTime: 0
   isIdle: 0
   enemyInstance: {fileID: 2606690603601728555}
