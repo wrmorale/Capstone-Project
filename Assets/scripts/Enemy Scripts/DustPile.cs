@@ -11,22 +11,25 @@ public class DustPile : MonoBehaviour{
     public float maxScale;
     private MeshRenderer meshRenderer;
 
-    public float healingSpeed = 0.1f;
+    public float healingSpeed = 0.2f;
+    private float healingTimer = 2f;
+    private float healingCountdown;
 
     void Start(){
-       health = maxHealth;
-       maxScale = 1;
+       health = maxHealth / 2;
+       maxScale = 2;
        meshRenderer = GetComponent<MeshRenderer>();
+       healingCountdown = healingTimer;
     }
 
     private void Update() {
         // Check if there are any nearby enemies
-        if (IsEnemyNearby()) {
+        healingCountdown -= Time.deltaTime;
+        if (IsEnemyNearby() || healingCountdown <= 0) {
+            healingCountdown = healingTimer;
             // Slowly increase health if not at max health
             if (health < maxHealth) {
-                health += healingSpeed * Time.deltaTime;
-                health = Mathf.Clamp(health, 0.0f, maxHealth);
-                UpdateVisuals();
+                IncreaseHealth(healingSpeed);
             }
         }
     }
@@ -36,6 +39,7 @@ public class DustPile : MonoBehaviour{
         health -= damage;
         if (health <= 0) {
             // Destroy the cube when it has no health left
+            
             Destroy(gameObject);
         } else {
             // Decrease scale and opacity
@@ -58,7 +62,8 @@ public class DustPile : MonoBehaviour{
 
     private void UpdateVisuals() {
         // Update the scale and opacity based on health
-        float scale = health / maxHealth;
+        float scale = health / maxHealth * maxScale;
+        scale = Mathf.Clamp(scale, 0.5f, maxScale);
         transform.localScale = new Vector3(scale, scale, scale);
         Color color = GetComponent<Renderer>().material.color;
         color.a = scale;

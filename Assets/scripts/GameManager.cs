@@ -55,6 +55,12 @@ public class GameManager : MonoBehaviour{
     public float cleaningPercent = 0;
 
     private float dustPilesCleaned;
+    private float dirtyingRate = 0.3f; // rate at which the room gets dirty
+    private float dustMaxHealth;
+    private float pooledHealth;
+    private float totalHealth;
+
+    private float fogDensity;
 
     //setup singleton
     private void Awake() {
@@ -63,7 +69,6 @@ public class GameManager : MonoBehaviour{
             Destroy(this.gameObject);
             return;
         }
-
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
@@ -103,6 +108,8 @@ public class GameManager : MonoBehaviour{
                 } while (Vector3.Distance(playerPos, position) < 3);
                 GameObject enemy = Instantiate(enemyPrefab, position, Quaternion.identity);
             }
+            
+            dustMaxHealth = dustPilePrefab.GetComponent<DustPile>().maxHealth;
 
             // Disable original objects
             enemyPrefab.SetActive(false);
@@ -115,7 +122,15 @@ public class GameManager : MonoBehaviour{
         // UI set up
         var root = hud.rootVisualElement;
         cleaningbar = root.Q<CleaningBar>();
-        cleaningbar.value = 0;
+        totalHealth = maxDustPiles * dustPilePrefab.GetComponent<DustPile>().maxHealth;
+        cleaningbar.value = totalHealth * 0.5f / totalHealth;
+
+        // fog
+        RenderSettings.fog = true;
+        fogDensity = cleaningbar.value;
+
+        // Start executing function after 2.0f, and re-execute every 2.0f
+        InvokeRepeating("DecreaseCleanliness", 2.0f, 2.0f);
 
     }
 
@@ -136,12 +151,13 @@ public class GameManager : MonoBehaviour{
                 Array.Clear(enemies, i, 1);
             }
         }
-        if(!playerStats.alive && playerStats.lives ==1){
+        if (!playerStats.alive && playerStats.lives == 1 ||
+        cleaningbar.value == 0){
             playerStats.lives--;
             //Debug.Log("You're Dead, Loser");
             //here we could insert a scene jump to a losing scene
         }
-        if(enemies.Length == 0 && dustPiles.Length == 0 && !roomCleared){
+        if (enemies.Length == 0 && dustPiles.Length == 0 && !roomCleared){
             roomCleared = true;
             doorPortal.SetActive(true);
             //Room clear condition successfully logged
@@ -157,11 +173,18 @@ public class GameManager : MonoBehaviour{
         }
         numberOfEnemies = enemies.Length;
         numberOfDustPiles = dustPiles.Length;
-        dustPilesCleaned = maxDustPiles - numberOfDustPiles;
 
-        numberOfDustPiles = Mathf.Clamp(numberOfDustPiles, 0, maxDustPiles);
-        cleaningPercent = dustPilesCleaned/maxDustPiles;
-        cleaningbar.value = cleaningPercent;
+        if (numberOfDustPiles == 0) {
+            cleaningbar.value = 1;
+        }
+        var newPooledHealth = PoolDustHealth(dustPiles);
+        if (newPooledHealth < pooledHealth) {
+            cleaningbar.value += (pooledHealth - newPooledHealth) / totalHealth;
+        }
+        pooledHealth = newPooledHealth; // get the current health pool of dustpiles.
+
+        // Adjust Fog based on dustpile health values.
+        RenderSettings.fogDensity = pooledHealth / (maxDustPiles * dustMaxHealth) * 0.2f;
 
         if (gamePaused){
             Time.timeScale = 0;
@@ -182,6 +205,18 @@ public class GameManager : MonoBehaviour{
                 // show end credits, player went through all rooms.
             }
         }
+    }
+
+    private float PoolDustHealth(DustPile[] dustPiles) {
+        float pooledHealth = 0f;
+        foreach (DustPile dustPile in dustPiles) {
+            pooledHealth += dustPile.GetComponent<DustPile>().health;
+        }
+        return pooledHealth;
+    }
+
+    private void DecreaseCleanliness() {
+        cleaningbar.value -= dirtyingRate * numberOfDustPiles / totalHealth;
     }
 
 }
