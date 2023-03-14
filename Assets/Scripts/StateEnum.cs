@@ -11,12 +11,19 @@ namespace States
         Running,
         Jumping,
         Falling,
-        Rolling,
+        Ability,
         Attacking,
         Blocking,
         AirAttacking,
         AirBlocking,
         Talking,
         Unknown,
+    }
+
+    public enum ActionState
+    {
+        Inactionable,
+        AttackCancelable,
+        AllCancelable,
     }
 }

@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Speacial ",
+                    "name": "Special ",
                     "type": "Button",
                     "id": "03f8e1f9-f4f4-432f-8975-1305a2415f8a",
                     "expectedControlType": "Button",
@@ -99,6 +99,24 @@
                     "name": "Roll",
                     "type": "Button",
                     "id": "23297020-3c1f-4fc6-bf59-a5dfa68e8050",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LockOn",
+                    "type": "Button",
+                    "id": "3b0a1a33-1448-475d-a351-0dd470b5d768",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "6c08809c-4a07-40dc-ade8-e2506f072630",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -223,7 +241,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Speacial ",
+                    "action": "Special ",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -323,6 +341,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Roll",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0b5f2546-fd1c-426a-b06d-19c0cb026430",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84cba658-9427-43a0-8c7d-b9f2160ca0cb",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "99f73e81-73a5-4d00-a051-bbfd1029f3f1",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

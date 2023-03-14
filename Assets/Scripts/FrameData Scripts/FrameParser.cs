@@ -12,6 +12,7 @@ public class FrameParser
     public string animatorStateName;
     public int layerNumber;
 
+    private string name;
     private int _totalFrames = 0;
     private int _animationFullNameHash;
 
@@ -21,7 +22,7 @@ public class FrameParser
 
         if (animator.isActiveAndEnabled) 
         {
-            string name = animator.GetLayerName(layerNumber) + "." + animatorStateName;
+            name = animator.GetLayerName(layerNumber) + "." + animatorStateName;
 
             _animationFullNameHash = Animator.StringToHash(name);
         }
@@ -52,5 +53,10 @@ public class FrameParser
     public int getTotalFrames()
     {
         return _totalFrames;
+    }
+
+    public void play() 
+    {
+        animator.Play(name, 0);
     }
 }

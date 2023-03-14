@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class enemyAttacks : MonoBehaviour
 {
     public Enemy enemyInstance;
@@ -108,3 +108,4 @@ public class enemyAttacks : MonoBehaviour
         }
     }
 }
+*/

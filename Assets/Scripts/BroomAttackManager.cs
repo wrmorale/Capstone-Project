@@ -28,6 +28,10 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     private FrameParser activeClip;
     private FrameChecker activeChecker;
 
+    private GameObject broom;
+    private GameObject pan;
+    private Animator broomAnimator;
+
     private playerController player;
     private Vector2 input = Vector2.zero;
 
@@ -38,7 +42,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     /* Attack frame data management */
     public void onActiveFrameStart() {
         // call hitbox detection
-        //Debug.Log("onActiveFrameStart");
         if (combo == 1){
             attack1_collider.SetActive(true);
         }
@@ -50,7 +53,6 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         }
     }
     public void onActiveFrameEnd() {
-        //Debug.Log("onActiveFrameEnd");
         if (combo == 1){
             attack1_collider.SetActive(false);
         }
@@ -82,19 +84,22 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onAllCancelFrameEnd() {
         if (actionState == ActionState.AllCancelable) actionState = ActionState.Inactionable;
     }
-    public void onLastFrameStart(){
-        //Debug.Log("onLastFrameStart");        
+    public void onLastFrameStart(){     
     }
     public void onLastFrameEnd(){
-        //Debug.Log("onLastFrameEnd");
         activeClip.animator.SetBool("Attacking", false);
         player.SetState(States.PlayerStates.Idle);
+        broom.SetActive(false);
+        pan.SetActive(false);
         combo = 0;
     }
 
     void Awake()
     {
         player = gameObject.GetComponent<playerController>();
+        broom = transform.Find("maid68/metarig/hip/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/broom1").gameObject;
+        broomAnimator = broom.GetComponent<Animator>();
+        pan = transform.Find("maid68/metarig/hip/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/pan").gameObject;
 
         light1Clip.initialize();
         light1Checker.initialize(this, light1Clip);
@@ -111,10 +116,10 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     // This custom update function can be called every frame from the Update() in playerController.cs to reduce overhead.
     // Only call if the player's state is Attacking.
 
-    public void updateMe() // yes we need this
+    public void updateMe(float time) // yes we need this
     {
         activeChecker.checkFrames();
-        player.MoveRoot();
+        
         if (actionState == ActionState.Inactionable)
         {  
         }
@@ -142,12 +147,28 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
                 combo = 0;
                 activeClip.animator.SetBool("Attacking", false);
                 player.Jump();
+                broom.SetActive(false);
+                pan.SetActive(false);
+            }
+            if (player.channeledAbility >= 0)
+            {
+                actionState = ActionState.Inactionable;
+                combo = 0;
+                activeClip.animator.SetBool("Attacking", false);
+                player.ActivateAbility();
+                player.ResetRoot();
+                broom.SetActive(false);
+                pan.SetActive(false);
             }
         }
+        if (player.state == States.PlayerStates.Attacking) { player.MoveRoot(); }
     }
 
     public void handleAttacks()
     {
+        broom.SetActive(true);
+        pan.SetActive(true);
+        
         int frames = 0; // amount of frames in anim 
         actionState = ActionState.Inactionable;
 
@@ -164,6 +185,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         }
         else if (combo == 2)
         {
+            broomAnimator.Play("light_3", 0);
             activeChecker = light3Checker;
             activeClip = light3Clip;
         }
@@ -174,7 +196,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
 
         frames = activeClip.getTotalFrames();
         activeClip.animator.SetBool("Attacking", true);
-        activeClip.animator.Play(activeClip.animatorStateName, 0);
+        activeClip.play();
         activeChecker.initCheck();
         activeChecker.checkFrames();
     }
