@@ -2,6 +2,5 @@
     <ui:VisualElement name="screen" style="flex-grow: 1;">
         <HudElements.HealthBar width="300" style="position: absolute; left: 5%; top: 5%;" />
         <HudElements.CleaningBar width="300" value="-0.5" style="position: absolute; top: 17%; left: 5%;" />
-        <HudElements.PhoneBar width="800" height="100" style="position: absolute; bottom: 0; right: 30%; left: auto; justify-content: center; align-items: center; flex-grow: 1;" />
     </ui:VisualElement>
 </ui:UXML>

@@ -96,7 +96,8 @@ public class enemyAttacks : MonoBehaviour
         //have other ability types as else if statments and we can add simple code to deal damage correctly. 
     }
 
-    private void checkCollision(float damage){ //for now just checks for collisions to deal damage. Will probably change once hitboxes and animations are in for enemies
+    private void checkCollision(float damage){ 
+        //for now just checks for collisions to deal damage. Will probably change once hitboxes and animations are in for enemies
         //checks to see if "attack" collides with player
         Collider[] colliders = Physics.OverlapSphere(enemyInstance.body.position, enemyInstance.attackRange);
         foreach (Collider collider in colliders) {
