@@ -33,7 +33,6 @@ public class TargetLock : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction lockonAction;
     private InputAction cameraAction;
-    private int channeledAbility;
     
     private float maxAngle;
     private Transform currentTarget;
@@ -121,10 +120,8 @@ public class TargetLock : MonoBehaviour
             AssignTarget(); 
             return;
         }
-        //Debug.Log(player.ParseAbilityInput());
-        channeledAbility = player.ParseAbilityInput();
-        if (player.attackAction.triggered ||
-            channeledAbility != -1)
+
+        if (player.attackAction.triggered)
         {
             // turn player towards enemy when they attack.
             controller.transform.LookAt(currentTarget); 

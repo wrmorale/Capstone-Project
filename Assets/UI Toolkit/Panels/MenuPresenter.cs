@@ -9,7 +9,6 @@ public class MenuPresenter : MonoBehaviour
     private void Awake() {
         VisualElement root = GetComponent<UIDocument>().rootVisualElement;
         root.Q<Button>("Start").clicked += () => SceneManager.LoadScene("SampleScene");
-        root.Q<Button>("ControlButton").clicked += () => SceneManager.LoadScene("Controls_Scene");
         // root.Q<Button>("Start").clicked += () => Debug.Log("test");
     }
 }
