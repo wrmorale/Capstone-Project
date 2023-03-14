@@ -105,7 +105,7 @@ public class Moth : Enemy
         //first check what type of ability it is and will do stuff depending on type of ability
         if(abilities[abilityNum].abilityType == "Ranged"){
             animator.SetBool("RangedAbility", true);
-            checkCollision(abilities[abilityNum].abilityDamage);
+            //checkCollision(abilities[abilityNum].abilityDamage);
             StartCoroutine(waitForAnimation("RangedAbility"));
         }
         //have other ability types as else if statments and we can add simple code to deal damage correctly. 
