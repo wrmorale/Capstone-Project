@@ -14,9 +14,9 @@ public class DamageFlash : MonoBehaviour{
     }
 
     void Update(){
-        if(Input.GetKeyDown(KeyCode.Space)){
+        /*if(Input.GetKeyDown(KeyCode.Space)){
             FlashStart();
-        }
+        }*/
     }
 
     public void FlashStart(){
