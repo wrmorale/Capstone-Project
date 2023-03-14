@@ -1,10 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="title" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/mainmenu.png?fileID=2800000&amp;guid=4a9dc963d2b8e44c8a1ab6311faba814&amp;type=3#mainmenu&apos;); width: auto; height: 1080px;">
-        <ui:VisualElement name="StartSign" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/simplestart.png?fileID=2800000&amp;guid=d958423cd0d5443b3b79dae14f399d31&amp;type=3#simplestart&apos;); width: 252px; height: 89px; position: absolute; top: 400px; left: 1350px;">
+        <ui:VisualElement name="StartSign" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/start.png?fileID=2800000&amp;guid=4a72c55022a0040b48e618db04732d49&amp;type=3#start&apos;); width: 379px; height: 529px; position: absolute; top: 45%; left: 65%;">
             <ui:Button text="Button" display-tooltip-when-elided="true" name="Start" style="display: flex; visibility: visible; opacity: 0; width: 100%; height: 100%;" />
-        </ui:VisualElement>
-        <ui:VisualElement name="Controls" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/controls.png?fileID=2800000&amp;guid=65f6a6249572149ae8f3819adc774e8f&amp;type=3#controls&apos;); width: 196px; height: 89px; position: absolute; top: 600px; left: 1380px;">
-            <ui:Button display-tooltip-when-elided="true" name="ControlButton" style="background-color: rgba(56, 56, 56, 0.02); background-image: none; border-left-color: rgb(56, 56, 56); border-right-color: rgb(56, 56, 56); border-top-color: rgb(56, 56, 56); border-bottom-color: rgb(56, 56, 56); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; height: 86px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
