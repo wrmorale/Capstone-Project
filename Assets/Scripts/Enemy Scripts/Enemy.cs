@@ -56,7 +56,7 @@ public class Enemy : MonoBehaviour
     private List<DustPile> dustPiles = new List<DustPile>();
 
     public GameObject damageFlashPrefab;
-    public DamageFlash damageFlash;
+    //public DamageFlash damageFlash;
     
     GameObject damageFlashObject;
     void Start(){
@@ -64,8 +64,8 @@ public class Enemy : MonoBehaviour
         playerBody = player.GetComponent<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
         health = maxHealth;
-        damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
-        damageFlash = damageFlashObject.GetComponent<DamageFlash>();
+        //damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
+        //damageFlash = damageFlashObject.GetComponent<DamageFlash>();
         //this just gets longest range to see when the enemy can start to cast abilities or attacking the player
         foreach (Ability ability in abilities) {
             if(longestAttackRange < ability.abilityRange){

@@ -25,6 +25,7 @@ public class Golem : Enemy
     }
 
     void Update() {
+        //enemyBody.transform.rotationX
         if (movement != Vector3.zero) {
             enemyBody.rotation = Quaternion.LookRotation(movement);
         }
