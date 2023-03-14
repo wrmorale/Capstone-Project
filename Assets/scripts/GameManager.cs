@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour{
             dustMaxHealth = dustPilePrefab.GetComponent<DustPile>().maxHealth;
 
             // Disable original objects
-            enemyPrefab.SetActive(false);
+            //enemyPrefab.SetActive(false);
             dustPilePrefab.SetActive(false);
 
             objectsInstantiated = true;
