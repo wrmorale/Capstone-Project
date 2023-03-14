@@ -16,6 +16,8 @@ public class Moth : Enemy
     [SerializeField] private float projectileDamage;
     public Transform bulletSpawn;
 
+    private bool shouldRotateTowardsPlayer = true;
+
     void FixedUpdate()
     {
         enemyMovement();
@@ -36,16 +38,20 @@ public class Moth : Enemy
                     movement = (enemyBody.position - playerBody.position).normalized * movementSpeed;
                     enemyBody.MovePosition(enemyBody.position + (movement * Time.fixedDeltaTime));
                     fleeRemaining -= Time.fixedDeltaTime;
+                    shouldRotateTowardsPlayer = false;
+                    enemyBody.rotation = Quaternion.LookRotation(movement);
                 }
                 else {
                     fleeRemaining = fleeDuration;
                     animator.SetBool("Moving", false);
                     cooldownRemaining = cooldownTime;
+                    shouldRotateTowardsPlayer = true;
                 }
             }
             else {
                 animator.SetBool("Moving", false);
                 cooldownRemaining -= Time.fixedDeltaTime;
+                shouldRotateTowardsPlayer = true;
             }
         }
         else {
@@ -58,20 +64,23 @@ public class Moth : Enemy
                     idleMovement = enemyBody.position + new Vector3(Random.Range(-idleMovementRange, idleMovementRange), 0, Random.Range(-idleMovementRange, idleMovementRange));
                     movement = (idleMovement - enemyBody.position).normalized * movementSpeed;
                     animator.SetBool("Moving", true);
+                    shouldRotateTowardsPlayer = false;
+                    enemyBody.rotation = Quaternion.LookRotation(movement);
                 } 
                 else {
                     movement = Vector3.zero;
                     animator.SetBool("Moving", false);
+                    shouldRotateTowardsPlayer = true;
                 }
             }
             enemyBody.MovePosition(enemyBody.position + (movement * Time.fixedDeltaTime));
         }
-        if (movement != Vector3.zero) {
-            enemyBody.rotation = Quaternion.LookRotation(movement);
-        } else {
+
+        if (shouldRotateTowardsPlayer) {
             enemyBody.transform.LookAt(playerBody.transform);
         }
     }
+
 
     public void enemyAttack(){
         //if able to attack, the enemy does so
@@ -105,7 +114,7 @@ public class Moth : Enemy
         //first check what type of ability it is and will do stuff depending on type of ability
         if(abilities[0].abilityType == "Ranged"){
             animator.SetBool("RangedAbility", true);
-            LaunchProjectile();
+            StartCoroutine(LaunchProjectile());
             StartCoroutine(waitForAnimation("RangedAbility"));
         }
     }
@@ -117,8 +126,9 @@ public class Moth : Enemy
         clone.Initialize(projectileSpeed, projectileLifetime, projectileDamage, 1f, heading);
     }
 
-    public void LaunchProjectile()
+    public IEnumerator LaunchProjectile()
     {
+        yield return new WaitForSeconds(1.8f);
         Vector3 direction = (playerBody.position - transform.position).normalized;
         SpawnProjectile(direction);
     }
