@@ -42,12 +42,12 @@ namespace PopupTest
             horizontalContainerButton.AddToClassList(ussHorContainer);
             window.Add(horizontalContainerButton);
 
-            Button confirmButton = new Button() { text = "CONFIRM"};
+            Button confirmButton = new Button() { text = "Resume"};
             confirmButton.AddToClassList(ussPopupButton);
             confirmButton.AddToClassList(ussConfirm);
             horizontalContainerButton.Add(confirmButton);
             
-            Button cancelButton = new Button() { text = "CANCEL"};
+            Button cancelButton = new Button() { text = " Quit "};
             cancelButton.AddToClassList(ussPopupButton);
             cancelButton.AddToClassList(ussCancel);
             horizontalContainerButton.Add(cancelButton);

@@ -23,12 +23,15 @@ namespace PopupTest
             PopupWindow popup = new PopupWindow();
             root.Add(popup);
 
-            popup.confirmed += () => Debug.Log("Confirmed");
-
-            popup.cancelled += () => Debug.Log("Cancelled");
+            popup.cancelled += () => Debug.Log("Quit");
             popup.cancelled += () => Time.timeScale = 1;
             popup.cancelled += () => root.Remove(popup);
-            popup.cancelled += () => pauseUI.SetActive(false);
+            popup.cancelled += () => SceneManager.LoadScene("Title_Scene");
+
+            popup.confirmed += () => Debug.Log("Resume");
+            popup.confirmed += () => Time.timeScale = 1;
+            popup.confirmed += () => root.Remove(popup);
+            popup.confirmed += () => pauseUI.SetActive(false);
         }
 
         // UIDocument ui = GetComponent<UIDocument>();
