@@ -9,8 +9,8 @@ public class Enemy : MonoBehaviour
 {
     [Header("Stats")]
     [SerializeField]public string enemyName;
-    [SerializeField]public double maxHealth;
-    [SerializeField]public double health;
+    [SerializeField]public float maxHealth;
+    [SerializeField]public float health;
     [SerializeField]public float basicAttackDamage;
     [SerializeField]public float basicAttackSpeed;
     [SerializeField]public float attackRange;
@@ -56,13 +56,18 @@ public class Enemy : MonoBehaviour
     private List<DustPile> dustPiles = new List<DustPile>();
 
     public GameObject damageFlashPrefab;
-    //public DamageFlash damageFlash;
+    public DamageFlash damageFlash;
+
+    private EnemyHealthBar enemyHealthBar;
+    private float HealthPercent = 1;
     
     GameObject damageFlashObject;
     void Start(){
         enemyBody = GetComponent<Rigidbody>();
         playerBody = player.GetComponent<Rigidbody>();
         animator = gameObject.GetComponentInChildren<Animator>();
+        enemyHealthBar  = GetComponentInChildren<EnemyHealthBar>();
+        enemyHealthBar.setMaxHealth(HealthPercent);
         health = maxHealth;
         //damageFlashObject = Instantiate(damageFlashPrefab, transform.position, Quaternion.identity);
         //damageFlash = damageFlashObject.GetComponent<DamageFlash>();
@@ -100,6 +105,9 @@ public class Enemy : MonoBehaviour
     public void isHit(float damage){
         health -= damage;
         //damageFlash.FlashStart();
+        health = Mathf.Clamp(health, 0, maxHealth);
+        HealthPercent = health / maxHealth;
+        enemyHealthBar.setHealth(HealthPercent);
         if(health <= 0){
             // Destroy the cube when it has no health left
             //this should work for death animation but not all enemies have one so it gets errors
