@@ -294,8 +294,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2213948, y: 0.52469003, z: 0.12275849}
-  m_Center: {x: -0.0029331446, y: 0.25768352, z: 0.00006323308}
+  m_Size: {x: 0.21495973, y: 0.52636653, z: 0.12275849}
+  m_Center: {x: 0.0016490296, y: 0.26066664, z: 0.00006323308}
 --- !u!114 &1817854267388228367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ MonoBehaviour:
   isAttacking: 0
   movement: {x: 0, y: 0, z: 0}
   idleMovement: {x: 0, y: 0, z: 0}
-  rotationSpeed: 80
+  rotationSpeed: 3
   elapsedTime: 0
   isIdle: 0
   enemyInstance: {fileID: 2606690603601728555}

@@ -93,7 +93,7 @@ MonoBehaviour:
     abilityDamage: 4
     abilityRange: 4
     abilityCooldown: 4
-    abilityChance: 80
+    abilityChance: 99
     castTime: 0
     damageMultiplier: 0
   abilityCooldownTimer: 0
