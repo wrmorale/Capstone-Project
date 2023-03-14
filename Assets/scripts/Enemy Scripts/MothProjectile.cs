@@ -2,31 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MothProjectile : MonoBehaviour
+public class MothProjectile : Projectile
 {
-    public Rigidbody rb;
-    public float speed = 10f;
-    public float lifetime = 5f;
-
-    private void Start()
+    protected override void Update()
     {
-        // Destroy the projectile after its lifetime has expired
-        Destroy(gameObject, lifetime);
-    }
-
-    public void Launch(Vector3 direction)
-    {
-        // Add force to the rigidbody to launch the projectile
-        rb.AddForce(direction * speed, ForceMode.Impulse);
+        base.Update();
+        transform.position += heading * speed * Time.deltaTime;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        // Check if the other object is the player
-        if (other.CompareTag("Player"))
+        if (other.tag == "Player") 
         {
-            // Destroy the projectile when it hits the player
+            Debug.Log("projectile hit");
+            Player player = other.GetComponent<Player>();
+            player.isHit(damage);
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("projectile destroyed");
     }
 }

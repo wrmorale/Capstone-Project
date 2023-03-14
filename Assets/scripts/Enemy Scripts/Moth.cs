@@ -9,8 +9,13 @@ public class Moth : Enemy
     public float fleeDuration = 1f;
     public float fleeRemaining = 0f;
 
-    public GameObject projectilePrefab;
-    
+    [Header("Projectile Stats")]
+    public Projectile projectilePrefab;
+    [SerializeField] private float projectileSpeed;
+    [SerializeField] private float projectileLifetime;
+    [SerializeField] private float projectileDamage;
+    public Transform bulletSpawn;
+
     void FixedUpdate()
     {
         enemyMovement();
@@ -84,37 +89,37 @@ public class Moth : Enemy
     public void enemyAction(){
         //if off ability cooldown can use ability depending on chance to use that ability
         if(abilityCooldownTimer == 0){
-            abilityCounter = 0;
-            foreach (Ability ability in abilities) {
-                //before checking if an ability can be cast check if the player is in ability range
-                if(Vector2.Distance(enemyBody.position, playerBody.position) < ability.abilityRange){
-                    float randomNumber = Random.Range(0, 100);
-                    if (randomNumber < ability.abilityChance) {
-                        useAbility(abilityCounter);
-                        actionCooldownTimer = ability.abilityCooldown;
-                        break;
-                    }
-                    abilityCounter++;
+            //before checking if an ability can be cast check if the player is in ability range
+            if(Vector2.Distance(enemyBody.position, playerBody.position) < abilities[0].abilityRange){
+                float randomNumber = Random.Range(0, 100);
+                if (randomNumber < abilities[0].abilityChance) {
+                    useAbility();
+                    actionCooldownTimer = abilities[0].abilityCooldown;
                 }
             }
         }
     }
 
-    private void useAbility(int abilityNum){
-        abilityCooldownTimer = abilities[abilityNum].abilityCooldown;
+    private void useAbility(){
+        abilityCooldownTimer = abilities[0].abilityCooldown;
         //first check what type of ability it is and will do stuff depending on type of ability
-        if(abilities[abilityNum].abilityType == "Ranged"){
+        if(abilities[0].abilityType == "Ranged"){
             animator.SetBool("RangedAbility", true);
-            //checkCollision(abilities[abilityNum].abilityDamage);
+            LaunchProjectile();
             StartCoroutine(waitForAnimation("RangedAbility"));
         }
-        //have other ability types as else if statments and we can add simple code to deal damage correctly. 
+    }
+
+    public void SpawnProjectile(Vector3 heading)
+    {
+        Projectile clone = Instantiate(projectilePrefab, bulletSpawn.position, Quaternion.LookRotation(heading));
+        clone.gameObject.SetActive(true);
+        clone.Initialize(projectileSpeed, projectileLifetime, projectileDamage, 1f, heading);
     }
 
     public void LaunchProjectile()
     {
-        GameObject projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
         Vector3 direction = (playerBody.position - transform.position).normalized;
-        projectile.GetComponent<MothProjectile>().Launch(direction);
+        SpawnProjectile(direction);
     }
 }
