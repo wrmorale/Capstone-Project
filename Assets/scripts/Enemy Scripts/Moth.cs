@@ -8,7 +8,16 @@ public class Moth : Enemy
     public float cooldownRemaining = 0f;
     public float fleeDuration = 1f;
     public float fleeRemaining = 0f;
-    
+
+    [Header("Projectile Stats")]
+    public Projectile projectilePrefab;
+    [SerializeField] private float projectileSpeed;
+    [SerializeField] private float projectileLifetime;
+    [SerializeField] private float projectileDamage;
+    public Transform bulletSpawn;
+
+    private bool shouldRotateTowardsPlayer = true;
+
     void FixedUpdate()
     {
         enemyMovement();
@@ -29,16 +38,20 @@ public class Moth : Enemy
                     movement = (enemyBody.position - playerBody.position).normalized * movementSpeed;
                     enemyBody.MovePosition(enemyBody.position + (movement * Time.fixedDeltaTime));
                     fleeRemaining -= Time.fixedDeltaTime;
+                    shouldRotateTowardsPlayer = false;
+                    enemyBody.rotation = Quaternion.LookRotation(movement);
                 }
                 else {
                     fleeRemaining = fleeDuration;
                     animator.SetBool("Moving", false);
                     cooldownRemaining = cooldownTime;
+                    shouldRotateTowardsPlayer = true;
                 }
             }
             else {
                 animator.SetBool("Moving", false);
                 cooldownRemaining -= Time.fixedDeltaTime;
+                shouldRotateTowardsPlayer = true;
             }
         }
         else {
@@ -51,20 +64,23 @@ public class Moth : Enemy
                     idleMovement = enemyBody.position + new Vector3(Random.Range(-idleMovementRange, idleMovementRange), 0, Random.Range(-idleMovementRange, idleMovementRange));
                     movement = (idleMovement - enemyBody.position).normalized * movementSpeed;
                     animator.SetBool("Moving", true);
+                    shouldRotateTowardsPlayer = false;
+                    enemyBody.rotation = Quaternion.LookRotation(movement);
                 } 
                 else {
                     movement = Vector3.zero;
                     animator.SetBool("Moving", false);
+                    shouldRotateTowardsPlayer = true;
                 }
             }
             enemyBody.MovePosition(enemyBody.position + (movement * Time.fixedDeltaTime));
         }
-        if (movement != Vector3.zero) {
-            enemyBody.rotation = Quaternion.LookRotation(movement);
-        } else {
+
+        if (shouldRotateTowardsPlayer) {
             enemyBody.transform.LookAt(playerBody.transform);
         }
     }
+
 
     public void enemyAttack(){
         //if able to attack, the enemy does so
@@ -82,30 +98,38 @@ public class Moth : Enemy
     public void enemyAction(){
         //if off ability cooldown can use ability depending on chance to use that ability
         if(abilityCooldownTimer == 0){
-            abilityCounter = 0;
-            foreach (Ability ability in abilities) {
-                //before checking if an ability can be cast check if the player is in ability range
-                if(Vector2.Distance(enemyBody.position, playerBody.position) < ability.abilityRange){
-                    float randomNumber = Random.Range(0, 100);
-                    if (randomNumber < ability.abilityChance) {
-                        useAbility(abilityCounter);
-                        actionCooldownTimer = ability.abilityCooldown;
-                        break;
-                    }
-                    abilityCounter++;
+            //before checking if an ability can be cast check if the player is in ability range
+            if(Vector2.Distance(enemyBody.position, playerBody.position) < abilities[0].abilityRange){
+                float randomNumber = Random.Range(0, 100);
+                if (randomNumber < abilities[0].abilityChance) {
+                    useAbility();
+                    actionCooldownTimer = abilities[0].abilityCooldown;
                 }
             }
         }
     }
 
-    private void useAbility(int abilityNum){
-        abilityCooldownTimer = abilities[abilityNum].abilityCooldown;
+    private void useAbility(){
+        abilityCooldownTimer = abilities[0].abilityCooldown;
         //first check what type of ability it is and will do stuff depending on type of ability
-        if(abilities[abilityNum].abilityType == "Ranged"){
+        if(abilities[0].abilityType == "Ranged"){
             animator.SetBool("RangedAbility", true);
-            checkCollision(abilities[abilityNum].abilityDamage);
+            StartCoroutine(LaunchProjectile());
             StartCoroutine(waitForAnimation("RangedAbility"));
         }
-        //have other ability types as else if statments and we can add simple code to deal damage correctly. 
+    }
+
+    public void SpawnProjectile(Vector3 heading)
+    {
+        Projectile clone = Instantiate(projectilePrefab, bulletSpawn.position, Quaternion.LookRotation(heading));
+        clone.gameObject.SetActive(true);
+        clone.Initialize(projectileSpeed, projectileLifetime, projectileDamage, 1f, heading);
+    }
+
+    public IEnumerator LaunchProjectile()
+    {
+        yield return new WaitForSeconds(1.8f);
+        Vector3 direction = (playerBody.position - transform.position).normalized;
+        SpawnProjectile(direction);
     }
 }
