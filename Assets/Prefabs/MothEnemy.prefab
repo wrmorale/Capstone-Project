@@ -1,5 +1,115 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2189304485348443954
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5796792958629981029}
+  - component: {fileID: 4510004410048329066}
+  - component: {fileID: 7967730983087043753}
+  - component: {fileID: 5246776602195852432}
+  - component: {fileID: 2758012890476290084}
+  m_Layer: 0
+  m_Name: mothProjectile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &5796792958629981029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189304485348443954}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.000031232834, y: 0.1274, z: 0.0365}
+  m_LocalScale: {x: 0.036675803, y: 0.036675803, z: 0.036675803}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8327740662560138378}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &4510004410048329066
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189304485348443954}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &7967730983087043753
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189304485348443954}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &5246776602195852432
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189304485348443954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2758012890476290084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2189304485348443954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6a518d1aed97d4787ae90b00f68441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4820427691773397322
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,6 +438,7 @@ Transform:
   m_Children:
   - {fileID: 2299728706520807095}
   - {fileID: 3211218206632432096}
+  - {fileID: 5796792958629981029}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -413,12 +524,15 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
-  damageFlashPrefab: {fileID: 4962231417127877380}
-  damageFlash: {fileID: 7169664591826417395}
   cooldownTime: 5
   cooldownRemaining: 0
   fleeDuration: 1
   fleeRemaining: 0
+  projectilePrefab: {fileID: 2758012890476290084}
+  projectileSpeed: 3.4
+  projectileLifetime: 2
+  projectileDamage: 5
+  bulletSpawn: {fileID: 1128690899316445487}
 --- !u!114 &7169664591826417395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,6 +614,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30c4a814325fe30458fc37939fc2e37c, type: 3}
+--- !u!4 &1128690899316445487 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -7509448865721581453, guid: 30c4a814325fe30458fc37939fc2e37c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1756683609672880476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1486636196141509645 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 30c4a814325fe30458fc37939fc2e37c,
@@ -529,12 +649,6 @@ Animator:
 --- !u!4 &2299728706520807095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30c4a814325fe30458fc37939fc2e37c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1756683609672880476}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4962231417127877380 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -2540701711086048680, guid: 30c4a814325fe30458fc37939fc2e37c,
     type: 3}
   m_PrefabInstance: {fileID: 1756683609672880476}
   m_PrefabAsset: {fileID: 0}

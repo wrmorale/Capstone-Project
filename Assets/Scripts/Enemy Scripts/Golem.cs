@@ -25,9 +25,11 @@ public class Golem : Enemy
     }
 
     void Update() {
-        //enemyBody.transform.rotationX
         if (movement != Vector3.zero) {
             enemyBody.rotation = Quaternion.LookRotation(movement);
+            Quaternion newRotation = Quaternion.LookRotation(movement, enemyBody.transform.up);
+            newRotation = Quaternion.Euler(0f, newRotation.eulerAngles.y, 0f);
+            enemyBody.transform.rotation = Quaternion.Slerp(enemyBody.transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
         }
         if (state == GolemState.Idle){
             enemyAction();
@@ -48,6 +50,9 @@ public class Golem : Enemy
             movement = playerBody.position - enemyBody.position;
             //lookAtPos.y = enemyBody.transform.position.y; // do not rotate the player around x
             Quaternion newRotation = Quaternion.LookRotation(movement, enemyBody.transform.up);
+            enemyBody.transform.rotation = Quaternion.Slerp(enemyBody.transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
+            // Set x and z rotation to zero
+            newRotation = Quaternion.Euler(0f, newRotation.eulerAngles.y, 0f);
             enemyBody.transform.rotation = Quaternion.Slerp(enemyBody.transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
         }
         if (isDashing) {

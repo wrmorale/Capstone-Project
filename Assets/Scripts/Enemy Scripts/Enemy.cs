@@ -55,8 +55,8 @@ public class Enemy : MonoBehaviour
     public int maxDustPiles = 5;
     private List<DustPile> dustPiles = new List<DustPile>();
 
-    public GameObject damageFlashPrefab;
-    public DamageFlash damageFlash;
+    //public GameObject damageFlashPrefab;
+    //public DamageFlash damageFlash;
 
     private EnemyHealthBar enemyHealthBar;
     private float HealthPercent = 1;
