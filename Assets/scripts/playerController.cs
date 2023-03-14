@@ -42,8 +42,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
     private bool groundedPlayer;
     private bool inJumpsquat = false;
 
-    public IEnumerator coroutine;
-
     private Transform cam;
 
     [HideInInspector] public InputAction moveAction;
@@ -105,7 +103,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         jumpClip.initialize();
         jumpFrameChecker.initialize(this, jumpClip);
         SetState(States.PlayerStates.Idle);
-        // coroutine = attackManager.handleAttacks();
     }
 
     void Update()
@@ -127,7 +124,6 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         // store direction input 
         Vector2 input = moveAction.ReadValue<Vector2>();
         if (state == States.PlayerStates.Ability) {
-            // rollManager.updateMe(Time.deltaTime);
             activeAbility.updateMe(Time.deltaTime);
         }
 
@@ -240,11 +236,13 @@ public class playerController : MonoBehaviour, IFrameCheckHandler
         lastRootY = hip.transform.localPosition.y;
     }
 
+    // Call when moving from one state that applies root motion to any state other than idle.
     public void ResetRoot() {
         lastRootY = 0;
         model.transform.localPosition = Vector3.zero;
     }
 
+    // Cycles player ability cooldowns when called each frame.
     public void ManageCooldowns(float time) 
     {
         for (int i = 0; i < playerAbilities.Length; i++) 

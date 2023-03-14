@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour{
     public float timer;
     public Text timerText;
     public bool roomCleared;
+    public bool isNextToExit;
+    public bool gamePaused;
     public static int currRoom = 1;
     private int roomCount = 4;
     public int currentGold; 
@@ -38,6 +40,7 @@ public class GameManager : MonoBehaviour{
     private float numberOfDustPiles;
     public GameObject enemyPrefab;
     public GameObject player;
+    public GameObject doorPortal;
     public GameObject spawnArea;
     public GameObject dustPilePrefab;
     public Player playerStats;
@@ -55,13 +58,22 @@ public class GameManager : MonoBehaviour{
 
     //setup singleton
     private void Awake() {
+
+        if(instance != null){
+            Destroy(this.gameObject);
+            return;
+        }
+
+
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
 
-    void Start(){
+    void Start() {
         timer = 0;
         roomCleared = false;
+        isNextToExit = false;
+        gamePaused = false;
         currentGold = 0;
         numberOfDustPiles = maxDustPiles;
         float spawnAreaY = spawnArea.transform.position.y;
@@ -111,6 +123,8 @@ public class GameManager : MonoBehaviour{
         timer += Time.deltaTime;
         //Debug.Log("Time: " + timer.ToString("F2")); //timer displays in console for now
 
+        HandleRoomTransition();
+
         //Checks to see if enemies are still in arena
         Enemy[] enemies = FindObjectsOfType<Enemy>();
         DustPile[] dustPiles = FindObjectsOfType<DustPile>();
@@ -128,17 +142,18 @@ public class GameManager : MonoBehaviour{
             //here we could insert a scene jump to a losing scene
         }
         if(enemies.Length == 0 && dustPiles.Length == 0 && !roomCleared){
-            roomCleared = true; 
+            roomCleared = true;
+            doorPortal.SetActive(true);
             //Room clear condition successfully logged
             Debug.Log("Room clear");
             //Add some code to advance to next scene
-            if (currRoom < roomCount) {
-                Debug.Log(currRoom);
-                currRoom++;
-                SceneManager.LoadScene("room_" + currRoom);
-            } else {
-                // show end credits, player went through all rooms.
-            }
+            // if (currRoom < roomCount) {
+            //     Debug.Log(currRoom);
+            //     currRoom++;
+            //     SceneManager.LoadScene("room_" + currRoom);
+            // } else {
+            //     // show end credits, player went through all rooms.
+            // }
         }
         numberOfEnemies = enemies.Length;
         numberOfDustPiles = dustPiles.Length;
@@ -147,5 +162,26 @@ public class GameManager : MonoBehaviour{
         numberOfDustPiles = Mathf.Clamp(numberOfDustPiles, 0, maxDustPiles);
         cleaningPercent = dustPilesCleaned/maxDustPiles;
         cleaningbar.value = cleaningPercent;
+
+        if (gamePaused){
+            Time.timeScale = 0;
+        } else {
+            Time.timeScale = 1;
+        }
     }
+
+    void HandleRoomTransition() {
+        if (roomCleared && isNextToExit) {
+            isNextToExit = false;
+            doorPortal.SetActive(false);
+            if (currRoom < roomCount) {
+                //Debug.Log(currRoom);
+                currRoom++;
+                SceneManager.LoadScene("room_" + currRoom);
+            } else {
+                // show end credits, player went through all rooms.
+            }
+        }
+    }
+
 }

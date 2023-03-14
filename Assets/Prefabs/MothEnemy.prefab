@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 8327740662560138379}
   - component: {fileID: 8327740662560138383}
   - component: {fileID: 8372967417428799471}
+  - component: {fileID: 7169664591826417395}
   m_Layer: 0
   m_Name: MothEnemy
   m_TagString: Enemy
@@ -248,11 +249,24 @@ MonoBehaviour:
   healingSpeed: 0.1
   dustPilePrefab: {fileID: 0}
   maxDustPiles: 5
+  damageFlashPrefab: {fileID: 4962231417127877380}
+  damageFlash: {fileID: 7169664591826417395}
   cooldownTime: 5
   cooldownRemaining: 0
   fleeDuration: 1
   fleeRemaining: 0
-  projectilePrefab: {fileID: 896198948383437505}
+--- !u!114 &7169664591826417395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8327740662560138380}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8473b334f435d2f4590aa29d1a6c8746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1756683609672880476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -351,6 +365,12 @@ Animator:
 --- !u!4 &2299728706520807095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30c4a814325fe30458fc37939fc2e37c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1756683609672880476}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4962231417127877380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2540701711086048680, guid: 30c4a814325fe30458fc37939fc2e37c,
     type: 3}
   m_PrefabInstance: {fileID: 1756683609672880476}
   m_PrefabAsset: {fileID: 0}
