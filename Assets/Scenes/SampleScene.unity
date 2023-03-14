@@ -5776,12 +5776,12 @@ GameObject:
   - component: {fileID: 959071690}
   - component: {fileID: 959071692}
   m_Layer: 0
-  m_Name: UI
+  m_Name: PauseUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &959071690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5826,6 +5826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f7ef8e26bf1bfc46b4a550ce7554eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseUI: {fileID: 959071689}
 --- !u!1 &965643142
 GameObject:
   m_ObjectHideFlags: 0
@@ -8076,7 +8077,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343681272}
-  m_LocalRotation: {x: 0.24820505, y: -0.0024147013, z: 0.00061870384, w: 0.96870434}
+  m_LocalRotation: {x: 0.24820505, y: -0.002414674, z: 0.0006186969, w: 0.96870434}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17010,6 +17011,7 @@ MonoBehaviour:
   doorPortal: {fileID: 1966903422}
   spawnArea: {fileID: 501613309}
   dustPilePrefab: {fileID: 919132148348794008}
+  pauseUI: {fileID: 959071689}
   playerStats: {fileID: 795224107}
   playerInput: {fileID: 795224110}
   hud: {fileID: 1639332890}

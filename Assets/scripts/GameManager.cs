@@ -44,6 +44,7 @@ public class GameManager : MonoBehaviour{
     public GameObject doorPortal;
     public GameObject spawnArea;
     public GameObject dustPilePrefab;
+    public GameObject pauseUI;
     public Player playerStats;
 
     private bool objectsInstantiated = false;
@@ -167,11 +168,17 @@ public class GameManager : MonoBehaviour{
         if (pauseAction.triggered){
             if (gamePaused) {
                 gamePaused = false;
+                pauseUI.SetActive(false);
                 Time.timeScale = 1;
             } else {
                 gamePaused = true;
+                // pauseUI.GetComponent<Popup_Setup>().enabled = true;
+                pauseUI.SetActive(true);
                 Time.timeScale = 0;
             }
+        }
+        if (gamePaused == true && (pauseUI.activeSelf == false)){
+            gamePaused = false;
         }
     }
 
