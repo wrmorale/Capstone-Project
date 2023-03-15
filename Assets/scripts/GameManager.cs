@@ -63,12 +63,6 @@ public class GameManager : MonoBehaviour{
 
     //setup singleton
     private void Awake() {
-
-        // if(instance != null){
-        //     Destroy(this.gameObject);
-        //     return;
-        // }
-
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
@@ -121,18 +115,8 @@ public class GameManager : MonoBehaviour{
 
         // UI set up
         var root = hud.rootVisualElement;
-        Debug.Log("root: " + root);
         cleaningbar = root.Q<CleaningBar>();
-        Debug.Log("cleaningbar: "+cleaningbar);
-        totalHealth = maxDustPiles * dustPilePrefab.GetComponent<DustPile>().maxHealth;
-        cleaningbar.value = totalHealth * 0.5f / totalHealth;
-
-        // fog
-        RenderSettings.fog = true;
-        fogDensity = cleaningbar.value;
-
-        // Start executing function after 2.0f, and re-execute every 2.0f
-        InvokeRepeating("DecreaseCleanliness", 2.0f, 2.0f);
+        cleaningbar.value = 0;
 
     }
 
