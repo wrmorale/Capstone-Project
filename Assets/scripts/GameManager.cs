@@ -197,7 +197,7 @@ public class GameManager : MonoBehaviour{
         RenderSettings.fogDensity = pooledHealth / (maxDustPiles * dustMaxHealth) * 0.2f;
 
         // Checks if player paused the game, if so stops time 
-        if (pauseAction.triggered){
+        if ((pauseUI) && pauseAction.triggered){
             if (gamePaused) {
                 gamePaused = false;
                 pauseUI.SetActive(false);
@@ -209,7 +209,7 @@ public class GameManager : MonoBehaviour{
                 Time.timeScale = 0;
             }
         }
-        if (gamePaused == true && (pauseUI.activeSelf == false)){
+        if ((pauseUI) && (gamePaused == true && (pauseUI.activeSelf == false))){
             gamePaused = false;
         }
     }
