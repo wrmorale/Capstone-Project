@@ -356,6 +356,7 @@ Transform:
   - {fileID: 6167770674353366193}
   - {fileID: 567324920048128663}
   - {fileID: 6265777921671824103}
+  - {fileID: 9182681363318070838}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -406,8 +407,8 @@ MonoBehaviour:
   basicAttackDamage: 3
   basicAttackSpeed: 0.2
   attackRange: 3
-  movementSpeed: 0.3
-  movementRange: 2
+  movementSpeed: 0.1
+  movementRange: 3.6
   idleMovementRange: 0
   staggerLimit: 5
   abilities:
@@ -422,8 +423,8 @@ MonoBehaviour:
   - abilityName: Light1
     abilityType: Melee
     abilityDamage: 5
-    abilityRange: 1.8
-    abilityCooldown: 1.8
+    abilityRange: 1.5
+    abilityCooldown: 2
     abilityChance: 50
     castTime: 1
     damageMultiplier: 1
@@ -459,7 +460,7 @@ MonoBehaviour:
   enemyBody: {fileID: 5875378272749639627}
   playerBody: {fileID: 0}
   player: {fileID: 0}
-  animator: {fileID: 907608586443398915}
+  animator: {fileID: 7249107271869851658}
   animationFinished: 1
   detectionRange: 5
   healingSpeed: 0.1
@@ -486,7 +487,7 @@ MonoBehaviour:
   spinAttackCollider: {fileID: 8750645048523731814}
   dashCollider: {fileID: 1250803297610215111}
   light1Clip:
-    animator: {fileID: 907608586443398915}
+    animator: {fileID: 7249107271869851658}
     clip: {fileID: 7400000, guid: 004ff1c6fb69e5c42b2f530b3251c82f, type: 2}
     animatorStateName: light_1
     layerNumber: 0
@@ -498,7 +499,7 @@ MonoBehaviour:
     allCancelFrameStart: 0
     allCancelFrameEnd: 0
   light2Clip:
-    animator: {fileID: 907608586443398915}
+    animator: {fileID: 7249107271869851658}
     clip: {fileID: 7400000, guid: 497a9b01298d04c4ba3348ecef06f46e, type: 2}
     animatorStateName: light_2
     layerNumber: 0
@@ -510,7 +511,7 @@ MonoBehaviour:
     allCancelFrameStart: 0
     allCancelFrameEnd: 0
   spinAttackClip:
-    animator: {fileID: 907608586443398915}
+    animator: {fileID: 7249107271869851658}
     clip: {fileID: 7400000, guid: a3b78feb2fa92cb4c9e8a987b2a691b8, type: 2}
     animatorStateName: spin
     layerNumber: 0
@@ -522,7 +523,7 @@ MonoBehaviour:
     allCancelFrameStart: 0
     allCancelFrameEnd: 0
   dashClip:
-    animator: {fileID: 907608586443398915}
+    animator: {fileID: 7249107271869851658}
     clip: {fileID: 7400000, guid: 19a83d2b3bbf837448ba51e5d9c5639c, type: 2}
     animatorStateName: dash
     layerNumber: 0
@@ -1101,6 +1102,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: golem20
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 79aa66d911f0d724dac97bc2fc806eef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79aa66d911f0d724dac97bc2fc806eef, type: 3}
 --- !u!4 &4008115417754378342 stripped
@@ -1135,3 +1141,104 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!1001 &8711590542268512733
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2181674869418801407}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b951fbd9982f6a34080c7ff33e36a30e,
+        type: 3}
+      propertyPath: m_Name
+      value: golem24
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b951fbd9982f6a34080c7ff33e36a30e, type: 3}
+--- !u!1 &8368990620116321420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b951fbd9982f6a34080c7ff33e36a30e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8711590542268512733}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7249107271869851658
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8368990620116321420}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e4216a73aa233f74582cf137bf25ee93, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!4 &9182681363318070838 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8711590542268512733}
+  m_PrefabAsset: {fileID: 0}

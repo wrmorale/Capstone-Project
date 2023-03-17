@@ -58,18 +58,19 @@ public class Golem : Enemy
         if (isDashing) {
             // move enemy towards player during dash animation
             directionToPlayer = playerBody.position - enemyBody.position;
-            movement = directionToPlayer.normalized * (movementSpeed * 5) * Time.fixedDeltaTime;
+            movement = directionToPlayer.normalized * (movementSpeed * 10) * Time.fixedDeltaTime;
             enemyBody.MovePosition(enemyBody.position + movement);
         }
-        if (state != GolemState.Attacking){
+        if (state == GolemState.Idle){
             enemyMovement();
-        }
+        } 
     }
 
     private void enemyMovement() {
         directionToPlayer = playerBody.position - enemyBody.position;
         // if player is in range
         if(playerInRange(movementRange)) {
+            animator.SetBool("Walk", true);
             // move enemy towards player
             movement = directionToPlayer.normalized * movementSpeed * Time.fixedDeltaTime;
             enemyBody.MovePosition(enemyBody.position + movement);
@@ -82,7 +83,7 @@ public class Golem : Enemy
         float randomNumber = Random.Range(0, 100);
         
         //first checks if it can dash to player
-        if (distanceToPlayer <= abilities[3].abilityRange && dashCooldownTimer <= 0){
+        if (distanceToPlayer <= abilities[3].abilityRange && distanceToPlayer > abilities[0].abilityRange && dashCooldownTimer <= 0){
             state = GolemState.Attacking;
             isDashing = true;
             attackManager.handleAttacks(abilities[3]);

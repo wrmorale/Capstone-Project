@@ -90,6 +90,8 @@ public class GolemAttackManager : MonoBehaviour, IFrameCheckHandler
     public void onAllCancelFrameEnd(){}
     public void onLastFrameStart(){}
     public void onLastFrameEnd(){
+        enemyInstance.state = Golem.GolemState.Idle;
+        enemyInstance.isDashing = false;
         activeClip.animator.SetBool("Light1", false);
         activeClip.animator.SetBool("Light2", false);
         activeClip.animator.SetBool("SpinAttack", false);
