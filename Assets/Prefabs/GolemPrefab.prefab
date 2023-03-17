@@ -423,7 +423,7 @@ MonoBehaviour:
   - abilityName: Light1
     abilityType: Melee
     abilityDamage: 5
-    abilityRange: 1.5
+    abilityRange: 1.29
     abilityCooldown: 4
     abilityChance: 50
     castTime: 1
