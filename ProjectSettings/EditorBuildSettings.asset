@@ -21,17 +21,17 @@ EditorBuildSettings:
     path: Assets/Scenes/room_4.unity
     guid: 5291222d4eef6f2448da78f306246860
   - enabled: 1
-    path: Assets/Scenes/Controls_Scene.unity
-    guid: e39a6e3886ed64c3d9c298a9e7c1bb6d
-  - enabled: 1
-    path: Assets/Scenes/Credits_Scene.unity
-    guid: ce20af73789ea164ba435bd05d9c4489
+    path: Assets/Scenes/Win_Scene.unity
+    guid: 2ca46a3f7d4056346b7ce71380de1ee2
   - enabled: 1
     path: Assets/Scenes/Loss_Scene.unity
     guid: 4842cad149c866443b2bb1db35b53d06
   - enabled: 1
-    path: Assets/Scenes/Win_Scene.unity
-    guid: 2ca46a3f7d4056346b7ce71380de1ee2
+    path: Assets/Scenes/Credits_Scene.unity
+    guid: ce20af73789ea164ba435bd05d9c4489
+  - enabled: 1
+    path: Assets/Scenes/Controls_Scene.unity
+    guid: e39a6e3886ed64c3d9c298a9e7c1bb6d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 727f4aa20ccb345428d4de1251616ef7,
       type: 2}

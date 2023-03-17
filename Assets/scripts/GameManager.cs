@@ -31,8 +31,9 @@ public class GameManager : MonoBehaviour{
     public bool roomCleared;
     public bool isNextToExit;
     public bool gamePaused;
-    public static int currRoom = 1;
-    private int roomCount = 4;
+    public static int currentSceneIndex = 0;
+    public static int currRoom = 0; // keeps track of the levels we beat
+    private int lastRoomIndex = 4; // 0 indexed so 4 total atm
     public int currentGold; 
     public List<String> availableAbilities = new List<String>(); //not sure how we will keep track of abilities yet but a list of strings to hold ablities that can be learned
     //
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour{
         pauseAction = playerInput.actions["Pause"];
 
         timer = 0;
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         roomCleared = false;
         isNextToExit = false;
         gamePaused = false;
@@ -131,7 +133,7 @@ public class GameManager : MonoBehaviour{
         var root = hud.rootVisualElement;
         Debug.Log("root: " + root);
         cleaningbar = root.Q<CleaningBar>();
-        Debug.Log("cleaningbar: "+cleaningbar);
+        Debug.Log("cleaningbar: "+ cleaningbar);
         totalHealth = maxDustPiles * dustPilePrefab.GetComponent<DustPile>().maxHealth;
         cleaningbar.value = totalHealth * 0.5f / totalHealth;
 
@@ -174,13 +176,6 @@ public class GameManager : MonoBehaviour{
             //Room clear condition successfully logged
             Debug.Log("Room clear");
             //Add some code to advance to next scene
-            // if (currRoom < roomCount) {
-            //     Debug.Log(currRoom);
-            //     currRoom++;
-            //     SceneManager.LoadScene("room_" + currRoom);
-            // } else {
-            //     // show end credits, player went through all rooms.
-            // }
         }
         numberOfEnemies = enemies.Length;
         numberOfDustPiles = dustPiles.Length;
@@ -215,17 +210,22 @@ public class GameManager : MonoBehaviour{
         }
     }
 
+    /**
+    * Check if we are next to the exit and we cleared the room
+    * to advance to the next room.
+    */
     void HandleRoomTransition() {
         if (isNextToExit) {
             isNextToExit = false;
             doorPortal.SetActive(false);
-            if (currRoom < roomCount) {
+            if (currentSceneIndex < lastRoomIndex) {
                 //Debug.Log(currRoom);
                 currRoom++;
-                SceneManager.LoadScene("room_" + currRoom);
+                currentSceneIndex++;
+                SceneManager.LoadScene(currentSceneIndex);
             } else {
                 // show end credits, player went through all rooms.
-                SceneManager.LoadScene("Credits_scene");
+                SceneManager.LoadScene("Win_scene");
             }
         }
     }

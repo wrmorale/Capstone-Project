@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7428022769836866490}
   m_Layer: 0
   m_Name: weapon3
-  m_TagString: Untagged
+  m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,8 +96,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.3771923, y: 1.299482, z: 1}
+  m_Center: {x: -0.038686022, y: -0.14974062, z: -6.0063996e-16}
 --- !u!114 &7428022769836866490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 7428022770733803870}
   m_Layer: 0
   m_Name: weapon1
-  m_TagString: Untagged
+  m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,8 +209,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.8971434}
+  m_Center: {x: 0, y: 0, z: -0.44857177}
 --- !u!114 &7428022770733803870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 7428022771009043261}
   m_Layer: 0
   m_Name: weapon2
-  m_TagString: Untagged
+  m_TagString: weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -322,8 +322,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1, z: 1.5709931}
+  m_Center: {x: 0, y: 0, z: -0.28549647}
 --- !u!114 &7428022771009043261
 MonoBehaviour:
   m_ObjectHideFlags: 0
