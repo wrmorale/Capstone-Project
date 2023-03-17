@@ -26,6 +26,11 @@ namespace PopupTest
             popup.cancelled += () => Debug.Log("Quit");
             popup.cancelled += () => Time.timeScale = 1;
             popup.cancelled += () => root.Remove(popup);
+            popup.cancelled += () => {
+                foreach (GameObject gameManager in GameObject.FindGameObjectsWithTag("GameManager")) {
+                    Destroy(GameObject.Find("GameManager"));
+                }
+            };
             popup.cancelled += () => SceneManager.LoadScene("Title_Scene");
 
             popup.confirmed += () => Debug.Log("Resume");

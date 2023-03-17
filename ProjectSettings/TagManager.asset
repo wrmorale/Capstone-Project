@@ -10,6 +10,7 @@ TagManager:
   - DustPile
   - Furniture
   - weapon
+  - GameManager
   layers:
   - Default
   - TransparentFX
