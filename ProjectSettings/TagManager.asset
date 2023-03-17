@@ -9,6 +9,7 @@ TagManager:
   - Room
   - DustPile
   - Furniture
+  - weapon
   layers:
   - Default
   - TransparentFX

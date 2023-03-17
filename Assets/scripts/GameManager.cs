@@ -166,6 +166,7 @@ public class GameManager : MonoBehaviour{
             playerStats.lives--;
             //Debug.Log("You're Dead, Loser");
             //here we could insert a scene jump to a losing scene
+            SceneManager.LoadScene("Loss_scene");
         }
         if (enemies.Length == 0 && dustPiles.Length == 0 && !roomCleared){
             roomCleared = true;
@@ -196,7 +197,7 @@ public class GameManager : MonoBehaviour{
         // Adjust Fog based on dustpile health values.
         RenderSettings.fogDensity = pooledHealth / (maxDustPiles * dustMaxHealth) * 0.2f;
 
-        // Checks if player paused the game, if so stops time 
+        // Checks if player paused the game, if so stops time
         if ((pauseUI) && pauseAction.triggered){
             if (gamePaused) {
                 gamePaused = false;
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour{
     }
 
     void HandleRoomTransition() {
-        if (roomCleared && isNextToExit) {
+        if (isNextToExit) {
             isNextToExit = false;
             doorPortal.SetActive(false);
             if (currRoom < roomCount) {
@@ -224,6 +225,7 @@ public class GameManager : MonoBehaviour{
                 SceneManager.LoadScene("room_" + currRoom);
             } else {
                 // show end credits, player went through all rooms.
+                SceneManager.LoadScene("Credits_scene");
             }
         }
     }
