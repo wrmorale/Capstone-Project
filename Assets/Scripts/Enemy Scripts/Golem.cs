@@ -9,7 +9,6 @@ public class Golem : Enemy
     private GolemAttackManager attackManager;
     private Vector3 directionToPlayer;
     private float distanceToPlayer;
-    private Quaternion lookRotation;
     public bool isDashing;
     public bool light1Complete;
 
@@ -26,14 +25,17 @@ public class Golem : Enemy
     }
 
     void Update() {
+        if (movement != Vector3.zero) {
+            enemyBody.rotation = Quaternion.LookRotation(movement);
+            Quaternion newRotation = Quaternion.LookRotation(movement, enemyBody.transform.up);
+            newRotation = Quaternion.Euler(0f, newRotation.eulerAngles.y, 0f);
+            enemyBody.transform.rotation = Quaternion.Slerp(enemyBody.transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
+        }
         if (state == GolemState.Idle){
             enemyAction();
         }
         if (state == GolemState.Attacking){
             attackManager.updateMe(Time.deltaTime);
-        }
-        else{
-            
         }
         dashCooldownTimer -= Time.deltaTime;
         actionCooldownTimer -= Time.deltaTime;
@@ -44,62 +46,63 @@ public class Golem : Enemy
     }
 
     void FixedUpdate() {
+        if (movement != Vector3.zero) {
+            movement = playerBody.position - enemyBody.position;
+            //lookAtPos.y = enemyBody.transform.position.y; // do not rotate the player around x
+            Quaternion newRotation = Quaternion.LookRotation(movement, enemyBody.transform.up);
+            enemyBody.transform.rotation = Quaternion.Slerp(enemyBody.transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
+            // Set x and z rotation to zero
+            newRotation = Quaternion.Euler(0f, newRotation.eulerAngles.y, 0f);
+            enemyBody.transform.rotation = Quaternion.Slerp(enemyBody.transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
+        }
         if (isDashing) {
             // move enemy towards player during dash animation
             directionToPlayer = playerBody.position - enemyBody.position;
-            movement = directionToPlayer.normalized * (movementSpeed * 5) * Time.fixedDeltaTime;
+            movement = directionToPlayer.normalized * (movementSpeed * 10) * Time.fixedDeltaTime;
             enemyBody.MovePosition(enemyBody.position + movement);
         }
-        if (state != GolemState.Attacking){
+        if (state == GolemState.Idle){
             enemyMovement();
-        }
+        } 
     }
 
     private void enemyMovement() {
         directionToPlayer = playerBody.position - enemyBody.position;
         // if player is in range
         if(playerInRange(movementRange)) {
+            animator.SetBool("Walk", true);
             // move enemy towards player
             movement = directionToPlayer.normalized * movementSpeed * Time.fixedDeltaTime;
             enemyBody.MovePosition(enemyBody.position + movement);
         }
     }
 
-    /*public bool enemyCanAttack(){
-        //if able to attack, the enemy does so
-        //first checks to see if enemy is in range for an attack
-        if(playerInRange(longestAttackRange) && canAttack()) {
-            return true;
-        }
-        return false;
-    }*/
-
     public void enemyAction(){
-        
         directionToPlayer = playerBody.position - enemyBody.position;
         distanceToPlayer = directionToPlayer.magnitude;
         float randomNumber = Random.Range(0, 100);
-        lookRotation = Quaternion.LookRotation(directionToPlayer, Vector3.up);
-        transform.rotation = lookRotation;
-        
         //first checks if it can dash to player
-        if (distanceToPlayer <= abilities[3].abilityRange && dashCooldownTimer <= 0){
+        if (distanceToPlayer <= abilities[3].abilityRange && distanceToPlayer > abilities[0].abilityRange && dashCooldownTimer <= 0){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             isDashing = true;
             attackManager.handleAttacks(abilities[3]);
             dashCooldownTimer = abilities[3].abilityCooldown;
-        }
+        } //this is for spin
         else if (distanceToPlayer <= abilities[0].abilityRange && randomNumber < abilities[0].abilityChance && actionCooldownTimer <= 0){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             attackManager.handleAttacks(abilities[0]);
             actionCooldownTimer = abilities[0].abilityCooldown;
-        }
+        } //light 1
         else if (distanceToPlayer <= abilities[1].abilityRange && actionCooldownTimer <= 0){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             attackManager.handleAttacks(abilities[1]);
             actionCooldownTimer = abilities[1].abilityCooldown;
-        }
+        } //light 2 if light 1 went before
         if (light1Complete && distanceToPlayer <= abilities[2].abilityRange){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             actionCooldownTimer = abilities[2].abilityCooldown;
             attackManager.handleAttacks(abilities[2]);

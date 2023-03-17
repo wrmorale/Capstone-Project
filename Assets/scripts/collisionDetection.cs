@@ -26,8 +26,9 @@ public class collisionDetection : MonoBehaviour
             furniture.isHit(player.basicDamage);
         }
 
-        if(other.tag == "Player"){
+        if(other.tag == "Player" && this.tag != "weapon"){
             Player playerEx = other.GetComponent<Player>();
+            //Debug.Log(enemy.basicAttackDamage);
             playerEx.isHit(enemy.basicAttackDamage);
         }
     }

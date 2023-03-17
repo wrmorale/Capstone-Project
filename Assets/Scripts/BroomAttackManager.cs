@@ -31,6 +31,7 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
     private GameObject broom;
     private GameObject pan;
     private Animator broomAnimator;
+    private Animator[] trailAnimators = new Animator[3];
 
     private playerController player;
     private Vector2 input = Vector2.zero;
@@ -100,6 +101,9 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         broom = transform.Find("maid68/metarig/hip/spine/chest/shoulder.R/upper_arm.R/forearm.R/hand.R/broom1").gameObject;
         broomAnimator = broom.GetComponent<Animator>();
         pan = transform.Find("maid68/metarig/hip/spine/chest/shoulder.L/upper_arm.L/forearm.L/hand.L/pan").gameObject;
+        trailAnimators[0] = transform.Find("maid68/trail1").GetComponent<Animator>();
+        trailAnimators[1] = transform.Find("maid68/trail2").GetComponent<Animator>();
+        trailAnimators[2] = transform.Find("maid68/trail3").GetComponent<Animator>();
 
         light1Clip.initialize();
         light1Checker.initialize(this, light1Clip);
@@ -177,17 +181,20 @@ public class BroomAttackManager : MonoBehaviour, IFrameCheckHandler
         {
             activeChecker = light1Checker;
             activeClip = light1Clip;
+            trailAnimators[combo].Play("trail1", 0, 0.0f);
         }
         else if (combo == 1)
         {
             activeChecker = light2Checker;
             activeClip = light2Clip;
+            trailAnimators[combo].Play("trail2", 0, 0.0f);
         }
         else if (combo == 2)
         {
             broomAnimator.Play("light_3", 0);
             activeChecker = light3Checker;
             activeClip = light3Clip;
+            trailAnimators[combo].Play("trail3", 0, 0.0f);
         }
 
         activeClip.animator.SetInteger("Combo", combo);

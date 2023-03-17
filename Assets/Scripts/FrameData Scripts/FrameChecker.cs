@@ -70,7 +70,7 @@ public class FrameChecker
 
         // ditch inactive parser
         if (!_frameParser.isActive()) { return; }
-
+        
         // check active frame range
         if (!_checkedActiveFrameStart && _frameParser.isOnOrPastFrame(activeFrameStart))
         {

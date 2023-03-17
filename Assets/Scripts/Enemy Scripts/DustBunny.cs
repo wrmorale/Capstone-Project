@@ -2,14 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DustBunny : Enemy
+public class DustBunny : Enemy, IFrameCheckHandler
 {
+    [SerializeField]
+    public GameObject pounceCollider;
+    [SerializeField]
+    private FrameParser pounceClip;
+    [SerializeField]
+    private FrameChecker pounceChecker;
+
+    private FrameParser activeClip;
+    private FrameChecker activeChecker;
+
+    private string currentAttack;
+
+    enum ActionState {Inactionable, AttackCancelable}
+    private ActionState actionState;
+
+    public enum BunnyState{
+        Idle,
+        Attacking
+    }
+    public BunnyState state = BunnyState.Idle;
+
     void FixedUpdate() {
         enemyMovement();
     }
 
     void Update() {
-        enemyAttack();
+        if (state == BunnyState.Idle){
+            enemyAttack();
+        }
+        if (state == BunnyState.Attacking){
+            updateMe(Time.deltaTime);
+        }
     }
 
     private void enemyMovement() {
@@ -76,21 +102,87 @@ public class DustBunny : Enemy
                 }
             }
         }
-        //if ability not used will basic attack
-        if(Vector2.Distance(enemyBody.position, playerBody.position) < attackRange){
-            attack(); //basic attack
-            actionCooldownTimer = (1 / basicAttackSpeed);
-        }
     }
 
     private void useAbility(int abilityNum){
         abilityCooldownTimer = abilities[abilityNum].abilityCooldown;
+        handleAttacks(abilities[abilityNum]);
+        /*
         //first check what type of ability it is and will do stuff depending on type of ability
         if(abilities[abilityNum].abilityType == "Movement"){
             animator.SetBool("MovementAttack", true);
             checkCollision(abilities[abilityNum].abilityDamage);
             StartCoroutine(waitForAnimation("MovementAttack"));
-        }
+        }*/
         //have other ability types as else if statments and we can add simple code to deal damage correctly. 
     }
+
+    public void onActiveFrameStart() {
+        //have if statements to see which ability to play here
+        if(currentAttack == "Pounce"){
+            pounceCollider.SetActive(true);
+        }
+    }
+    public void onActiveFrameEnd() {
+        state = BunnyState.Idle;
+        if(currentAttack == "Pounce"){
+            pounceCollider.SetActive(false);
+            activeClip.animator.SetBool("Pounce", false);
+        }
+    }
+    public void onAttackCancelFrameStart() {
+        actionState = ActionState.AttackCancelable;
+        //have it so that it can cast another attack after the last attack
+        //if it wants to
+    }
+    public void onAttackCancelFrameEnd() {
+        if (actionState == ActionState.AttackCancelable) actionState = ActionState.Inactionable;
+    }
+    public void onAllCancelFrameStart(){}
+    public void onAllCancelFrameEnd(){}
+    public void onLastFrameStart(){}
+    public void onLastFrameEnd(){
+        state = BunnyState.Idle;
+        activeClip.animator.SetBool("Pounce", false);
+    }
+
+    void Awake()
+    {
+        pounceClip.initialize();
+        pounceChecker.initialize(this, pounceClip);
+
+        activeChecker = pounceChecker;
+        activeClip = pounceClip;
+    }
+
+    public void updateMe(float time) // yes we need this
+    {
+        activeChecker.checkFrames();
+
+        if (actionState == ActionState.Inactionable){}
+        if (actionState == ActionState.AttackCancelable)
+        {
+            actionState = ActionState.Inactionable;
+        }
+    }
+    public void handleAttacks(Ability ability)
+    {
+        int frames = 0; // amount of frames in anim 
+        actionState = ActionState.Inactionable;
+        state = BunnyState.Attacking;
+
+        currentAttack = ability.abilityName;
+
+        if (currentAttack == "Pounce")
+        {
+            activeChecker = pounceChecker;
+            activeClip = pounceClip;
+        }
+        frames = activeClip.getTotalFrames();
+        activeClip.animator.SetBool(ability.abilityName, true);
+        activeClip.animator.Play(activeClip.animatorStateName, 0);
+        activeChecker.initCheck();
+        activeChecker.checkFrames();
+    }
+
 }
