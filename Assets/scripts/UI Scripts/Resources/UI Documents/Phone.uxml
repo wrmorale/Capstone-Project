@@ -1,7 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Phone" style="flex-grow: 1;">
+    <ui:VisualElement name="Phone" style="flex-grow: 1; width: 1090px; height: 1080px;">
         <ui:VisualElement name="Background" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/phonebar.png?fileID=2800000&amp;guid=72453ba99acb1fc48b42a9b8e84bb955&amp;type=3#phonebar&apos;); height: 130px; flex-grow: 1;">
-            <ui:VisualElement name="Foreground" style="flex-grow: 1;" />
+            <ui:VisualElement name="Foreground" style="flex-grow: 1;">
+                <ui:VisualElement name="BleachBomb" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/abilities/Bleach%20bomb.png?fileID=2800000&amp;guid=98930f59db191436190de4eaceb7fd59&amp;type=3#Bleach bomb&apos;); width: 140px; height: 110px; position: absolute; top: 96px; left: 294px;" />
+                <ui:VisualElement name="Roll" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/abilities/Roll.png?fileID=2800000&amp;guid=750ae6dde4f314e15af67e075f1f819e&amp;type=3#Roll&apos;); width: 140px; height: 110px; position: absolute; top: 100px; left: 12px;" />
+                <ui:VisualElement name="Duster" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/abilities/Feather%20Duster%201.png?fileID=2800000&amp;guid=90b37bb90fc3b4fa397f1a079e835e9d&amp;type=3#Feather Duster 1&apos;); width: 140px; height: 110px; position: absolute; top: 98px; left: 142px;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
