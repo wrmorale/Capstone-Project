@@ -408,7 +408,7 @@ MonoBehaviour:
   basicAttackSpeed: 0.2
   attackRange: 3
   movementSpeed: 0.1
-  movementRange: 4
+  movementRange: 3
   idleMovementRange: 0
   staggerLimit: 5
   abilities:
