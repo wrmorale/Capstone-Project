@@ -81,25 +81,28 @@ public class Golem : Enemy
         directionToPlayer = playerBody.position - enemyBody.position;
         distanceToPlayer = directionToPlayer.magnitude;
         float randomNumber = Random.Range(0, 100);
-        
         //first checks if it can dash to player
         if (distanceToPlayer <= abilities[3].abilityRange && distanceToPlayer > abilities[0].abilityRange && dashCooldownTimer <= 0){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             isDashing = true;
             attackManager.handleAttacks(abilities[3]);
             dashCooldownTimer = abilities[3].abilityCooldown;
         } //this is for spin
         else if (distanceToPlayer <= abilities[0].abilityRange && randomNumber < abilities[0].abilityChance && actionCooldownTimer <= 0){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             attackManager.handleAttacks(abilities[0]);
             actionCooldownTimer = abilities[0].abilityCooldown;
         } //light 1
         else if (distanceToPlayer <= abilities[1].abilityRange && actionCooldownTimer <= 0){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             attackManager.handleAttacks(abilities[1]);
             actionCooldownTimer = abilities[1].abilityCooldown;
         } //light 2 if light 1 went before
         if (light1Complete && distanceToPlayer <= abilities[2].abilityRange){
+            animator.SetBool("Walk", false);
             state = GolemState.Attacking;
             actionCooldownTimer = abilities[2].abilityCooldown;
             attackManager.handleAttacks(abilities[2]);

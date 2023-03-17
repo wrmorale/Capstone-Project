@@ -424,7 +424,7 @@ MonoBehaviour:
     abilityType: Melee
     abilityDamage: 5
     abilityRange: 1.5
-    abilityCooldown: 2
+    abilityCooldown: 4
     abilityChance: 50
     castTime: 1
     damageMultiplier: 1
