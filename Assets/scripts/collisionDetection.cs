@@ -28,7 +28,7 @@ public class collisionDetection : MonoBehaviour
 
         if(other.tag == "Player" && this.tag != "weapon"){
             Player playerEx = other.GetComponent<Player>();
-            Debug.Log(enemy.basicAttackDamage);
+            //Debug.Log(enemy.basicAttackDamage);
             playerEx.isHit(enemy.basicAttackDamage);
         }
     }

@@ -14,7 +14,6 @@ public class MothProjectile : Projectile
     {
         if (other.tag == "Player") 
         {
-            Debug.Log("projectile hit");
             Player player = other.GetComponent<Player>();
             player.isHit(damage);
             Destroy(gameObject);
@@ -23,6 +22,6 @@ public class MothProjectile : Projectile
 
     private void OnDestroy()
     {
-        Debug.Log("projectile destroyed");
+        //Debug.Log("projectile destroyed");
     }
 }
