@@ -70,10 +70,12 @@ public class FrameChecker
 
         // ditch inactive parser
         if (!_frameParser.isActive()) { return; }
-
+        
         // check active frame range
+        Debug.Log(!_checkedActiveFrameStart);
         if (!_checkedActiveFrameStart && _frameParser.isOnOrPastFrame(activeFrameStart))
         {
+            
             _frameCheckHandler.onActiveFrameStart();
             _checkedActiveFrameStart = true;
         }

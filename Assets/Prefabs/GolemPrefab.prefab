@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2181674869418801407}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 18.288}
 --- !u!33 &7119237310232890118
 MeshFilter:
@@ -146,7 +146,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2181674869418801407}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 8.535, y: 0, z: 0}
 --- !u!33 &527705552042973404
 MeshFilter:
@@ -259,7 +259,7 @@ RectTransform:
   m_Children:
   - {fileID: 2685411159431009693}
   m_Father: {fileID: 2181674869418801407}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -350,13 +350,13 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 9182681363318070838}
   - {fileID: 4008115417754378342}
   - {fileID: 8569674675143406367}
   - {fileID: 6548740817008165245}
   - {fileID: 6167770674353366193}
   - {fileID: 567324920048128663}
   - {fileID: 6265777921671824103}
-  - {fileID: 9182681363318070838}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -408,7 +408,7 @@ MonoBehaviour:
   basicAttackSpeed: 0.2
   attackRange: 3
   movementSpeed: 0.1
-  movementRange: 3.6
+  movementRange: 4
   idleMovementRange: 0
   staggerLimit: 5
   abilities:
@@ -488,7 +488,7 @@ MonoBehaviour:
   dashCollider: {fileID: 1250803297610215111}
   light1Clip:
     animator: {fileID: 7249107271869851658}
-    clip: {fileID: 7400000, guid: 004ff1c6fb69e5c42b2f530b3251c82f, type: 2}
+    clip: {fileID: 4523782979721099966, guid: 79aa66d911f0d724dac97bc2fc806eef, type: 3}
     animatorStateName: light_1
     layerNumber: 0
   light1Checker:
@@ -500,7 +500,7 @@ MonoBehaviour:
     allCancelFrameEnd: 0
   light2Clip:
     animator: {fileID: 7249107271869851658}
-    clip: {fileID: 7400000, guid: 497a9b01298d04c4ba3348ecef06f46e, type: 2}
+    clip: {fileID: 4270415319956280189, guid: 79aa66d911f0d724dac97bc2fc806eef, type: 3}
     animatorStateName: light_2
     layerNumber: 0
   light2Checker:
@@ -512,7 +512,7 @@ MonoBehaviour:
     allCancelFrameEnd: 0
   spinAttackClip:
     animator: {fileID: 7249107271869851658}
-    clip: {fileID: 7400000, guid: a3b78feb2fa92cb4c9e8a987b2a691b8, type: 2}
+    clip: {fileID: -5055356247035031728, guid: 79aa66d911f0d724dac97bc2fc806eef, type: 3}
     animatorStateName: spin
     layerNumber: 0
   spinAttackChecker:
@@ -524,7 +524,7 @@ MonoBehaviour:
     allCancelFrameEnd: 0
   dashClip:
     animator: {fileID: 7249107271869851658}
-    clip: {fileID: 7400000, guid: 19a83d2b3bbf837448ba51e5d9c5639c, type: 2}
+    clip: {fileID: -851199388697429409, guid: 79aa66d911f0d724dac97bc2fc806eef, type: 3}
     animatorStateName: dash
     layerNumber: 0
   dashChecker:
@@ -630,7 +630,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2181674869418801407}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 15.391, y: 0, z: 0}
 --- !u!33 &5764175712384544861
 MeshFilter:
@@ -895,7 +895,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2181674869418801407}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 5.293, y: 0, z: 4.678}
 --- !u!33 &8764197921776693570
 MeshFilter:
@@ -985,7 +985,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 79aa66d911f0d724dac97bc2fc806eef,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 79aa66d911f0d724dac97bc2fc806eef,
         type: 3}
@@ -1151,7 +1151,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b951fbd9982f6a34080c7ff33e36a30e,
         type: 3}
