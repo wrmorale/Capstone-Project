@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: ceiling_4
+    second: {fileID: 2100000, guid: 2ca01a1baf238476baaaa3c63dd907ee, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: ceiling_5
     second: {fileID: 2100000, guid: bb6bccd412bb84302ab59082b7e09b3c, type: 2}
   - first:
@@ -22,6 +27,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: floor_4
+    second: {fileID: 2100000, guid: 41d3561f8ef5442798c5b3a0ebed57b1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: floor_5
     second: {fileID: 2100000, guid: 5fe3cadd97f684e7c922a9672e54e5a2, type: 2}
   - first:
@@ -32,8 +42,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: railing_2
+    second: {fileID: 2100000, guid: 0f1103e331dd547679719a8d13bbcb50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: sconce
     second: {fileID: 2100000, guid: 05db36049a1134f2fb48bd34021f0de8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: walls_4
+    second: {fileID: 2100000, guid: 632e598c172dc468eb65d3b9fceddac1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

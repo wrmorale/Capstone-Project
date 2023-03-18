@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7380436816532067105}
   - component: {fileID: 1784583339972542679}
   m_Layer: 0
-  m_Name: Bookcase_2
+  m_Name: bookcase_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,7 +221,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.43921572, g: 0.9254902, b: 0.8172365, a: 1}
+  m_Color: {r: 0.10840159, g: 0.7924528, b: 0.63798964, a: 1}
   m_Intensity: 3
   m_Range: 1
   m_SpotAngle: 30
