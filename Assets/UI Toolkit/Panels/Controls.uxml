@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:VisualElement name="ControlImage" style="width: 100%; height: 100%; background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/ControllerLayout2.png?fileID=2800000&amp;guid=38c79601f46e5ec48a97a37d203d1996&amp;type=3#ControllerLayout2&apos;);">
         <ui:Button display-tooltip-when-elided="true" name="BackButton" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/back.png?fileID=2800000&amp;guid=2c57cff24a2944c4681a7deb9117bf30&amp;type=3#back&apos;); position: absolute; height: 135px; width: 372px; top: 936px; left: 1536px;" />
+        <ui:Button text="Keyboard Controls" display-tooltip-when-elided="true" name="KeyboardButton" style="width: 557px; height: 135px; position: absolute; top: 936px; left: 952px; font-size: 55px; color: rgb(250, 250, 250); background-color: rgb(163, 155, 109); -unity-font-style: bold;" />
     </ui:VisualElement>
 </ui:UXML>
