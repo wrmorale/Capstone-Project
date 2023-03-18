@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour{
     public static int currentSceneIndex = 0;
     public static int currRoom = 0; // keeps track of the levels we beat
     private int lastRoomIndex = 4; // 0 indexed so 4 total atm
+    private LevelLoader levelLoader;
     public int currentGold; 
     public List<String> availableAbilities = new List<String>(); //not sure how we will keep track of abilities yet but a list of strings to hold ablities that can be learned
     //
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour{
         pauseAction = playerInput.actions["Pause"];
 
         timer = 0;
+        levelLoader = FindObjectOfType(typeof(LevelLoader)) as LevelLoader;
         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         roomCleared = false;
         isNextToExit = false;
@@ -168,7 +170,7 @@ public class GameManager : MonoBehaviour{
             playerStats.lives--;
             //Debug.Log("You're Dead, Loser");
             //here we could insert a scene jump to a losing scene
-            SceneManager.LoadScene("Loss_scene");
+            levelLoader.LoadTargetLevel("Loss_scene");
         }
         if (enemies.Length == 0 && dustPiles.Length == 0 && !roomCleared){
             roomCleared = true;
@@ -220,12 +222,10 @@ public class GameManager : MonoBehaviour{
             doorPortal.SetActive(false);
             if (currentSceneIndex < lastRoomIndex) {
                 //Debug.Log(currRoom);
-                currRoom++;
-                currentSceneIndex++;
-                SceneManager.LoadScene(currentSceneIndex);
+                levelLoader.LoadNextLevel();
             } else {
                 // show end credits, player went through all rooms.
-                SceneManager.LoadScene("Win_scene");
+                levelLoader.LoadTargetLevel("Win_scene");
             }
         }
     }
