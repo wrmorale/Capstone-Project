@@ -11,6 +11,7 @@ public class MenuPresenter : MonoBehaviour
         root.Q<Button>("Start").clicked += () => SceneManager.LoadScene("SampleScene");
         root.Q<Button>("ControlButton").clicked += () => SceneManager.LoadScene("Controls_Scene");
         root.Q<Button>("CreditButton").clicked += () => SceneManager.LoadScene("Credits_Scene");
+        root.Q<Button>("QuitButton").clicked += () =>  Application.Quit();
         // root.Q<Button>("Start").clicked += () => Debug.Log("test");
     }
 }

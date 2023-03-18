@@ -3,9 +3,9 @@
         <ui:VisualElement name="StartSign" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/simplestart.png?fileID=2800000&amp;guid=d958423cd0d5443b3b79dae14f399d31&amp;type=3#simplestart&apos;); width: 252px; height: 89px; position: absolute; top: 552px; left: 1354px;">
             <ui:Button text="Button" display-tooltip-when-elided="true" name="Start" style="display: flex; visibility: visible; opacity: 0; width: 100%; height: 100%;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Controls" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/controls.png?fileID=2800000&amp;guid=65f6a6249572149ae8f3819adc774e8f&amp;type=3#controls&apos;); width: 196px; height: 89px; position: absolute; top: 740px; left: 1384px;">
-            <ui:Button display-tooltip-when-elided="true" name="ControlButton" style="background-color: rgba(56, 56, 56, 0.02); background-image: none; border-left-color: rgb(56, 56, 56); border-right-color: rgb(56, 56, 56); border-top-color: rgb(56, 56, 56); border-bottom-color: rgb(56, 56, 56); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; height: 86px;" />
-        </ui:VisualElement>
-        <ui:Button text="Credits" display-tooltip-when-elided="true" name="CreditButton" style="width: 229px; height: 72px; position: absolute; top: 932px; left: 1368px; font-size: 50px; color: rgb(250, 250, 250); background-color: rgb(163, 155, 109);" />
+        <ui:VisualElement name="Controls" style="background-image: url(&apos;project://database/Assets/UI%20Toolkit/UI-Assets/controls.png?fileID=2800000&amp;guid=65f6a6249572149ae8f3819adc774e8f&amp;type=3#controls&apos;); width: 196px; height: 89px; position: absolute; top: 692px; left: 1380px;" />
+        <ui:Button text="Credits" display-tooltip-when-elided="true" name="CreditButton" style="width: 229px; height: 72px; position: absolute; top: 840px; left: 1368px; font-size: 50px; color: rgb(250, 250, 250); background-color: rgb(163, 155, 109);" />
+        <ui:Button display-tooltip-when-elided="true" name="ControlButton" style="background-color: rgba(56, 56, 56, 0.02); background-image: none; border-left-color: rgb(56, 56, 56); border-right-color: rgb(56, 56, 56); border-top-color: rgb(56, 56, 56); border-bottom-color: rgb(56, 56, 56); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; height: 86px;" />
     </ui:VisualElement>
+    <ui:Button text="Quit" display-tooltip-when-elided="true" name="QuitButton" style="width: 229px; height: 72px; position: absolute; top: 964px; left: 1368px; font-size: 50px; color: rgb(250, 250, 250); background-color: rgb(163, 155, 109);" />
 </ui:UXML>
