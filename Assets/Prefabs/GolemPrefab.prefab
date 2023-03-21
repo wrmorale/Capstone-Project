@@ -407,7 +407,7 @@ MonoBehaviour:
   basicAttackDamage: 3
   basicAttackSpeed: 0.2
   attackRange: 3
-  movementSpeed: 0.1
+  movementSpeed: 0.3
   movementRange: 3
   idleMovementRange: 0
   staggerLimit: 5

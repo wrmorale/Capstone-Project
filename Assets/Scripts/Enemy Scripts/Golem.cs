@@ -58,7 +58,7 @@ public class Golem : Enemy
         if (isDashing) {
             // move enemy towards player during dash animation
             directionToPlayer = playerBody.position - enemyBody.position;
-            movement = directionToPlayer.normalized * (movementSpeed * 10) * Time.fixedDeltaTime;
+            movement = directionToPlayer.normalized * (movementSpeed * 8) * Time.fixedDeltaTime;
             enemyBody.MovePosition(enemyBody.position + movement);
         }
         if (state == GolemState.Idle){
