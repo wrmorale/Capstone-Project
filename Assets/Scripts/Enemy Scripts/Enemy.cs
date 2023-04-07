@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour
         foreach (DustPile dustPile in dustPiles) {
             if (dustPile.health < dustPile.maxHealth) {
                 float distance = Vector3.Distance(transform.position, dustPile.transform.position);
-                if (distance <= detectionRange) {
+                if (distance <= detectionRange) {//check if dust pile doesn't have full health and is nearby
                     dustPile.IncreaseHealth(healingSpeed * Time.deltaTime);
                 }
             }
@@ -103,6 +103,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void isHit(float damage){
+        //decrease health
         health -= damage;
         //damageFlash.FlashStart();
         health = Mathf.Clamp(health, 0, maxHealth);
@@ -126,6 +127,7 @@ public class Enemy : MonoBehaviour
     }
 
     public bool canAttack(){
+        //allows enemy to attack only when their cooldown runs out
         if(actionCooldownTimer < 0) {
             return true;
         }

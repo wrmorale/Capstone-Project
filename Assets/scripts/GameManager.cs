@@ -181,7 +181,7 @@ public class GameManager : MonoBehaviour{
         }
         numberOfEnemies = enemies.Length;
         numberOfDustPiles = dustPiles.Length;
-
+        //checks if there are no dustpiles and updates UI bar
         if (numberOfDustPiles == 0) {
             cleaningbar.value = 1;
         }
